@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- created with https://www.codeandweb.com/physicseditor -->
+<bodydef>
+
+	<body name="banana">
+		<is_dynamic/>
+		<linear_damping>0</linear_damping>
+		<angular_damping>0</angular_damping>
+		<allow_sleep/>
+	</body>
+
+	<body name="cherries">
+		<is_dynamic/>
+		<linear_damping>0</linear_damping>
+		<angular_damping>0</angular_damping>
+		<allow_sleep/>
+	</body>
+
+	<body name="crate">
+		<is_dynamic/>
+		<linear_damping>0</linear_damping>
+		<angular_damping>0</angular_damping>
+		<allow_sleep/>
+	</body>
+
+	<body name="orange">
+		<is_dynamic/>
+		<linear_damping>0</linear_damping>
+		<angular_damping>0</angular_damping>
+		<allow_sleep/>
+	</body>
+
+	<metadata>
+		<format>1</format>
+		<ptm_ratio>32</ptm_ratio>
+	</metadata>
+
+</bodydef>
+
