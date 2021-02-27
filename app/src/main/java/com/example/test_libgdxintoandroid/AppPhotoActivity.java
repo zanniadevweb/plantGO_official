@@ -1,6 +1,7 @@
 package com.example.test_libgdxintoandroid;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -14,6 +15,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -45,8 +53,10 @@ public class AppPhotoActivity extends AppCompatActivity {
             int writePermission = ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-            if (writePermission != PackageManager.PERMISSION_GRANTED ||
-                    readPermission != PackageManager.PERMISSION_GRANTED) {
+            if (writePermission != PackageManager.PERMISSION_GRANTED
+                    ||
+                readPermission  != PackageManager.PERMISSION_GRANTED)
+            {
                 // If don't have permission so prompt the user.
                 this.requestPermissions(
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -66,9 +76,8 @@ public class AppPhotoActivity extends AppCompatActivity {
 
             // The external storage directory.
             File directory = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getPackageName());
-            if (!directory.exists()) {
+            if (!directory.exists())
                 directory.mkdirs();
-            }
 
             // file:///storage/emulated/0/myphoto.png
             fichier = new File(directory.getPath() + "/myphoto.jpg");
@@ -109,26 +118,30 @@ public class AppPhotoActivity extends AppCompatActivity {
 
                 // Note: If request is cancelled, the result arrays are empty.
                 // Permissions granted (read/write).
-                if (resultCode == RESULT_OK) {
-
-                    Log.d("Repertoire fichier","après photographie (prouve que le fichier a été créé) : " + fichier);
-
-                }
+                if (resultCode == RESULT_OK)
+                    { Log.d("Repertoire fichier","après photographie (prouve que le fichier a été créé) : " + Uri.fromFile(fichier)); }
                 // Cancelled or denied.
-                else if ( resultCode == RESULT_CANCELED) {
-                    Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_LONG).show();
-                }
-                else {
-
-                    Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_SHORT).show();
-                }
+                else if ( resultCode == RESULT_CANCELED)
+                    { Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_LONG).show(); }
+                else
+                    { Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_SHORT).show(); }
                 break;
             }
         }
+        sendToApi();
     }
 
+    // Envoyer l'image à l'api : récupérer le résultat
+    // image : directory.getPath() + "/myphoto.jpg"
+
+
+    // Envoyer l'image à l'API de reconnaissance
+    public void sendToApi() {
+        Intent intent = new Intent(AppPhotoActivity.this, APIActivity.class);
+        AppPhotoActivity.this.startActivity(intent);
+    }
     // retour accueil
-    public void displayAccueil(View view) {
+    public void displayAccueil() {
         Intent intent = new Intent(AppPhotoActivity.this, MainActivity.class);
         AppPhotoActivity.this.startActivity(intent);
     }

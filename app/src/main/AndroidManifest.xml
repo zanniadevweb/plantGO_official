@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cartePlanteActivity"></activity>
+        <activity android:name=".APIActivity"></activity>
+        <activity android:name=".cartePlanteActivity" />
         <activity android:name=".HerbierActivity" />
         <activity
             android:name=".MainActivity"

@@ -9,7 +9,7 @@ ext {
     ashleyVersion = '1.7.0'
     aiVersion = '1.8.0'
 }
-// --------------------- Bloc "ext propre à libGDX -------------------- //
+// ----------------------------------------- //
 
 android {
     compileSdkVersion 30
@@ -38,15 +38,23 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-    // --------------------- Bloc "sourceSets" propre à libGDX -------------------- //
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // ----------------------------------------- //
 }
 
-// --------------------- Ligne de configuration propre à libGDX -------------------- //
+// --------------------- Ligne de configuration propre à libGDX ---------------------- //
 configurations { natives }
-// --------------------- Ligne de configuration propre à libGDX -------------------- //
+// ----------------------------------------- //
 
 dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    // ------------------------ Dépendances liées à l'API -----------------------------//
+    implementation 'com.firebaseui:firebase-ui-storage:3.1.3'
+    implementation 'com.android.volley:volley:1.1.1'
+    // -----------------------------------------------------//
 
     // --------------------- Dépendances propres à Android Studio -------------------- //
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -59,13 +67,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation 'junit:junit:4.12'
-    // --------------------- Dépendances propres à Android Studio -------------------- //
+    // ----------------------------------------- //
 
-    // --------------------- Dépendances pour utiliser les Gifs -------------------- //
+    // --------------------- Dépendances pour utiliser les Gifs --------------------- //
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
-    // --------------------- Dépendances pour utiliser les Gifs -------------------- //
+    // ----------------------------------------- //
 
-    // --------------------- Dépendances propres à libGDX -------------------- //
+    // ------------------ Dépendances propres à libGDX ----------------------- //
     api "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
     api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -85,7 +93,7 @@ dependencies {
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-arm64-v8a"
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
-    // --------------------- Dépendances propres à libGDX -------------------- //
+    // ----------------------------------------- //
 }
 
 // --------------------- Bloc propre à libGDX -------------------- //
@@ -112,4 +120,4 @@ task copyAndroidNatives() {
         }
     }
 }
-// --------------------- Bloc propre à libGDX -------------------- //
+// ----------------------------------------- //
