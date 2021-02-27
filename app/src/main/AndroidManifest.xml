@@ -12,39 +12,60 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".APIActivity"></activity>
-        <activity android:name=".cartePlanteActivity" />
-        <activity android:name=".HerbierActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".AndroidLauncherRandom"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".ConsignesDeJeu"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AppPhotoActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ProfilActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Inventaire"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Personnage"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".JeuCoffreTresor"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".APIActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".cartePlanteActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".HerbierActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
