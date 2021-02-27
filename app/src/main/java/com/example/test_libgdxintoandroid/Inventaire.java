@@ -16,8 +16,6 @@ public class Inventaire extends AppCompatActivity {
         setContentView(R.layout.activity_inventaire);
             isAvailableOrNotHat2();
             isAvailableOrNotTorso2();
-            isUnlockedIfAvailableHat2();
-            isUnlockedIfAvailableTorso2();
     }
 
     public void displayProfile (View view) {
@@ -27,37 +25,23 @@ public class Inventaire extends AppCompatActivity {
 
     public void isAvailableOrNotHat2 () {
         if (Modele.jeuCoffreTresorGagne == true) {
-            Modele.canAddHat2On = false;
-        }
-    }
-
-    public void isAvailableOrNotTorso2 () {
-        if (Modele.jeuCoffreTresorGagne == true) {
-            Modele.canAddTorso2On = false;
-        }
-    }
-
-    public void isUnlockedIfAvailableHat2 () {
-        if (Modele.canAddHat2On == false) {
             Switch sw2Hat = findViewById(R.id.switchHat2);
             sw2Hat.setClickable(false);
             sw2Hat.setChecked(true);
             ImageView imgv2Hat = findViewById(R.id.imageViewHat2);
             imgv2Hat.setImageResource(R.drawable.hat2);
             sw2Hat.setText("Disponible");
-            Personnage.HataddElement(R.drawable.hat2);
         }
     }
 
-    public void isUnlockedIfAvailableTorso2 () {
-        if (Modele.canAddTorso2On == false) {
+    public void isAvailableOrNotTorso2 () {
+        if (Modele.jeuCoffreTresorGagne == true) {
             Switch sw2Torso = findViewById(R.id.switchTorso2);
             sw2Torso.setClickable(false);
             sw2Torso.setChecked(true);
             ImageView imgv2Torso = findViewById(R.id.imageViewTorso2);
             imgv2Torso.setImageResource(R.drawable.torso2);
             sw2Torso.setText("Disponible");
-            Personnage.TorsoaddElement(R.drawable.torso2);
         }
     }
 
