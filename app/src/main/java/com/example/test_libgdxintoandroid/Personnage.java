@@ -17,9 +17,6 @@ public class Personnage extends AppCompatActivity {
     //creating object of ViewPager
     ViewPager mViewPagerHat;
 
-    //objets array
-    int[] imagesAllObjects = {};
-
     //images array list
     public static ArrayList<Integer> imagesTorso = new ArrayList<Integer>(); // {R.drawable.torso1, R.drawable.torso2};
 
@@ -31,7 +28,6 @@ public class Personnage extends AppCompatActivity {
 
     //Creating Object of ViewPagerAdapter
     ViewPagerAdapter mViewPagerAdapterHat;
-    public static int count;
 
 
     @Override
@@ -39,9 +35,15 @@ public class Personnage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personnage);
 
-        if (Modele.firstInventoryLook == true) {
+        if (Modele.unSetDeBase == true) {
             TorsoaddElement(R.drawable.torso1);
             HataddElement(R.drawable.hat1);
+            Modele.unSetDeBase = false;
+        }
+
+        if (Modele.firstInventoryLook == true && Modele.jeuCoffreTresorGagne == true) {
+            Personnage.HataddElement(R.drawable.hat2);
+            Personnage.TorsoaddElement(R.drawable.torso2);
             Modele.firstInventoryLook = false;
         }
 

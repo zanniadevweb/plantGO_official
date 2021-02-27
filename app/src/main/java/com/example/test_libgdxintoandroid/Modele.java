@@ -13,8 +13,7 @@ public class Modele {
     public static Integer jetonRejouer = 1;
 
     // Attributs propres au jeu du coffre au trésor et à l'inventaire (backpack)
-    public static boolean canAddHat2On = true;
-    public static boolean canAddTorso2On = true;
     public static boolean firstInventoryLook = true;
     public static boolean jeuCoffreTresorGagne = false;
+    public static boolean unSetDeBase = true;
 }
