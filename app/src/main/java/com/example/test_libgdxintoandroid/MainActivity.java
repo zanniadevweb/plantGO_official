@@ -9,16 +9,108 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+
+//* Import propre à la lecture / écriture de fichiers *//
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    private String SAVE = "resultatjeucoffretresor.txt";
+    private String resultatJeuCoffreTresor = "true";
+    private File mFile = null;
+    private Button mWrite = null;
+    private Button mRead = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
+
+        // On crée un fichier qui correspond à l'emplacement extérieur
+        File directory = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getPackageName());
+        if (!directory.exists())
+            directory.mkdirs();
+
+        mFile = new File(directory.getPath() + SAVE);
+        mWrite = findViewById(R.id.write);
+        mWrite.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                try {
+                    // Flux interne
+                    FileOutputStream output = openFileOutput(SAVE, MODE_PRIVATE);
+
+                    // On écrit dans le flux interne
+                    output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+
+                    if(output != null)
+                        output.close();
+
+                    // Si le fichier est lisible et qu'on peut écrire dedans
+                    if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                            && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
+                        // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
+                        mFile.createNewFile();
+                        output = new FileOutputStream(mFile);
+                        output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                        if(output != null)
+                            output.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        mRead = findViewById(R.id.read);
+        mRead.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                try {
+                    FileInputStream input = openFileInput(SAVE);
+                    int value;
+                    // On utilise un StringBuffer pour construire la chaîne au fur et à mesure
+                    StringBuffer lu = new StringBuffer();
+                    // On lit les caractères les uns après les autres
+                    while((value = input.read()) != -1) {
+                        // On écrit dans le fichier le caractère lu
+                        lu.append((char)value);
+                    }
+                    Toast.makeText(MainActivity.this, "Interne : " + lu.toString(), Toast.LENGTH_SHORT).show();
+                    Modele.jeuCoffreTresorGagne = Boolean.valueOf(lu.toString()); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                    Log.d("r", "resultat partie : " + lu.toString());
+                    if(input != null)
+                        input.close();
+
+                    if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                        lu = new StringBuffer();
+                        input = new FileInputStream(mFile);
+                        while((value = input.read()) != -1)
+                            lu.append((char)value);
+                        Toast.makeText(MainActivity.this, "Externe : " + lu.toString(), Toast.LENGTH_SHORT).show();
+                        Modele.jeuCoffreTresorGagne = Boolean.valueOf(lu.toString()); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                        Log.d("r", "resultat partie : " + lu.toString());
+                        if(input != null)
+                            input.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void launchGameHorizontal(View view) {
@@ -48,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         Integer tempsJeu = Modele.tempsPartie;
         TextView tv2 = findViewById(R.id.tempsDeJeu);
 
-        if (TextUtils.equals(resultatWinLose, "Partie gagnée")) {
+        if (TextUtils.equals(resultatWinLose, "Partie gagnée") || Modele.resultatpartie == "Partie gagnée") {
             Integer experienceJeuGagne = 50;
             Integer experienceSupplementaireTemps = 0;
             Integer experienceTotale = 0;
@@ -73,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             pb.setProgress(experienceTotale);
 
         }
-        if (TextUtils.equals(resultatWinLose,"Partie perdue")) {
+        if (TextUtils.equals(resultatWinLose,"Partie perdue") || Modele.resultatpartie == "Partie perdue") {
             tv1.setText( "Partie perdue. Action : PAS de gain expérience");
             tv2.setText("Temps PAS PRIS en compte");
             pb.setProgress(0);

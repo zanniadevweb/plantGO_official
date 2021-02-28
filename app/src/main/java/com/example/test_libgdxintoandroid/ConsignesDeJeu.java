@@ -38,7 +38,6 @@ public class ConsignesDeJeu extends AppCompatActivity {
         setContentView(R.layout.activity_consignesjeu);
     }
 
-
     public void launchSelectedGame(View view) {
         if (Modele.resultatpartie == "Partie gagnée" || Modele.resultatpartie == "Partie perdue") {
             Intent intent = new Intent(ConsignesDeJeu.this, MainActivity.class);
