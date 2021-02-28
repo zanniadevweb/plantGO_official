@@ -1,18 +1,32 @@
 package com.example.test_libgdxintoandroid;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
 
 public class APIActivity extends AppCompatActivity {
     /*
@@ -23,15 +37,23 @@ public class APIActivity extends AppCompatActivity {
      * Elle envoie une demande de reconnaissance à l'api de PlantNet qui renvoie un JSON de data que l'on parse ensuite.
      */
 
+    private StorageReference StorageRef;
+    private DatabaseReference DBRef;
+    private Uri uri = Modele.imageURI;
+
     TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a_p_i);
 
+        StorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        DBRef = FirebaseDatabase.getInstance().getReference("uploads");
+
         tv = findViewById(R.id.textView5);
 
-        // uploadImage();
+        uploadImage(uri);
         recognizeImageThroughAPI();
 
     }
@@ -52,9 +74,25 @@ public class APIActivity extends AppCompatActivity {
 */
 
     // upload l'image en ligne (pour que l'API de reconnaisance de plante puisse l'utiliser)
-    protected void uploadImage(){
+    protected void uploadImage(Uri imageURI){
         String link ="";
+
+        StorageReference fileReference = StorageRef.child("image");
+        fileReference.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                Toast.makeText(APIActivity.this, "Réussite de la mise en ligne ", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(APIActivity.this, "Impossible de mettre l'image en ligne, vérifiez la connexion internet : " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+
         recognizeImageThroughAPI();
+
     }
 
     // appeler l'API de reconnaisance de plante avec l'URL de l'image
@@ -64,7 +102,7 @@ public class APIActivity extends AppCompatActivity {
 /*
         String url ="https://my-api.plantnet.org/v2/identify/all?images=" +
                     "https://media.gerbeaud.net/2014/02/640/chene-quercus-robur.jpg" +
-                    "&organs=leaf&include-related-images=false&lang=en" +
+                    "&organs=leaf&include-related-images=false&lang=fr" +
                     "&api-key=2a10dhqKV1csqtYS4gUnTxZ";
 */
         String url = "https://my-api.plantnet.org/v2/identify/all?images=https://media.gerbeaud.net/2014/02/640/chene-quercus-robur.jpg&organs=leaf&include-related-images=false&lang=en&api-key=2a10dhqKV1csqtYS4gUnTxZ";

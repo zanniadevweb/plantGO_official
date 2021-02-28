@@ -119,7 +119,8 @@ public class AppPhotoActivity extends AppCompatActivity {
                 // Note: If request is cancelled, the result arrays are empty.
                 // Permissions granted (read/write).
                 if (resultCode == RESULT_OK)
-                    { Log.d("Repertoire fichier","après photographie (prouve que le fichier a été créé) : " + Uri.fromFile(fichier)); }
+                    {   Log.d("Repertoire fichier","après photographie (prouve que le fichier a été créé) : " + Uri.fromFile(fichier));
+                        Modele.imageURI = Uri.fromFile(fichier);}
                 // Cancelled or denied.
                 else if ( resultCode == RESULT_CANCELED)
                     { Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_LONG).show(); }

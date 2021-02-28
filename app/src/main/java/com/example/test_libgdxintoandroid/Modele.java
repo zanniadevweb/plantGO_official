@@ -1,5 +1,7 @@
 package com.example.test_libgdxintoandroid;
 
+import android.net.Uri;
+
 import java.util.Random;
 
 public class Modele {
@@ -11,6 +13,8 @@ public class Modele {
     public static Boolean testBoolean = false;
     public static Integer tempsPartie = 0;
     public static Integer jetonRejouer = 1;
+
+    public static Uri imageURI;
 
     // Attributs propres au jeu du coffre au trésor et à l'inventaire (backpack)
     public static boolean firstInventoryLook = true;
