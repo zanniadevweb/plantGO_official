@@ -23,14 +23,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String SAVE = "experience_actuelle.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | quete
+    private String SAVE = "experience_actuelle.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | queteAcceptee[2]
     private String resultatJeuCoffreTresor = String.valueOf(Modele.jeuCoffreTresorGagne);
+    private String queteEstAcceptee = String.valueOf(Modele.queteAcceptee);
     private String experienceActuelle = String.valueOf(Modele.experienceTotaleActuelle);
-    private String pipeSeparation = "|";
+    private final String pipeSeparation = "|";
     private File mFile = null;
     private Button mWrite = null;
     private Button mRead = null;
@@ -40,6 +43,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
+        Button bt4 = findViewById(R.id.button);
+        bt4.setVisibility(View.INVISIBLE);
+        Button bt5 = findViewById(R.id.button2);
+        bt5.setVisibility(View.INVISIBLE);
+        Button bt6 = findViewById(R.id.gameHorizontal);
+        bt6.setVisibility(View.INVISIBLE);
+        Button bt7 = findViewById(R.id.gameVertical);
+        bt7.setVisibility(View.INVISIBLE);
+        Button bt8 = findViewById(R.id.randomGame);
+        bt8.setVisibility(View.INVISIBLE);
+        Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+        bt3.setVisibility(View.INVISIBLE);
+
+        TextView tv0 = findViewById(R.id.textView);
+        tv0.setVisibility(View.INVISIBLE);
+        TextView tv2 = findViewById(R.id.textView2);
+        tv2.setVisibility(View.INVISIBLE);
+        TextView tv3 = findViewById(R.id.tempsDeJeu);
+        tv3.setVisibility(View.INVISIBLE);
+        TextView tv4 = findViewById(R.id.planteAChercher);
+        tv4.setVisibility(View.INVISIBLE);
+        TextView tv5 = findViewById(R.id.planteQuete1);
+        tv5.setVisibility(View.INVISIBLE);
+        TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+        tv6.setVisibility(View.INVISIBLE);
+
         if (Modele.firstLoadingApplication) {
             Button bt1 = findViewById(R.id.write);
             bt1.setVisibility(View.INVISIBLE);
@@ -47,50 +76,30 @@ public class MainActivity extends AppCompatActivity {
         if (!Modele.firstLoadingApplication) {
             Button bt1 = findViewById(R.id.read);
             bt1.setVisibility(View.INVISIBLE);
+            bt4.setVisibility(View.VISIBLE);
+            bt5.setVisibility(View.VISIBLE);
+            bt6.setVisibility(View.VISIBLE);
+            bt7.setVisibility(View.VISIBLE);
+            bt8.setVisibility(View.VISIBLE);
+
+            tv0.setVisibility(View.VISIBLE);
+            tv2.setVisibility(View.VISIBLE);
+            tv3.setVisibility(View.VISIBLE);
+            tv4.setVisibility(View.VISIBLE);
+            tv5.setVisibility(View.VISIBLE);
+            tv6.setVisibility(View.VISIBLE);
+        }
+
+        if (Modele.queteAcceptee == true) {
+            bt3.setVisibility(View.INVISIBLE);
+            TextView tv1 = findViewById(R.id.textViewQueteEnCours);
+            tv1.setText("La quête est en cours");
         }
 
         // On crée un fichier qui correspond à l'emplacement extérieur
         File directory = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getPackageName());
         if (!directory.exists())
             directory.mkdirs();
-
-        mFile = new File(directory.getPath() + SAVE);
-        /* -------------------- BUT QUI DEVRA ETRE ATTEINT : SAUVEGARDER CHAQUE FOIS QUE L'ON REVIENT SUR MAINACTIVITY -------------------- */
-        mWrite = findViewById(R.id.write);
-        mWrite.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                try {
-                    // Flux interne
-                    FileOutputStream output = openFileOutput(SAVE, MODE_PRIVATE);
-
-                    // On écrit dans le flux interne
-                    output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                    output.write(pipeSeparation.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                    output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                    //Toast.makeText(MainActivity.this, "Fichier sauvegardé : " + output, Toast.LENGTH_SHORT).show();
-                    //Log.d("r", "Fichier sauvegardé : " + output);
-
-                    if(output != null)
-                        output.close();
-
-                    // Si le fichier est lisible et qu'on peut écrire dedans
-                    if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                            && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
-                        // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
-                        mFile.createNewFile();
-                        output = new FileOutputStream(mFile);
-                        output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                        output.write(pipeSeparation.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                        output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                        if(output != null)
-                            output.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         /* --------------------- BUT QUI DEVRA ETRE ATTEINT : CHARGER LA SAUVEGARDE UNE SEULE FOIS AU LANCEMENT DE MAINACTIVITY -------------------- */
             mRead = findViewById(R.id.read);
@@ -102,7 +111,27 @@ public class MainActivity extends AppCompatActivity {
                 Button bt1 = findViewById(R.id.write);
                 bt1.setVisibility(View.VISIBLE);
                 Button bt2 = findViewById(R.id.read);
+                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+                bt3.setVisibility(View.VISIBLE);
                 bt2.setVisibility(View.INVISIBLE);
+                bt4.setVisibility(View.VISIBLE);
+                bt5.setVisibility(View.VISIBLE);
+                bt6.setVisibility(View.VISIBLE);
+                bt7.setVisibility(View.VISIBLE);
+                bt8.setVisibility(View.VISIBLE);
+
+                    TextView tv0 = findViewById(R.id.textView);
+                    tv0.setVisibility(View.VISIBLE);
+                    TextView tv2 = findViewById(R.id.textView2);
+                    tv2.setVisibility(View.VISIBLE);
+                    TextView tv3 = findViewById(R.id.tempsDeJeu);
+                    tv3.setVisibility(View.VISIBLE);
+                    TextView tv4 = findViewById(R.id.planteAChercher);
+                    tv4.setVisibility(View.VISIBLE);
+                    TextView tv5 = findViewById(R.id.planteQuete1);
+                    tv5.setVisibility(View.VISIBLE);
+                    TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+                    tv6.setVisibility(View.VISIBLE);
                 }
 
                 FileInputStream input = openFileInput(SAVE);
@@ -116,13 +145,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 String strFields0 = lu.toString().split("\\|")[0];
                 String strFields1 = lu.toString().split("\\|")[1];
+                String strFields2 = lu.toString().split("\\|")[2];
 
                 Toast.makeText(MainActivity.this, "Lecture sauvegarde Interne : " + lu.toString(), Toast.LENGTH_SHORT).show();
                 Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
                 Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                Log.d("x", "experience actuelle : " + lu.toString());
+                Modele.queteAcceptee = Boolean.valueOf(strFields2); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
                 Log.d("s0", "split0 : " + strFields0);
                 Log.d("s1", "split1 : " + strFields1);
+                Log.d("s2", "split2 : " + strFields2);
+                Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
                 Modele.firstLoadingApplication = false;
                 if (input != null)
                     input.close();
@@ -133,11 +165,13 @@ public class MainActivity extends AppCompatActivity {
                     while ((value = input.read()) != -1)
                         lu.append((char) value);
                     Toast.makeText(MainActivity.this, "Lecture sauvegarde Externe : " + lu.toString(), Toast.LENGTH_SHORT).show();
-                    //Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                    //Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                    //Log.d("x", "experience actuelle : " + lu.toString());
-                    //Log.d("s0", "split0 : " + strFields0);
-                    //Log.d("s1", "split1 : " + strFields1);
+                    Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                    Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                    Modele.queteAcceptee = Boolean.valueOf(strFields2); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                    Log.d("s0", "split0 : " + strFields0);
+                    Log.d("s1", "split1 : " + strFields1);
+                    Log.d("s2", "split2 : " + strFields2);
+                    Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
                     Modele.firstLoadingApplication = false;
                     if (input != null)
                         input.close();
@@ -148,6 +182,49 @@ public class MainActivity extends AppCompatActivity {
             }
             }
             });
+
+        /* -------------------- BUT QUI DEVRA ETRE ATTEINT : SAUVEGARDER CHAQUE FOIS QUE L'ON REVIENT SUR MAINACTIVITY (APRES LE PREMIER LANCEMENT) -------------------- */
+        mFile = new File(directory.getPath() + SAVE);
+        mWrite = findViewById(R.id.write);
+
+        mWrite.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                try {
+                    // Flux interne
+                    FileOutputStream output = openFileOutput(SAVE, MODE_PRIVATE);
+
+                    // On écrit dans le flux interne
+                    output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                    output.write(pipeSeparation.getBytes());
+                    output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                    output.write(pipeSeparation.getBytes());
+                    output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                    Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
+
+                    if(output != null)
+                        output.close();
+
+                    // Si le fichier est lisible et qu'on peut écrire dedans
+                    if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                            && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
+                        // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
+                        mFile.createNewFile();
+                        output = new FileOutputStream(mFile);
+                        output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                        output.write(pipeSeparation.getBytes());
+                        output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                        output.write(pipeSeparation.getBytes());
+                        output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                        Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
+                        if(output != null)
+                            output.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         }
 
 
@@ -228,6 +305,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, ConsignesDeJeu.class);
         MainActivity.this.startActivityForResult(intent, 1);
     }
+
+
+    public void accepterQuete(View view) {
+        Modele.queteAcceptee = true;
+        Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
+    }
+
 
     // afficher profil
     public void displayProfile(View view) {

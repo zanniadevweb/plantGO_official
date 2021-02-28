@@ -140,8 +140,9 @@ public class AppPhotoActivity extends AppCompatActivity {
         Intent intent = new Intent(AppPhotoActivity.this, APIActivity.class);
         AppPhotoActivity.this.startActivity(intent);
     }
+
     // retour accueil
-    public void displayAccueil() {
+    public void displayAccueil(View view) {
         Intent intent = new Intent(AppPhotoActivity.this, MainActivity.class);
         AppPhotoActivity.this.startActivity(intent);
     }

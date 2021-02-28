@@ -20,4 +20,7 @@ public class Modele {
     public static boolean unSetDeBase = true;
     public static Integer experienceTotale = 0;
     public static boolean firstLoadingApplication = true;
+
+
+    public static boolean queteAcceptee = false;
 }

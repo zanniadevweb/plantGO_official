@@ -7,7 +7,7 @@
     tools:context=".AppPhotoActivity">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonAccueil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="displayAccueil"
