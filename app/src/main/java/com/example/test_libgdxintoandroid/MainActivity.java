@@ -308,6 +308,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void accepterQuete(View view) {
+        Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+        bt3.setVisibility(View.INVISIBLE);
+        TextView tv1 = findViewById(R.id.textViewQueteEnCours);
+        tv1.setText("La quête est en cours");
         Modele.queteAcceptee = true;
         Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
     }
