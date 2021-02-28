@@ -1,5 +1,10 @@
 package com.example.test_libgdxintoandroid;
 
+import android.net.Uri;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+
 import java.util.Random;
 
 public class Modele {
@@ -22,5 +27,18 @@ public class Modele {
     public static boolean firstLoadingApplication = true;
 
 
+    // Firebase
+    public static Uri imageURI;
+
+
+    // Quêtes
     public static boolean queteAcceptee = false;
+
+
+    // Google Maps
+    public static LatLng marqueurQuete;
+    public static LatLng maPosition;
+    public static double latitudeTempsT;
+    public static double longitudeTempsT;
+    public static Marker MyMarker;
 }

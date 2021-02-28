@@ -55,7 +55,7 @@ public class AppPhotoActivity extends AppCompatActivity {
 
             if (writePermission != PackageManager.PERMISSION_GRANTED
                     ||
-                readPermission  != PackageManager.PERMISSION_GRANTED)
+                    readPermission  != PackageManager.PERMISSION_GRANTED)
             {
                 // If don't have permission so prompt the user.
                 this.requestPermissions(
@@ -119,12 +119,13 @@ public class AppPhotoActivity extends AppCompatActivity {
                 // Note: If request is cancelled, the result arrays are empty.
                 // Permissions granted (read/write).
                 if (resultCode == RESULT_OK)
-                    { Log.d("Repertoire fichier","après photographie (prouve que le fichier a été créé) : " + Uri.fromFile(fichier)); }
+                {   Log.d("Repertoire fichier","après photographie (prouve que le fichier a été créé) : " + Uri.fromFile(fichier));
+                    Modele.imageURI = Uri.fromFile(fichier);}
                 // Cancelled or denied.
                 else if ( resultCode == RESULT_CANCELED)
-                    { Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_LONG).show(); }
+                { Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_LONG).show(); }
                 else
-                    { Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_SHORT).show(); }
+                { Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_SHORT).show(); }
                 break;
             }
         }
@@ -140,9 +141,8 @@ public class AppPhotoActivity extends AppCompatActivity {
         Intent intent = new Intent(AppPhotoActivity.this, APIActivity.class);
         AppPhotoActivity.this.startActivity(intent);
     }
-
     // retour accueil
-    public void displayAccueil(View view) {
+    public void displayAccueil() {
         Intent intent = new Intent(AppPhotoActivity.this, MainActivity.class);
         AppPhotoActivity.this.startActivity(intent);
     }
