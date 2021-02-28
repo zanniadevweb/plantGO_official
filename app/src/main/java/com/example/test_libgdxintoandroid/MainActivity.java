@@ -27,9 +27,10 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String SAVE = "experience_actuelle.txt";
-    //private String resultatJeuCoffreTresor = String.valueOf(Modele.jeuCoffreTresorGagne);
+    private String SAVE = "experience_actuelle.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | quete
+    private String resultatJeuCoffreTresor = String.valueOf(Modele.jeuCoffreTresorGagne);
     private String experienceActuelle = String.valueOf(Modele.experienceTotaleActuelle);
+    private String pipeSeparation = "|";
     private File mFile = null;
     private Button mWrite = null;
     private Button mRead = null;
@@ -64,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     FileOutputStream output = openFileOutput(SAVE, MODE_PRIVATE);
 
                     // On écrit dans le flux interne
-                    //output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                    output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                    output.write(pipeSeparation.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
                     output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                    Toast.makeText(MainActivity.this, "Fichier sauvegardé : " + experienceActuelle, Toast.LENGTH_SHORT).show();
-                    Log.d("r", "Fichier sauvegardé : " + experienceActuelle);
+                    //Toast.makeText(MainActivity.this, "Fichier sauvegardé : " + output, Toast.LENGTH_SHORT).show();
+                    //Log.d("r", "Fichier sauvegardé : " + output);
 
                     if(output != null)
                         output.close();
@@ -78,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
                         // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
                         mFile.createNewFile();
                         output = new FileOutputStream(mFile);
-                        //output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                        output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                        output.write(pipeSeparation.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
                         output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
                         if(output != null)
                             output.close();
@@ -111,10 +114,15 @@ public class MainActivity extends AppCompatActivity {
                     // On écrit dans le fichier le caractère lu
                     lu.append((char) value);
                 }
+                String strFields0 = lu.toString().split("\\|")[0];
+                String strFields1 = lu.toString().split("\\|")[1];
+
                 Toast.makeText(MainActivity.this, "Lecture sauvegarde Interne : " + lu.toString(), Toast.LENGTH_SHORT).show();
-                //Modele.jeuCoffreTresorGagne = Boolean.valueOf(lu.toString()); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                Modele.experienceTotaleActuelle = Integer.valueOf(lu.toString()); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
                 Log.d("x", "experience actuelle : " + lu.toString());
+                Log.d("s0", "split0 : " + strFields0);
+                Log.d("s1", "split1 : " + strFields1);
                 Modele.firstLoadingApplication = false;
                 if (input != null)
                     input.close();
@@ -125,9 +133,11 @@ public class MainActivity extends AppCompatActivity {
                     while ((value = input.read()) != -1)
                         lu.append((char) value);
                     Toast.makeText(MainActivity.this, "Lecture sauvegarde Externe : " + lu.toString(), Toast.LENGTH_SHORT).show();
-                    //Modele.jeuCoffreTresorGagne = Boolean.valueOf(lu.toString()); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                    Modele.experienceTotaleActuelle = Integer.valueOf(lu.toString()); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                    Log.d("x", "experience actuelle : " + lu.toString());
+                    //Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                    //Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                    //Log.d("x", "experience actuelle : " + lu.toString());
+                    //Log.d("s0", "split0 : " + strFields0);
+                    //Log.d("s1", "split1 : " + strFields1);
                     Modele.firstLoadingApplication = false;
                     if (input != null)
                         input.close();
