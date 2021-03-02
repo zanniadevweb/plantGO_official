@@ -17,11 +17,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.UUID;
 
 public class APIActivity extends AppCompatActivity {
     /*
@@ -31,6 +31,8 @@ public class APIActivity extends AppCompatActivity {
      * Ainsi, l'image étant accessible via un lien, il suffit de le passer à la méthode "recognizeImageThroughAPI()".
      * Elle envoie une demande de reconnaissance à l'api de PlantNet qui renvoie un JSON de data que l'on parse ensuite.
      */
+
+
 
     private StorageReference storageRef;
     private Uri uri = Modele.imageURI;
@@ -42,23 +44,23 @@ public class APIActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a_p_i);
 
+
         storageRef = FirebaseStorage.getInstance().getReference();
 
         tv = findViewById(R.id.textView5);
 
         uploadImage(uri);
+        // recognizeImageThroughAPI();
+
 
     }
 /*
     private void onResponse(JSONObject response) {
         try {
-
             JSONObject resultatsDeLaRecherche = (JSONObject) response.getJSONArray("results").get(0); // L'api renvoie tous les résultats probables de la reconnaissance de plan
             JSONObject resultatLePlusProbable = resultatsDeLaRecherche.getJSONObject("species"); // nom scientifique, nom commun, famille
             // nomScientifique.set(resultatLePlusProbable.getString("scientificNameWithoutAuthor"));
-
             tv.setText(response.toString());
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -87,22 +89,7 @@ public class APIActivity extends AppCompatActivity {
         });
 
 
-
-        Task<Uri> text = storageRef.child("images/plante").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Toast.makeText(APIActivity.this, storageRef.child("images/plante").getDownloadUrl().toString(), Toast.LENGTH_SHORT).show();
-                Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",uri.toString());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(APIActivity.this, "KO", Toast.LENGTH_SHORT).show();
-            }
-        });
-
       //  recognizeImageThroughAPI();
-
     }
 
     // appeler l'API de reconnaisance de plante avec l'URL de l'image

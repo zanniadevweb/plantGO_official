@@ -2,7 +2,8 @@ package com.example.test_libgdxintoandroid;
 
 import android.net.Uri;
 
-import java.util.Random;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 public class Modele {
     // Attributs propres à libGDX
@@ -16,7 +17,6 @@ public class Modele {
     public static Integer experienceTotaleActuelle = 0;
     public static boolean pasEncoreAjoutExperience = true;
 
-    public static Uri imageURI;
 
     // Attributs propres au jeu du coffre au trésor et à l'inventaire (backpack)
     public static boolean firstInventoryLook = true;
@@ -26,5 +26,18 @@ public class Modele {
     public static boolean firstLoadingApplication = true;
 
 
+    // Firebase
+    public static Uri imageURI;
+
+
+    // Quêtes
     public static boolean queteAcceptee = false;
+
+
+    // Google Maps
+    public static LatLng marqueurQuete;
+    public static LatLng maPosition;
+    public static double latitudeTempsT;
+    public static double longitudeTempsT;
+    public static Marker MyMarker;
 }
