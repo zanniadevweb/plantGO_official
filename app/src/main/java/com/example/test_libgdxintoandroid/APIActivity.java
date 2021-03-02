@@ -3,6 +3,7 @@ package com.example.test_libgdxintoandroid;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,20 +14,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Date;
+import java.util.UUID;
 
 public class APIActivity extends AppCompatActivity {
     /*
@@ -37,8 +32,7 @@ public class APIActivity extends AppCompatActivity {
      * Elle envoie une demande de reconnaissance à l'api de PlantNet qui renvoie un JSON de data que l'on parse ensuite.
      */
 
-    private StorageReference StorageRef;
-    private DatabaseReference DBRef;
+    private StorageReference storageRef;
     private Uri uri = Modele.imageURI;
 
     TextView tv;
@@ -48,13 +42,11 @@ public class APIActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a_p_i);
 
-        StorageRef = FirebaseStorage.getInstance().getReference("uploads");
-        DBRef = FirebaseDatabase.getInstance().getReference("uploads");
+        storageRef = FirebaseStorage.getInstance().getReference();
 
         tv = findViewById(R.id.textView5);
 
         uploadImage(uri);
-        recognizeImageThroughAPI();
 
     }
 /*
@@ -77,21 +69,39 @@ public class APIActivity extends AppCompatActivity {
     protected void uploadImage(Uri imageURI){
         String link ="";
 
-        StorageReference fileReference = StorageRef.child("image");
-        fileReference.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                            @Override
-                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                Toast.makeText(APIActivity.this, "Réussite de la mise en ligne ", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(APIActivity.this, "Impossible de mettre l'image en ligne, vérifiez la connexion internet : " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                            }
-                                        });
+        StorageReference ref = storageRef.child("images/plante");
 
-        recognizeImageThroughAPI();
+        // adding listeners on upload
+        // or failure of image
+        ref.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Toast.makeText(APIActivity.this, uri.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", uri.toString());
+                    }
+                });
+            }
+        });
+
+
+
+        Task<Uri> text = storageRef.child("images/plante").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Toast.makeText(APIActivity.this, storageRef.child("images/plante").getDownloadUrl().toString(), Toast.LENGTH_SHORT).show();
+                Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",uri.toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(APIActivity.this, "KO", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+      //  recognizeImageThroughAPI();
 
     }
 
