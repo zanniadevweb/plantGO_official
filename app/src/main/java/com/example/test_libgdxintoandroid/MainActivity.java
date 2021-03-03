@@ -9,12 +9,15 @@ import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +27,10 @@ import android.text.TextUtils;
 import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-
 import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.snackbar.Snackbar;
 
 //* Import propre à la lecture / écriture de fichiers *//
@@ -58,7 +57,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -135,6 +133,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private TextView mLastUpdateTimeTextView;
     private TextView mLatitudeTextView;
     private TextView mLongitudeTextView;
+    private Switch sw_carte;
 
     // Labels.
     private String mLatitudeLabel;
@@ -174,12 +173,43 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     View mapFragment = findViewById(R.id.map);
-                    mapFragment.setVisibility(View.INVISIBLE);
+                    mapFragment.setVisibility(View.VISIBLE);
                 }
                 if (!isChecked) {
                     View mapFragment = findViewById(R.id.map);
-                    mapFragment.setVisibility(View.VISIBLE);
+                    mapFragment.setVisibility(View.INVISIBLE);
                 }
+            }
+        });
+
+        Button lancerDe = findViewById(R.id.lancerDe);
+        lancerDe.setOnClickListener (new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Modele.estActifJetDe = true;
+                    lancerDe.setVisibility(View.INVISIBLE);
+
+                    ImageView img1 = findViewById(R.id.jetDe);
+                    img1.setVisibility(View.VISIBLE);
+                    View mapFragment = findViewById(R.id.map);
+                    mapFragment.setVisibility(View.INVISIBLE);
+                    Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
+                    sw_carte.setVisibility(View.INVISIBLE);
+                    Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
+                    TextView tv1 = findViewById(R.id.resultatJetDe);
+                    tv1.setVisibility(View.VISIBLE);
+                    tv1.setText(String.valueOf(randomJouerOuNon));
+
+                    if (randomJouerOuNon > 3) {
+                        timerAvantJeu();
+                    }
+                    if (randomJouerOuNon <= 3) {
+                        timerSiPasJeu();
+                    }
+
+                    TextView tv7 = findViewById(R.id.jeJoue);
+                    tv7.setVisibility(View.INVISIBLE);
+
             }
         });
 
@@ -242,6 +272,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         tv5.setVisibility(View.INVISIBLE);
         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
         tv6.setVisibility(View.INVISIBLE);
+        TextView tv7 = findViewById(R.id.jeJoue);
+        tv7.setVisibility(View.INVISIBLE);
+
+        ImageView img1 = findViewById(R.id.jetDe);
+        img1.setVisibility(View.INVISIBLE);
+
 
         if (Modele.firstLoadingApplication) {
             Button bt1 = findViewById(R.id.write);
@@ -966,6 +1002,169 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Modele.circle.setVisible(false);
 
     }
+
+    public Integer timeCountInMilliSeconds = 4000;
+
+    private void timerAvantJeu() {
+        CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                ProgressBar pb1 = findViewById(R.id.progressBar);
+                pb1.setVisibility(View.INVISIBLE);
+                Button bt1 = findViewById(R.id.start_updates_button);
+                bt1.setVisibility(View.INVISIBLE);
+                Button bt2 = findViewById(R.id.stop_updates_button);
+                bt2.setVisibility(View.INVISIBLE);
+                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+                bt3.setVisibility(View.INVISIBLE);
+                Button bt4 = findViewById(R.id.button);
+                bt4.setVisibility(View.INVISIBLE);
+                Button bt5 = findViewById(R.id.button2);
+                bt5.setVisibility(View.INVISIBLE);
+                Button bt6 = findViewById(R.id.gameHorizontal);
+                bt6.setVisibility(View.INVISIBLE);
+                Button bt7 = findViewById(R.id.gameVertical);
+                bt7.setVisibility(View.INVISIBLE);
+                Button bt8 = findViewById(R.id.randomGame);
+                bt8.setVisibility(View.INVISIBLE);
+                Button bt9 = findViewById(R.id.read);
+                bt9.setVisibility(View.INVISIBLE);
+                Button bt10 = findViewById(R.id.write);
+                bt10.setVisibility(View.INVISIBLE);
+                Button bt11 = findViewById(R.id.button4);
+                bt11.setVisibility(View.INVISIBLE);
+                TextView tv0 = findViewById(R.id.textView);
+                tv0.setVisibility(View.INVISIBLE);
+                TextView tv3 = findViewById(R.id.tempsDeJeu);
+                tv3.setVisibility(View.INVISIBLE);
+                TextView tv4 = findViewById(R.id.planteAChercher);
+                tv4.setVisibility(View.INVISIBLE);
+                TextView tv5 = findViewById(R.id.planteQuete1);
+                tv5.setVisibility(View.INVISIBLE);
+                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+                tv6.setVisibility(View.INVISIBLE);
+                TextView tv7 = findViewById(R.id.jeJoue);
+                tv7.setVisibility(View.VISIBLE);
+                tv7.setText("Vous allez jouer !");
+                TextView tv8 = findViewById(R.id.longitude_text);
+                tv8.setVisibility(View.INVISIBLE);
+                TextView tv9 = findViewById(R.id.latitude_text);
+                tv9.setVisibility(View.INVISIBLE);
+                TextView tv10 = findViewById(R.id.last_update_time_text);
+                tv10.setVisibility(View.INVISIBLE);
+                TextView tv12 = findViewById(R.id.marqueur_quete_text);
+                tv12.setVisibility(View.INVISIBLE);
+            }
+            @Override
+            public void onFinish() {
+                // Lance un nombre aléatoire compris entre 1 (Jeu Horizontal) et 2 (Jeu Vertical)
+                Modele.random = new Random().nextInt(2) + 1; // [0, 1] + 1 => [1, 2] : Minimum 1 (si [0] + 1) et maximum 2 (si [1] + 1)
+                remettreZeroParametresJeu();
+                lancerConsignesJeu();
+            }
+        }.start();
+        countDownTimer.start();
+    }
+
+    private void timerSiPasJeu() {
+        CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                ProgressBar pb1 = findViewById(R.id.progressBar);
+                pb1.setVisibility(View.INVISIBLE);
+                Button bt1 = findViewById(R.id.start_updates_button);
+                bt1.setVisibility(View.INVISIBLE);
+                Button bt2 = findViewById(R.id.stop_updates_button);
+                bt2.setVisibility(View.INVISIBLE);
+                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+                bt3.setVisibility(View.INVISIBLE);
+                Button bt4 = findViewById(R.id.button);
+                bt4.setVisibility(View.INVISIBLE);
+                Button bt5 = findViewById(R.id.button2);
+                bt5.setVisibility(View.INVISIBLE);
+                Button bt6 = findViewById(R.id.gameHorizontal);
+                bt6.setVisibility(View.INVISIBLE);
+                Button bt7 = findViewById(R.id.gameVertical);
+                bt7.setVisibility(View.INVISIBLE);
+                Button bt8 = findViewById(R.id.randomGame);
+                bt8.setVisibility(View.INVISIBLE);
+                Button bt9 = findViewById(R.id.read);
+                bt9.setVisibility(View.INVISIBLE);
+                Button bt10 = findViewById(R.id.write);
+                bt10.setVisibility(View.INVISIBLE);
+                Button bt11 = findViewById(R.id.button4);
+                bt11.setVisibility(View.INVISIBLE);
+                TextView tv7 = findViewById(R.id.jeJoue);
+                tv7.setVisibility(View.VISIBLE);
+                tv7.setText("Vous ne jouerez pas cette fois-ci !");
+                TextView tv8 = findViewById(R.id.longitude_text);
+                tv8.setVisibility(View.INVISIBLE);
+                TextView tv9 = findViewById(R.id.latitude_text);
+                tv9.setVisibility(View.INVISIBLE);
+                TextView tv10 = findViewById(R.id.last_update_time_text);
+                tv10.setVisibility(View.INVISIBLE);
+                TextView tv12 = findViewById(R.id.marqueur_quete_text);
+                tv12.setVisibility(View.INVISIBLE);
+            }
+            @Override
+            public void onFinish() {
+                Modele.estActifJetDe = false;
+                ProgressBar pb1 = findViewById(R.id.progressBar);
+                pb1.setVisibility(View.VISIBLE);
+                View mapFragment = findViewById(R.id.map);
+                mapFragment.setVisibility(View.VISIBLE);
+                Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
+                sw_carte.setVisibility(View.VISIBLE);
+                ImageView img1 = findViewById(R.id.jetDe);
+                img1.setVisibility(View.INVISIBLE);
+                Button bt1 = findViewById(R.id.start_updates_button);
+                bt1.setVisibility(View.VISIBLE);
+                Button bt2 = findViewById(R.id.stop_updates_button);
+                bt2.setVisibility(View.VISIBLE);
+                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+                bt3.setVisibility(View.VISIBLE);
+                Button bt4 = findViewById(R.id.button);
+                bt4.setVisibility(View.VISIBLE);
+                Button bt5 = findViewById(R.id.button2);
+                bt5.setVisibility(View.VISIBLE);
+                Button bt6 = findViewById(R.id.gameHorizontal);
+                bt6.setVisibility(View.VISIBLE);
+                Button bt7 = findViewById(R.id.gameVertical);
+                bt7.setVisibility(View.VISIBLE);
+                Button bt8 = findViewById(R.id.randomGame);
+                bt8.setVisibility(View.VISIBLE);
+                Button bt9 = findViewById(R.id.read);
+                bt9.setVisibility(View.VISIBLE);
+                Button bt10 = findViewById(R.id.write);
+                bt10.setVisibility(View.VISIBLE);
+                Button bt11 = findViewById(R.id.button4);
+                bt11.setVisibility(View.VISIBLE);
+                TextView tv7 = findViewById(R.id.jeJoue);
+                tv7.setVisibility(View.INVISIBLE);
+                TextView tv8 = findViewById(R.id.longitude_text);
+                tv8.setVisibility(View.VISIBLE);
+                TextView tv9 = findViewById(R.id.latitude_text);
+                tv9.setVisibility(View.VISIBLE);
+                TextView tv10 = findViewById(R.id.last_update_time_text);
+                tv10.setVisibility(View.VISIBLE);
+                TextView tv11 = findViewById(R.id.resultatJetDe);
+                tv11.setVisibility(View.INVISIBLE);
+                TextView tv12 = findViewById(R.id.marqueur_quete_text);
+                tv12.setVisibility(View.VISIBLE);
+                desactiverBouton();
+            }
+        }.start();
+        countDownTimer.start();
+    }
+
+    private void desactiverBouton() {
+        if   (!Modele.estActifJetDe) {
+            Button lancerDe = findViewById(R.id.lancerDe);
+            lancerDe.setVisibility(View.VISIBLE);
+        }
+    }
+
+
 
 }
 

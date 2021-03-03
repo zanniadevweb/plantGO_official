@@ -33,6 +33,7 @@ public class Modele {
 
     // Quêtes
     public static boolean queteAcceptee = false;
+    public static boolean estActifJetDe = false;
 
 
     // Google Maps
