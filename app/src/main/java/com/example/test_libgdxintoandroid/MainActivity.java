@@ -65,7 +65,7 @@ import com.google.android.gms.tasks.Task;
 
 public class MainActivity<LocationRequest> extends AppCompatActivity implements OnMapReadyCallback {
 
-    /** --------------------------------------------------- Attributs pour localisation -------------------------------------------------- **/
+    /** --------------------------------------------------- Attributs pour localisation --------------------------------------------------- **/
     private static final String TAG = MainActivity.class.getSimpleName();
     /**
      * Code used in requesting runtime permissions.
