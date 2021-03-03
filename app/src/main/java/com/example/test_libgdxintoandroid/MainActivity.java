@@ -744,11 +744,11 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
             Log.d("time", "time " + updatetime);
 
-            // Il faut que cette instruction ne DOIT s'exécuter qu'une seule fois (sinon surcharge la mémoire pour rien : car un point chargé/créé le reste pour toujours) ==> Le false / true ne marche pas
+            // Il faudrait que cette instruction ne s'exécute qu'une seule fois (sinon surcharge la mémoire pour rien : car un point chargé/créé le reste pour toujours) ==> Le false / true ne marche pas
              boolean marqueurQueteDejaAjoute = false;
-            if (Modele.queteAcceptee && marqueurQueteDejaAjoute == false) {
+            if (Modele.queteAcceptee && !marqueurQueteDejaAjoute) {
                 mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
-                marqueurQueteDejaAjoute = true;
+                marqueurQueteDejaAjoute = true; // dit "redondant" ???
                 Modele.circle.setVisible(true);
             }
 

@@ -19,22 +19,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-
-
-        /*configurations.all {
-            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-                def requested = details.requested
-                if (requested.group == 'com.google.android.gms') {
-                    details.useVersion '17.0.0'
-                }
-
-                if (requested.group == 'com.google.firebase') {
-                    details.useVersion '12.0.1'
-                }
-            }
-        }*/
-
-
         jcenter()
         // --------------------- Ligne de code propre à l'usage des gifs -------------------- //
         mavenCentral()
