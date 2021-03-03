@@ -2,6 +2,7 @@ package com.example.test_libgdxintoandroid;
 
 import android.net.Uri;
 
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
@@ -41,4 +42,5 @@ public class Modele {
     public static double latitudeTempsT;
     public static double longitudeTempsT;
     public static Marker MyMarker;
+    public static Circle circle;
 }

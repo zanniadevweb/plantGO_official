@@ -28,5 +28,7 @@
 
     <dimen name="small_margin">10dp</dimen>
 
+    <string name="nom_plante1">Bananier</string>
+
 
 </resources>

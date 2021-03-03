@@ -26,6 +26,8 @@ import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.snackbar.Snackbar;
 
 //* Import propre à la lecture / écriture de fichiers *//
@@ -699,14 +701,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             //If results has length 3 or greater, the final bearing is stored in results[2]
             float[] distance = new float[1];
 
-            //if (Modele.queteAcceptee) {
                 Location.distanceBetween(
                         latitude, // Latitude de départ (Moi)
                         longitude, // Longitude de départ (Moi)
                         Modele.marqueurQuete.latitude, // Latitude de fin (marqueurQuete)
                         Modele.marqueurQuete.longitude, // Longitude de fin (marqueurQuete)
                         distance); // Résultat = distance
-            //}
 
             String updatetime = mLastUpdateTime;
 
@@ -721,22 +721,19 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
             else
             {
-                //Modele.MyMarker.setVisible(false);
                 Modele.MyMarker.remove();
                 Modele.MyMarker = null;
 
-                //if (Modele.queteAcceptee) {
                     if (distance[0] < 210) { // Si distance est inférieure à 210 mètres
                         TextView tv5 = findViewById(R.id.marqueur_quete_text);
-                        tv5.setText("Vous êtes dans la zone de quête (+ ou - 210 mètres) du centre");
+                        String nom_plante1 = getString(R.string.nom_plante1);
+                        tv5.setText("Vous êtes dans la zone de quête (+ ou - 210 mètres) du centre. C'est ici que vous trouverez un(e) " + nom_plante1);
                     } else {
                         TextView tv5 = findViewById(R.id.marqueur_quete_text);
                         tv5.setText("Vous n'êtes pas dans la zone de quête");
                     }
-                //}
             }
             //mMap.clear();
-
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.moi)); // Suit en permanance (chaque fois que la localisation est actualisée) ma position
 
             Log.d("loc", "latitude " + latitude);
@@ -746,6 +743,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Log.d("loc", "distance " + distance[0]);
             }
             Log.d("time", "time " + updatetime);
+
+            // Il faut que cette instruction ne DOIT s'exécuter qu'une seule fois (sinon surcharge la mémoire pour rien : car un point chargé/créé le reste pour toujours) ==> Le false / true ne marche pas
+             boolean marqueurQueteDejaAjoute = false;
+            if (Modele.queteAcceptee && marqueurQueteDejaAjoute == false) {
+                mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
+                marqueurQueteDejaAjoute = true;
+                Modele.circle.setVisible(true);
+            }
+
         }
     }
 
@@ -927,17 +933,18 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        //if (Modele.queteAcceptee) {
             // Add a marker in Anglet and move the camera
             Modele.marqueurQuete = new LatLng(43.47834075276044, -1.5079883577079218);
-            mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
+            //Marker marqueurQuete = mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.marqueurQuete));
-            Circle circle = mMap.addCircle(new CircleOptions()
+            Modele.circle = mMap.addCircle(new CircleOptions()
                     .center(Modele.marqueurQuete)
                     .radius(210)
                     .strokeColor(Color.RED)
                     .fillColor(Color.TRANSPARENT));
-        //}
+
+        // Rendre invisible au départ
+        Modele.circle.setVisible(false);
 
     }
 
