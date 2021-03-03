@@ -24,7 +24,7 @@ public class Inventaire extends AppCompatActivity {
     }
 
     public void isAvailableOrNotHat2 () {
-        if (Modele.jeuCoffreTresorGagne == true) {
+        if (Modele.jeuCoffreTresorGagne) {
             Switch sw2Hat = findViewById(R.id.switchHat2);
             sw2Hat.setClickable(false);
             sw2Hat.setChecked(true);
@@ -35,7 +35,7 @@ public class Inventaire extends AppCompatActivity {
     }
 
     public void isAvailableOrNotTorso2 () {
-        if (Modele.jeuCoffreTresorGagne == true) {
+        if (Modele.jeuCoffreTresorGagne) {
             Switch sw2Torso = findViewById(R.id.switchTorso2);
             sw2Torso.setClickable(false);
             sw2Torso.setChecked(true);

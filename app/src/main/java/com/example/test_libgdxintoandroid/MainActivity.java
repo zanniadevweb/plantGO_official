@@ -14,6 +14,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -22,6 +24,8 @@ import android.text.TextUtils;
 import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+
 import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
@@ -65,7 +69,7 @@ import com.google.android.gms.tasks.Task;
 
 public class MainActivity<LocationRequest> extends AppCompatActivity implements OnMapReadyCallback {
 
-    /** --------------------------------------------------- Attributs pour localisation --------------------------------------------------- **/
+    /** --------------------------------------------------- Attributs pour localisation -------------------------------------------------- **/
     private static final String TAG = MainActivity.class.getSimpleName();
     /**
      * Code used in requesting runtime permissions.
@@ -163,6 +167,21 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
+
+        Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
+        sw_carte.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    View mapFragment = findViewById(R.id.map);
+                    mapFragment.setVisibility(View.INVISIBLE);
+                }
+                if (!isChecked) {
+                    View mapFragment = findViewById(R.id.map);
+                    mapFragment.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
