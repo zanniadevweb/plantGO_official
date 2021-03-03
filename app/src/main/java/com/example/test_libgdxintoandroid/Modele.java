@@ -6,8 +6,6 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
-import java.util.Random;
-
 public class Modele {
     // Attributs propres à libGDX
     public static String resultatpartie = "Partie non déterminée";
@@ -19,6 +17,7 @@ public class Modele {
     public static Integer jetonRejouer = 1;
     public static Integer experienceTotaleActuelle = 0;
     public static boolean pasEncoreAjoutExperience = true;
+
 
     // Attributs propres au jeu du coffre au trésor et à l'inventaire (backpack)
     public static boolean firstInventoryLook = true;
