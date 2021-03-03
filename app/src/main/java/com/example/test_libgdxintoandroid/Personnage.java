@@ -35,13 +35,13 @@ public class Personnage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personnage);
 
-        if (Modele.unSetDeBase == true) {
+        if (Modele.unSetDeBase) {
             TorsoaddElement(R.drawable.torso1);
             HataddElement(R.drawable.hat1);
             Modele.unSetDeBase = false;
         }
 
-        if (Modele.firstInventoryLook == true && Modele.jeuCoffreTresorGagne == true) {
+        if (Modele.firstInventoryLook && Modele.jeuCoffreTresorGagne) {
             Personnage.HataddElement(R.drawable.hat2);
             Personnage.TorsoaddElement(R.drawable.torso2);
             Modele.firstInventoryLook = false;

@@ -150,7 +150,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private String mLastUpdateTime;
 
 
-    private String SAVE = "experience_actuelle.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | queteAcceptee[2]
+    private String SAVE = "sauvegarde.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | queteAcceptee[2]
     private String resultatJeuCoffreTresor = String.valueOf(Modele.jeuCoffreTresorGagne);
     private String queteEstAcceptee = String.valueOf(Modele.queteAcceptee);
     private String experienceActuelle = String.valueOf(Modele.experienceTotaleActuelle);
