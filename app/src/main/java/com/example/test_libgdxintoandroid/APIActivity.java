@@ -21,6 +21,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class APIActivity extends AppCompatActivity {
@@ -64,7 +72,6 @@ public class APIActivity extends AppCompatActivity {
 
     // upload l'image en ligne (pour que l'API de reconnaisance de plante puisse l'utiliser)
     protected void uploadImage(Uri imageURI){
-        String link ="";
 
         StorageReference ref = storageRef.child("images/plante");
 
@@ -78,56 +85,62 @@ public class APIActivity extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         Toast.makeText(APIActivity.this, uri.toString(), Toast.LENGTH_SHORT).show();
                         Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", uri.toString());
+                        try { recognizeImageThroughAPI(uri.toString()); }
+                        catch (UnsupportedEncodingException e) { e.printStackTrace(); }
                     }
                 });
             }
         });
 
 
-
-        Task<Uri> text = storageRef.child("images/plante").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Toast.makeText(APIActivity.this, storageRef.child("images/plante").getDownloadUrl().toString(), Toast.LENGTH_SHORT).show();
-                Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",uri.toString());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(APIActivity.this, "KO", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //  recognizeImageThroughAPI();
-
     }
 
     // appeler l'API de reconnaisance de plante avec l'URL de l'image
-    protected void recognizeImageThroughAPI(/*String imageLink*/){
-
+    protected void recognizeImageThroughAPI(String imageLink) throws UnsupportedEncodingException {
+        imageLink = formater(imageLink);
         RequestQueue queue = Volley.newRequestQueue(APIActivity.this);
-/*
+
         String url ="https://my-api.plantnet.org/v2/identify/all?images=" +
-                    "https://media.gerbeaud.net/2014/02/640/chene-quercus-robur.jpg" +
+                    imageLink +
                     "&organs=leaf&include-related-images=false&lang=fr" +
                     "&api-key=2a10dhqKV1csqtYS4gUnTxZ";
-*/
-        String url = "https://my-api.plantnet.org/v2/identify/all?images=https://media.gerbeaud.net/2014/02/640/chene-quercus-robur.jpg&organs=leaf&include-related-images=false&lang=en&api-key=2a10dhqKV1csqtYS4gUnTxZ";
 
         JsonObjectRequest request = new JsonObjectRequest (Request.Method.GET,
                 url,
                 null,
 
                 /* En cas de réponse de l'API */
-                //   this::onResponse,
-                reponse -> { tv.setText("OK"); },
+                this::onResponse,
+
                 /* En cas d'erreur */
                 error -> { tv.setText("Erreur envoie à l'API "); }
         );
 
+
         // Add the request to the RequestQueue.
         queue.add(request);
     }
+
+    private void onResponse(JSONObject response) {
+        try
+        {
+            JSONObject resultatsDeLaRecherche = (JSONObject) response.getJSONArray("results").get(0); // L'api renvoie tous les résultats probables de la reconnaissance de plan
+            JSONObject resultatLePlusProbable = resultatsDeLaRecherche.getJSONObject("species"); // nom scientifique, nom commun, famille
+            String nomScientifique = resultatLePlusProbable.getString("scientificNameWithoutAuthor");
+
+            tv.setText(nomScientifique);
+        }
+        catch (JSONException e)
+            { e.printStackTrace(); }
+    }
+
+
+    private String formater(String url) throws UnsupportedEncodingException {
+
+        String encoded = URLEncoder.encode(url, StandardCharsets.UTF_8.toString()); Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", encoded);
+        return encoded;
+    }
+
 
     // retour accueil
     public void displayAccueil() {
