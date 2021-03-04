@@ -113,6 +113,8 @@ public class APIActivity extends AppCompatActivity {
             JSONObject resultatLePlusProbable = resultatsDeLaRecherche.getJSONObject("species"); // nom scientifique, nom commun, famille
             String nomScientifique = resultatLePlusProbable.getString("scientificNameWithoutAuthor");
 
+            Modele.planteCourante = nomScientifique;
+
             if (!Modele.isInTheWeeklyQuest(nomScientifique))
                     nomScientifique = "Pas dans la quête hebdomadaire !";
 

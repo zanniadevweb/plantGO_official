@@ -34,10 +34,11 @@ public class Modele {
     // Quêtes
     public static boolean queteAcceptee = false;
     public static boolean estActifJetDe = false;
-    public static String[] plantesQueteCourante = {"Bananier", "Vanilla planifolia"};
+    public static String[] plantesQueteCourante = {"Vanilla planifolia"};
     public static LatLng marqueurCoffre;
     public static double randomLat;
     public static double randomLng;
+    public static String planteCourante;
 
     public static boolean isInTheWeeklyQuest(String currentPlant) {
         for ( String plant : plantesQueteCourante ) {
@@ -46,6 +47,8 @@ public class Modele {
         }
         return false;
     }
+
+    public static boolean queteTerminee = false;
 
     // Google Maps
     public static LatLng marqueurQuete;

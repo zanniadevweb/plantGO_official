@@ -165,6 +165,47 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         setContentView(R.layout.activity_main);
         overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
 
+        // Test Jeu Coffre Tresor
+        /*
+        Intent intent = new Intent(MainActivity.this, JeuCoffreTresor.class);
+        MainActivity.this.startActivity(intent);
+         */
+
+        String nomScientifique = Modele.planteCourante;
+
+        if (Modele.isInTheWeeklyQuest(nomScientifique) && Modele.queteAcceptee) {
+            Modele.queteTerminee = true;
+        }
+        if (Modele.queteTerminee) {
+            //apparitionCoffre();
+
+            View mapFragment = findViewById(R.id.map);
+            Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
+
+            View[] views1 = {sw_carte, mapFragment };
+            for (View view : views1) {
+                view.setVisibility(View.INVISIBLE);
+            }
+
+            ImageView img1 = findViewById(R.id.jetDe);
+            TextView tv1 = findViewById(R.id.resultatJetDe);
+
+            View[] views2 = {img1, tv1 };
+            for (View view : views2) {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
+            tv1.setText(String.valueOf(randomJouerOuNon));
+
+            if (randomJouerOuNon > 3) {
+                timerAvantJeu();
+            }
+            if (randomJouerOuNon <= 3) {
+                timerSiPasJeu();
+            }
+        }
+
         Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
         sw_carte.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -467,7 +508,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
 
             Modele.experienceTotale = experienceJeuGagne + experienceSupplementaireTemps;
-            if (Modele.pasEncoreAjoutExperience == true) {
+            if (Modele.pasEncoreAjoutExperience) {
                 Modele.experienceTotaleActuelle = Modele.experienceTotaleActuelle + Modele.experienceTotale;
                 Modele.pasEncoreAjoutExperience = false;
             }
@@ -778,6 +819,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
             if (Modele.marqueurCoffre != null) //rajouté si quete finie
             {
+
                 float[] distance2 = new float[1];
 
                 Location.distanceBetween(
@@ -791,6 +833,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     TextView tv5 = findViewById(R.id.marqueur_quete_text);
                     tv5.setText("Vous êtes proche du coffre ");
                     //lancé le mini-jeu du coffre
+                    Intent intent = new Intent(MainActivity.this, JeuCoffreTresor.class);
+                    MainActivity.this.startActivity(intent);
                 } else {
                     TextView tv5 = findViewById(R.id.marqueur_quete_text);
                     tv5.setText("Vous êtes loin du coffre");
