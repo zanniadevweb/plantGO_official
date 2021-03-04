@@ -10,7 +10,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
@@ -133,7 +132,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private TextView mLastUpdateTimeTextView;
     private TextView mLatitudeTextView;
     private TextView mLongitudeTextView;
-    private Switch sw_carte;
 
     // Labels.
     private String mLatitudeLabel;
@@ -152,7 +150,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private String mLastUpdateTime;
 
 
-    private String SAVE = "experience_actuelle.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | queteAcceptee[2]
+    private String SAVE = "sauvegarde.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | queteAcceptee[2]
     private String resultatJeuCoffreTresor = String.valueOf(Modele.jeuCoffreTresorGagne);
     private String queteEstAcceptee = String.valueOf(Modele.queteAcceptee);
     private String experienceActuelle = String.valueOf(Modele.experienceTotaleActuelle);
@@ -187,17 +185,24 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onClick(View v) {
                     Modele.estActifJetDe = true;
-                    lancerDe.setVisibility(View.INVISIBLE);
+
+                    View mapFragment = findViewById(R.id.map);
+                    Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
+
+                    View[] views1 = {lancerDe, sw_carte, mapFragment };
+                    for (View view : views1) {
+                        view.setVisibility(View.INVISIBLE);
+                    }
 
                     ImageView img1 = findViewById(R.id.jetDe);
-                    img1.setVisibility(View.VISIBLE);
-                    View mapFragment = findViewById(R.id.map);
-                    mapFragment.setVisibility(View.INVISIBLE);
-                    Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
-                    sw_carte.setVisibility(View.INVISIBLE);
-                    Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
                     TextView tv1 = findViewById(R.id.resultatJetDe);
-                    tv1.setVisibility(View.VISIBLE);
+
+                    View[] views2 = {img1, tv1   };
+                    for (View view : views2) {
+                        view.setVisibility(View.VISIBLE);
+                    }
+
+                    Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
                     tv1.setText(String.valueOf(randomJouerOuNon));
 
                     if (randomJouerOuNon > 3) {
@@ -206,9 +211,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     if (randomJouerOuNon <= 3) {
                         timerSiPasJeu();
                     }
-
-                    TextView tv7 = findViewById(R.id.jeJoue);
-                    tv7.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -249,57 +251,41 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         createLocationRequest();
         buildLocationSettingsRequest();
 
-        Button bt4 = findViewById(R.id.button);
-        bt4.setVisibility(View.INVISIBLE);
-        Button bt5 = findViewById(R.id.button2);
-        bt5.setVisibility(View.INVISIBLE);
-        Button bt6 = findViewById(R.id.gameHorizontal);
-        bt6.setVisibility(View.INVISIBLE);
-        Button bt7 = findViewById(R.id.gameVertical);
-        bt7.setVisibility(View.INVISIBLE);
-        Button bt8 = findViewById(R.id.randomGame);
-        bt8.setVisibility(View.INVISIBLE);
-        Button bt3 = findViewById(R.id.buttonQueteAcceptee);
-        bt3.setVisibility(View.INVISIBLE);
-
-        TextView tv0 = findViewById(R.id.textView);
-        tv0.setVisibility(View.INVISIBLE);
-        TextView tv3 = findViewById(R.id.tempsDeJeu);
-        tv3.setVisibility(View.INVISIBLE);
-        TextView tv4 = findViewById(R.id.planteAChercher);
-        tv4.setVisibility(View.INVISIBLE);
-        TextView tv5 = findViewById(R.id.planteQuete1);
-        tv5.setVisibility(View.INVISIBLE);
-        TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-        tv6.setVisibility(View.INVISIBLE);
-        TextView tv7 = findViewById(R.id.jeJoue);
-        tv7.setVisibility(View.INVISIBLE);
-
         ImageView img1 = findViewById(R.id.jetDe);
-        img1.setVisibility(View.INVISIBLE);
+        Button bt1 = findViewById(R.id.write);
+        Button bt2 = findViewById(R.id.read);
+        Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+        Button bt4 = findViewById(R.id.button);
+        Button bt5 = findViewById(R.id.button2);
+        Button bt6 = findViewById(R.id.gameHorizontal);
+        Button bt7 = findViewById(R.id.gameVertical);
+        Button bt8 = findViewById(R.id.randomGame);
+        TextView tv0 = findViewById(R.id.textView);
+        TextView tv3 = findViewById(R.id.tempsDeJeu);
+        TextView tv4 = findViewById(R.id.planteAChercher);
+        TextView tv5 = findViewById(R.id.planteQuete1);
+        TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+        TextView tv7 = findViewById(R.id.jeJoue);
 
+        View[] views1 = { img1, bt4, bt6, bt5, bt7, bt8, tv0, tv3, tv4, tv5, tv6, tv7};
+        for (View view : views1) {
+            view.setVisibility(View.INVISIBLE);
+        }
 
         if (Modele.firstLoadingApplication) {
-            Button bt1 = findViewById(R.id.write);
             bt1.setVisibility(View.INVISIBLE);
+            bt3.setVisibility(View.INVISIBLE);
         }
         if (!Modele.firstLoadingApplication) {
-            Button bt1 = findViewById(R.id.read);
-            bt1.setVisibility(View.INVISIBLE);
-            bt4.setVisibility(View.VISIBLE);
-            bt5.setVisibility(View.VISIBLE);
-            bt6.setVisibility(View.VISIBLE);
-            bt7.setVisibility(View.VISIBLE);
-            bt8.setVisibility(View.VISIBLE);
+            bt2.setVisibility(View.INVISIBLE);
 
-            tv0.setVisibility(View.VISIBLE);
-            tv3.setVisibility(View.VISIBLE);
-            tv4.setVisibility(View.VISIBLE);
-            tv5.setVisibility(View.VISIBLE);
-            tv6.setVisibility(View.VISIBLE);
+            View[] views2 = { bt4, bt3, bt5, bt6, bt7, bt8, tv0, tv3, tv4, tv5, tv6 };
+            for (View view : views2) {
+                view.setVisibility(View.VISIBLE);
+            }
         }
 
-        if (Modele.queteAcceptee == true) {
+        if (Modele.queteAcceptee) {
             bt3.setVisibility(View.INVISIBLE);
             TextView tv1 = findViewById(R.id.textViewQueteEnCours);
             tv1.setText("La quête est en cours");
@@ -317,27 +303,28 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             public void onClick(View view) {
             try {
                 if (Modele.firstLoadingApplication) {
-                Button bt1 = findViewById(R.id.write);
-                bt1.setVisibility(View.VISIBLE);
-                Button bt2 = findViewById(R.id.read);
-                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
-                bt3.setVisibility(View.VISIBLE);
-                bt2.setVisibility(View.INVISIBLE);
-                bt4.setVisibility(View.VISIBLE);
-                bt5.setVisibility(View.VISIBLE);
-                bt6.setVisibility(View.VISIBLE);
-                bt7.setVisibility(View.VISIBLE);
-                bt8.setVisibility(View.VISIBLE);
+                    Button bt2 = findViewById(R.id.read);
+                    bt2.setVisibility(View.INVISIBLE);
 
+                    Button bt1 = findViewById(R.id.write);
+                    Button bt3 = findViewById(R.id.buttonQueteAcceptee);
                     TextView tv0 = findViewById(R.id.textView);
-                    tv0.setVisibility(View.VISIBLE);
                     TextView tv3 = findViewById(R.id.tempsDeJeu);
-                    tv3.setVisibility(View.VISIBLE);
                     TextView tv4 = findViewById(R.id.planteAChercher);
-                    tv4.setVisibility(View.VISIBLE);
                     TextView tv5 = findViewById(R.id.planteQuete1);
-                    tv5.setVisibility(View.VISIBLE);
                     TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+
+                    bt1.setVisibility(View.VISIBLE);
+                    bt3.setVisibility(View.VISIBLE);
+                    bt4.setVisibility(View.VISIBLE);
+                    bt5.setVisibility(View.VISIBLE);
+                    bt6.setVisibility(View.VISIBLE);
+                    bt7.setVisibility(View.VISIBLE);
+                    bt8.setVisibility(View.VISIBLE);
+                    tv0.setVisibility(View.VISIBLE);
+                    tv3.setVisibility(View.VISIBLE);
+                    tv4.setVisibility(View.VISIBLE);
+                    tv5.setVisibility(View.VISIBLE);
                     tv6.setVisibility(View.VISIBLE);
                 }
 
@@ -1010,50 +997,34 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onTick(long millisUntilFinished) {
                 ProgressBar pb1 = findViewById(R.id.progressBar);
-                pb1.setVisibility(View.INVISIBLE);
                 Button bt1 = findViewById(R.id.start_updates_button);
-                bt1.setVisibility(View.INVISIBLE);
                 Button bt2 = findViewById(R.id.stop_updates_button);
-                bt2.setVisibility(View.INVISIBLE);
                 Button bt3 = findViewById(R.id.buttonQueteAcceptee);
-                bt3.setVisibility(View.INVISIBLE);
                 Button bt4 = findViewById(R.id.button);
-                bt4.setVisibility(View.INVISIBLE);
                 Button bt5 = findViewById(R.id.button2);
-                bt5.setVisibility(View.INVISIBLE);
                 Button bt6 = findViewById(R.id.gameHorizontal);
-                bt6.setVisibility(View.INVISIBLE);
                 Button bt7 = findViewById(R.id.gameVertical);
-                bt7.setVisibility(View.INVISIBLE);
                 Button bt8 = findViewById(R.id.randomGame);
-                bt8.setVisibility(View.INVISIBLE);
                 Button bt9 = findViewById(R.id.read);
-                bt9.setVisibility(View.INVISIBLE);
                 Button bt10 = findViewById(R.id.write);
-                bt10.setVisibility(View.INVISIBLE);
                 Button bt11 = findViewById(R.id.button4);
-                bt11.setVisibility(View.INVISIBLE);
                 TextView tv0 = findViewById(R.id.textView);
-                tv0.setVisibility(View.INVISIBLE);
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
-                tv3.setVisibility(View.INVISIBLE);
                 TextView tv4 = findViewById(R.id.planteAChercher);
-                tv4.setVisibility(View.INVISIBLE);
                 TextView tv5 = findViewById(R.id.planteQuete1);
-                tv5.setVisibility(View.INVISIBLE);
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-                tv6.setVisibility(View.INVISIBLE);
                 TextView tv7 = findViewById(R.id.jeJoue);
+                TextView tv8 = findViewById(R.id.longitude_text);
+                TextView tv9 = findViewById(R.id.latitude_text);
+                TextView tv10 = findViewById(R.id.last_update_time_text);
+                TextView tv12 = findViewById(R.id.marqueur_quete_text);
+
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                for (View view : views) {
+                    view.setVisibility(View.INVISIBLE);
+                }
                 tv7.setVisibility(View.VISIBLE);
                 tv7.setText("Vous allez jouer !");
-                TextView tv8 = findViewById(R.id.longitude_text);
-                tv8.setVisibility(View.INVISIBLE);
-                TextView tv9 = findViewById(R.id.latitude_text);
-                tv9.setVisibility(View.INVISIBLE);
-                TextView tv10 = findViewById(R.id.last_update_time_text);
-                tv10.setVisibility(View.INVISIBLE);
-                TextView tv12 = findViewById(R.id.marqueur_quete_text);
-                tv12.setVisibility(View.INVISIBLE);
             }
             @Override
             public void onFinish() {
@@ -1071,86 +1042,72 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onTick(long millisUntilFinished) {
                 ProgressBar pb1 = findViewById(R.id.progressBar);
-                pb1.setVisibility(View.INVISIBLE);
                 Button bt1 = findViewById(R.id.start_updates_button);
-                bt1.setVisibility(View.INVISIBLE);
                 Button bt2 = findViewById(R.id.stop_updates_button);
-                bt2.setVisibility(View.INVISIBLE);
                 Button bt3 = findViewById(R.id.buttonQueteAcceptee);
-                bt3.setVisibility(View.INVISIBLE);
                 Button bt4 = findViewById(R.id.button);
-                bt4.setVisibility(View.INVISIBLE);
                 Button bt5 = findViewById(R.id.button2);
-                bt5.setVisibility(View.INVISIBLE);
                 Button bt6 = findViewById(R.id.gameHorizontal);
-                bt6.setVisibility(View.INVISIBLE);
                 Button bt7 = findViewById(R.id.gameVertical);
-                bt7.setVisibility(View.INVISIBLE);
                 Button bt8 = findViewById(R.id.randomGame);
-                bt8.setVisibility(View.INVISIBLE);
                 Button bt9 = findViewById(R.id.read);
-                bt9.setVisibility(View.INVISIBLE);
                 Button bt10 = findViewById(R.id.write);
-                bt10.setVisibility(View.INVISIBLE);
                 Button bt11 = findViewById(R.id.button4);
-                bt11.setVisibility(View.INVISIBLE);
+                TextView tv0 = findViewById(R.id.textView);
+                TextView tv3 = findViewById(R.id.tempsDeJeu);
+                TextView tv4 = findViewById(R.id.planteAChercher);
+                TextView tv5 = findViewById(R.id.planteQuete1);
+                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
                 TextView tv7 = findViewById(R.id.jeJoue);
+                TextView tv8 = findViewById(R.id.longitude_text);
+                TextView tv9 = findViewById(R.id.latitude_text);
+                TextView tv10 = findViewById(R.id.last_update_time_text);
+                TextView tv12 = findViewById(R.id.marqueur_quete_text);
+
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                for (View view : views) {
+                    view.setVisibility(View.INVISIBLE);
+                }
                 tv7.setVisibility(View.VISIBLE);
                 tv7.setText("Vous ne jouerez pas cette fois-ci !");
-                TextView tv8 = findViewById(R.id.longitude_text);
-                tv8.setVisibility(View.INVISIBLE);
-                TextView tv9 = findViewById(R.id.latitude_text);
-                tv9.setVisibility(View.INVISIBLE);
-                TextView tv10 = findViewById(R.id.last_update_time_text);
-                tv10.setVisibility(View.INVISIBLE);
-                TextView tv12 = findViewById(R.id.marqueur_quete_text);
-                tv12.setVisibility(View.INVISIBLE);
             }
             @Override
             public void onFinish() {
                 Modele.estActifJetDe = false;
+
                 ProgressBar pb1 = findViewById(R.id.progressBar);
-                pb1.setVisibility(View.VISIBLE);
                 View mapFragment = findViewById(R.id.map);
-                mapFragment.setVisibility(View.VISIBLE);
                 Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
-                sw_carte.setVisibility(View.VISIBLE);
-                ImageView img1 = findViewById(R.id.jetDe);
-                img1.setVisibility(View.INVISIBLE);
                 Button bt1 = findViewById(R.id.start_updates_button);
-                bt1.setVisibility(View.VISIBLE);
                 Button bt2 = findViewById(R.id.stop_updates_button);
-                bt2.setVisibility(View.VISIBLE);
                 Button bt3 = findViewById(R.id.buttonQueteAcceptee);
-                bt3.setVisibility(View.VISIBLE);
                 Button bt4 = findViewById(R.id.button);
-                bt4.setVisibility(View.VISIBLE);
                 Button bt5 = findViewById(R.id.button2);
-                bt5.setVisibility(View.VISIBLE);
                 Button bt6 = findViewById(R.id.gameHorizontal);
-                bt6.setVisibility(View.VISIBLE);
                 Button bt7 = findViewById(R.id.gameVertical);
-                bt7.setVisibility(View.VISIBLE);
                 Button bt8 = findViewById(R.id.randomGame);
-                bt8.setVisibility(View.VISIBLE);
                 Button bt9 = findViewById(R.id.read);
-                bt9.setVisibility(View.VISIBLE);
                 Button bt10 = findViewById(R.id.write);
-                bt10.setVisibility(View.VISIBLE);
                 Button bt11 = findViewById(R.id.button4);
-                bt11.setVisibility(View.VISIBLE);
-                TextView tv7 = findViewById(R.id.jeJoue);
-                tv7.setVisibility(View.INVISIBLE);
                 TextView tv8 = findViewById(R.id.longitude_text);
-                tv8.setVisibility(View.VISIBLE);
                 TextView tv9 = findViewById(R.id.latitude_text);
-                tv9.setVisibility(View.VISIBLE);
                 TextView tv10 = findViewById(R.id.last_update_time_text);
-                tv10.setVisibility(View.VISIBLE);
-                TextView tv11 = findViewById(R.id.resultatJetDe);
-                tv11.setVisibility(View.INVISIBLE);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
-                tv12.setVisibility(View.VISIBLE);
+
+                View[] views1 = {pb1, mapFragment, sw_carte, pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt9,bt10,bt11,tv8,tv9,tv10,tv12 };
+                for (View view : views1) {
+                    view.setVisibility(View.VISIBLE);
+                }
+
+                ImageView img1 = findViewById(R.id.jetDe);
+                TextView tv7 = findViewById(R.id.jeJoue);
+                TextView tv11 = findViewById(R.id.resultatJetDe);
+
+                View[] views2 = {img1, tv7, tv11 };
+                for (View view : views2) {
+                    view.setVisibility(View.INVISIBLE);
+                }
+
                 desactiverBouton();
             }
         }.start();
@@ -1158,7 +1115,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     private void desactiverBouton() {
-        if   (!Modele.estActifJetDe) {
+        if (!Modele.estActifJetDe) {
             Button lancerDe = findViewById(R.id.lancerDe);
             lancerDe.setVisibility(View.VISIBLE);
         }
