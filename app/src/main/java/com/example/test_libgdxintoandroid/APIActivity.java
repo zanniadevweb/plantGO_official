@@ -57,18 +57,6 @@ public class APIActivity extends AppCompatActivity {
         uploadImage(uri);
 
     }
-/*
-    private void onResponse(JSONObject response) {
-        try {
-            JSONObject resultatsDeLaRecherche = (JSONObject) response.getJSONArray("results").get(0); // L'api renvoie tous les résultats probables de la reconnaissance de plan
-            JSONObject resultatLePlusProbable = resultatsDeLaRecherche.getJSONObject("species"); // nom scientifique, nom commun, famille
-            // nomScientifique.set(resultatLePlusProbable.getString("scientificNameWithoutAuthor"));
-            tv.setText(response.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-*/
 
     // upload l'image en ligne (pour que l'API de reconnaisance de plante puisse l'utiliser)
     protected void uploadImage(Uri imageURI){
@@ -91,8 +79,6 @@ public class APIActivity extends AppCompatActivity {
                 });
             }
         });
-
-
     }
 
     // appeler l'API de reconnaisance de plante avec l'URL de l'image
@@ -122,11 +108,13 @@ public class APIActivity extends AppCompatActivity {
     }
 
     private void onResponse(JSONObject response) {
-        try
-        {
+        try {
             JSONObject resultatsDeLaRecherche = (JSONObject) response.getJSONArray("results").get(0); // L'api renvoie tous les résultats probables de la reconnaissance de plan
             JSONObject resultatLePlusProbable = resultatsDeLaRecherche.getJSONObject("species"); // nom scientifique, nom commun, famille
             String nomScientifique = resultatLePlusProbable.getString("scientificNameWithoutAuthor");
+
+            if (!Modele.isInTheWeeklyQuest(nomScientifique))
+                    nomScientifique = "Pas dans la quête hebdomadaire !";
 
             tv.setText(nomScientifique);
         }
