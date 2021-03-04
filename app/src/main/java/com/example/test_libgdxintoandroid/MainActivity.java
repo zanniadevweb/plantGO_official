@@ -775,6 +775,27 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         tv5.setText("Vous n'êtes pas dans la zone de quête");
                     }
             }
+
+            if (Modele.marqueurCoffre != null) //rajouté si quete finie
+            {
+                float[] distance2 = new float[1];
+
+                Location.distanceBetween(
+                        latitude, // Latitude de départ (Moi)
+                        longitude, // Longitude de départ (Moi)
+                        Modele.marqueurCoffre.latitude, // Latitude de fin (marqueurQuete)
+                        Modele.marqueurCoffre.longitude, // Longitude de fin (marqueurQuete)
+                        distance); // Résultat = distance
+
+                if (distance[0] < 20) { // Si distance est inférieure à 20 mètres
+                    TextView tv5 = findViewById(R.id.marqueur_quete_text);
+                    tv5.setText("Vous êtes proche du coffre ");
+                    //lancé le mini-jeu du coffre
+                } else {
+                    TextView tv5 = findViewById(R.id.marqueur_quete_text);
+                    tv5.setText("Vous êtes loin du coffre");
+                }
+            }
             //mMap.clear();
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.moi)); // Suit en permanance (chaque fois que la localisation est actualisée) ma position
 
@@ -1121,7 +1142,14 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
     }
 
+    private void apparitionCoffre() {
+        //lat : 43.47834-43.47645=0,00189=210m // min 43.47645, max 43,48023
+        //lng : -1.50798+1.50538=0,0026=210m // min -1,51058, max -1.50538
+        Modele.randomLat = Math.random()* 0.00378 + (Modele.marqueurQuete.latitude-0.00189); //créer une longitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
+        Modele.randomLng = Math.random()* 0.0052 +(Modele.marqueurQuete.longitude-0.0026); //créer une latitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
+        Modele.marqueurCoffre = new LatLng(Modele.randomLat,Modele.randomLng);
+        mMap.addMarker(new MarkerOptions().position(Modele.marqueurCoffre ).title("Coffre").icon(BitmapDescriptorFactory.fromResource((R.drawable.tresor))));
 
-
+    }
 }
 
