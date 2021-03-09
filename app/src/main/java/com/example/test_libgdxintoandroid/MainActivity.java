@@ -1096,8 +1096,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             public void onClick(View view) {
                 try {
                     if (Modele.firstLoadingApplication) {
-                        Button bt2 = findViewById(R.id.read);
-                        bt2.setVisibility(View.INVISIBLE);
 
                         Button bt1 = findViewById(R.id.write);
                         Button bt3 = findViewById(R.id.buttonQueteAcceptee);
@@ -1112,18 +1110,13 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         TextView tv5 = findViewById(R.id.planteQuete1);
                         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
 
-                        bt1.setVisibility(View.VISIBLE);
-                        bt3.setVisibility(View.VISIBLE);
-                        bt4.setVisibility(View.VISIBLE);
-                        bt5.setVisibility(View.VISIBLE);
-                        bt6.setVisibility(View.VISIBLE);
-                        bt7.setVisibility(View.VISIBLE);
-                        bt8.setVisibility(View.VISIBLE);
-                        tv0.setVisibility(View.VISIBLE);
-                        tv3.setVisibility(View.VISIBLE);
-                        tv4.setVisibility(View.VISIBLE);
-                        tv5.setVisibility(View.VISIBLE);
-                        tv6.setVisibility(View.VISIBLE);
+                        View[] views = {bt1, bt3, bt4, bt5, bt6, bt7, bt8, tv0, tv3, tv4, tv5, tv6 };
+                        for (View viewButton : views) {
+                            viewButton.setVisibility(View.VISIBLE);
+                        }
+
+                        Button bt2 = findViewById(R.id.read);
+                        bt2.setVisibility(View.INVISIBLE);
                     }
 
                     FileInputStream input = openFileInput(SAVE);
