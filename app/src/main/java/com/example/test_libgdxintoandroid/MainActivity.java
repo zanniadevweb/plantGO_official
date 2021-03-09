@@ -170,10 +170,13 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
         String nomScientifique = Modele.planteCourante;
 
+        TextView tv8 = findViewById(R.id.planteQuete1);
+        tv8.setText(Modele.plantesQueteCourante[0]);
+
         if (Modele.isInTheWeeklyQuest(nomScientifique) && Modele.queteAcceptee) {
             Modele.queteTerminee = true;
         }
-        if (Modele.queteTerminee) {
+        if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée")) {
             //apparitionCoffre();
 
             View mapFragment = findViewById(R.id.map);
@@ -1004,12 +1007,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt9 = findViewById(R.id.read);
                 Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
+                TextView tv4 = findViewById(R.id.planteAChercher);
+                TextView tv5 = findViewById(R.id.planteQuete1);
+                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
                 TextView tv8 = findViewById(R.id.longitude_text);
                 TextView tv9 = findViewById(R.id.latitude_text);
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views1 = {pb1, mapFragment, sw_carte, pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt9,bt10,bt11,tv8,tv9,tv10,tv12 };
+                View[] views1 = {pb1, mapFragment, sw_carte, pb1, bt1, bt2, bt3, bt4, bt5, bt6,bt7,bt9,bt10,bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);
                 }
