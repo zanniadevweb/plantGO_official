@@ -33,7 +33,6 @@ public class Modele {
 
     // Quêtes
     public static boolean queteAcceptee = false;
-    public static boolean estActifJetDe = false;
     public static String[] plantesQueteCourante = {"Vanilla planifolia"};
     public static LatLng marqueurCoffre;
     public static double randomLat;
@@ -48,7 +47,7 @@ public class Modele {
         return false;
     }
 
-    public static boolean queteTerminee = false;
+    public static boolean queteTerminee = false; // Si true : Active le lancer de dé et lance un jeu au hasard parmi les deux par défaut si résultat > 3
 
     // Google Maps
     public static LatLng marqueurQuete;

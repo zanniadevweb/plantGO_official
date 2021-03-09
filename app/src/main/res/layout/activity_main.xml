@@ -57,19 +57,6 @@
         app:layout_constraintVertical_bias="0.167" />
 
     <Button
-        android:id="@+id/randomGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="launchRandomGame"
-        android:text="Random Game"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -307,18 +294,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
-
-    <Button
-        android:id="@+id/lancerDe"
-        android:layout_width="81dp"
-        android:layout_height="61dp"
-        android:text="Jeter un dé"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
 
     <TextView
         android:id="@+id/resultatJetDe"

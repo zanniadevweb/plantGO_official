@@ -218,41 +218,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
         });
 
-        Button lancerDe = findViewById(R.id.lancerDe);
-        lancerDe.setOnClickListener (new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    Modele.estActifJetDe = true;
-
-                    View mapFragment = findViewById(R.id.map);
-                    Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
-
-                    View[] views1 = {lancerDe, sw_carte, mapFragment };
-                    for (View view : views1) {
-                        view.setVisibility(View.INVISIBLE);
-                    }
-
-                    ImageView img1 = findViewById(R.id.jetDe);
-                    TextView tv1 = findViewById(R.id.resultatJetDe);
-
-                    View[] views2 = {img1, tv1   };
-                    for (View view : views2) {
-                        view.setVisibility(View.VISIBLE);
-                    }
-
-                    Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
-                    tv1.setText(String.valueOf(randomJouerOuNon));
-
-                    if (randomJouerOuNon > 3) {
-                        timerAvantJeu();
-                    }
-                    if (randomJouerOuNon <= 3) {
-                        timerSiPasJeu();
-                    }
-
-            }
-        });
-
         /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -297,7 +262,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Button bt5 = findViewById(R.id.button2);
         Button bt6 = findViewById(R.id.gameHorizontal);
         Button bt7 = findViewById(R.id.gameVertical);
-        Button bt8 = findViewById(R.id.randomGame);
         TextView tv0 = findViewById(R.id.textView);
         TextView tv3 = findViewById(R.id.tempsDeJeu);
         TextView tv4 = findViewById(R.id.planteAChercher);
@@ -305,7 +269,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
         TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = { img1, bt4, bt6, bt5, bt7, bt8, tv0, tv3, tv4, tv5, tv6, tv7};
+        View[] views1 = { img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5, tv6, tv7};
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
         }
@@ -317,7 +281,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         if (!Modele.firstLoadingApplication) {
             bt2.setVisibility(View.INVISIBLE);
 
-            View[] views2 = { bt4, bt3, bt5, bt6, bt7, bt8, tv0, tv3, tv4, tv5, tv6 };
+            View[] views2 = { bt4, bt3, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
             for (View view : views2) {
                 view.setVisibility(View.VISIBLE);
             }
@@ -334,6 +298,17 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         sauvegarderFichier();
 
 
+/*
+        SauvegardeActivity object = new SauvegardeActivity();
+        object.chargerFichier();
+        object.sauvegarderFichier();
+*/
+
+/*
+
+        SauvegardeActivity.SvgAct.chargerFichier();
+        SauvegardeActivity.SvgAct.sauvegarderFichier();
+*/
         }
 
 
@@ -345,13 +320,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void launchGameVertical(View view) {
         Modele.testBoolean = true;
-        remettreZeroParametresJeu();
-        lancerConsignesJeu();
-    }
-
-    public void launchRandomGame(View view) {
-        // Lance un nombre aléatoire compris entre 1 (Jeu Horizontal) et 2 (Jeu Vertical)
-        Modele.random = new Random().nextInt(2) + 1; // [0, 1] + 1 => [1, 2] : Minimum 1 (si [0] + 1) et maximum 2 (si [1] + 1)
         remettreZeroParametresJeu();
         lancerConsignesJeu();
     }
@@ -951,7 +919,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt8 = findViewById(R.id.randomGame);
                 Button bt9 = findViewById(R.id.read);
                 Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
@@ -966,10 +933,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
+                ImageView img1 = findViewById(R.id.jetDe);
+                img1.setVisibility(View.VISIBLE);
                 tv7.setVisibility(View.VISIBLE);
                 tv7.setText("Vous allez jouer !");
             }
@@ -996,7 +965,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt8 = findViewById(R.id.randomGame);
                 Button bt9 = findViewById(R.id.read);
                 Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
@@ -1011,16 +979,17 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
+                ImageView img1 = findViewById(R.id.jetDe);
+                img1.setVisibility(View.VISIBLE);
                 tv7.setVisibility(View.VISIBLE);
                 tv7.setText("Vous ne jouerez pas cette fois-ci !");
             }
             @Override
             public void onFinish() {
-                Modele.estActifJetDe = false;
 
                 ProgressBar pb1 = findViewById(R.id.progressBar);
                 View mapFragment = findViewById(R.id.map);
@@ -1032,7 +1001,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt8 = findViewById(R.id.randomGame);
                 Button bt9 = findViewById(R.id.read);
                 Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
@@ -1041,7 +1009,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views1 = {pb1, mapFragment, sw_carte, pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt9,bt10,bt11,tv8,tv9,tv10,tv12 };
+                View[] views1 = {pb1, mapFragment, sw_carte, pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt9,bt10,bt11,tv8,tv9,tv10,tv12 };
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);
                 }
@@ -1054,18 +1022,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 for (View view : views2) {
                     view.setVisibility(View.INVISIBLE);
                 }
-
-                desactiverBouton();
             }
         }.start();
         countDownTimer.start();
-    }
-
-    private void desactiverBouton() {
-        if (!Modele.estActifJetDe) {
-            Button lancerDe = findViewById(R.id.lancerDe);
-            lancerDe.setVisibility(View.VISIBLE);
-        }
     }
 
     private void apparitionCoffre() {
@@ -1089,6 +1048,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     /* --------------------- BUT QUI DEVRA ETRE ATTEINT : CHARGER LA SAUVEGARDE UNE SEULE FOIS AU LANCEMENT DE MAINACTIVITY -------------------- */
 
+
     public void chargerFichier() {
         mRead = findViewById(R.id.read);
         mRead.setOnClickListener(new View.OnClickListener() {
@@ -1103,14 +1063,13 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         Button bt5 = findViewById(R.id.button2);
                         Button bt6 = findViewById(R.id.gameHorizontal);
                         Button bt7 = findViewById(R.id.gameVertical);
-                        Button bt8 = findViewById(R.id.randomGame);
                         TextView tv0 = findViewById(R.id.textView);
                         TextView tv3 = findViewById(R.id.tempsDeJeu);
                         TextView tv4 = findViewById(R.id.planteAChercher);
                         TextView tv5 = findViewById(R.id.planteQuete1);
                         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
 
-                        View[] views = {bt1, bt3, bt4, bt5, bt6, bt7, bt8, tv0, tv3, tv4, tv5, tv6 };
+                        View[] views = {bt1, bt3, bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
                         for (View viewButton : views) {
                             viewButton.setVisibility(View.VISIBLE);
                         }
@@ -1178,7 +1137,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             directory.mkdirs();
 
         /* -------------------- BUT QUI DEVRA ETRE ATTEINT : SAUVEGARDER CHAQUE FOIS QUE L'ON REVIENT SUR MAINACTIVITY (APRES LE PREMIER LANCEMENT) -------------------- */
-        mFile = new File(directory.getPath() + SAVE);
+
+    mFile = new File(directory.getPath() + SAVE);
         mWrite = findViewById(R.id.write);
 
         mWrite.setOnClickListener(new View.OnClickListener() {
@@ -1220,5 +1180,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
         });
     }
+
+
 }
 
