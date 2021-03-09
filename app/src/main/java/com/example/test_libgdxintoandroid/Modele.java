@@ -33,10 +33,9 @@ public class Modele {
 
     // Quêtes
     public static boolean queteAcceptee = false;
+    public static boolean lancerDeDejaFait = false;
     public static String[] plantesQueteCourante = {"Vanilla planifolia"};
     public static LatLng marqueurCoffre;
-    public static double randomLat;
-    public static double randomLng;
     public static String planteCourante;
 
     public static boolean isInTheWeeklyQuest(String currentPlant) {
@@ -56,4 +55,6 @@ public class Modele {
     public static double longitudeTempsT;
     public static Marker MyMarker;
     public static Circle circle;
+    public static double randomLat;
+    public static double randomLng;
 }

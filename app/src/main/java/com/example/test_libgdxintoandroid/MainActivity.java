@@ -173,11 +173,16 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         TextView tv8 = findViewById(R.id.planteQuete1);
         tv8.setText(Modele.plantesQueteCourante[0]);
 
+        /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
+        ne s'exécute que si TOUTES les plantes de la quête en cours ont été identifiées */
         if (Modele.isInTheWeeklyQuest(nomScientifique) && Modele.queteAcceptee) {
             Modele.queteTerminee = true;
+            Modele.queteAcceptee = false;
         }
-        if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée")) {
-            //apparitionCoffre();
+        /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
+        ne s'exécute que si UNE plante a été reconnue ==> lancer de dé pour jouer ou non */
+        if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée") && !Modele.lancerDeDejaFait) {
+            Modele.lancerDeDejaFait = true;
 
             View mapFragment = findViewById(R.id.map);
             Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
@@ -195,15 +200,14 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 view.setVisibility(View.VISIBLE);
             }
 
-            Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
-            tv1.setText(String.valueOf(randomJouerOuNon));
-
-            if (randomJouerOuNon > 3) {
-                timerAvantJeu();
-            }
-            if (randomJouerOuNon <= 3) {
-                timerSiPasJeu();
-            }
+            lancerUnDe();
+        }
+        if (Modele.queteTerminee && !Modele.queteAcceptee) {
+            //apparitionCoffre();
+            TextView tv0 = findViewById(R.id.textViewQueteEnCours);
+            tv0.setText("La quête est terminée");
+            Button bt3 = findViewById(R.id.buttonQueteAcceptee);
+            bt3.setVisibility(View.INVISIBLE);
         }
 
         Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
@@ -910,6 +914,19 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public Integer timeCountInMilliSeconds = 4000;
 
+    private void lancerUnDe() {
+        Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
+        TextView tv1 = findViewById(R.id.resultatJetDe);
+        tv1.setText(String.valueOf(randomJouerOuNon));
+
+        if (randomJouerOuNon > 3) {
+            timerAvantJeu();
+        }
+        if (randomJouerOuNon <= 3) {
+            timerSiPasJeu();
+        }
+    }
+
     private void timerAvantJeu() {
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
@@ -999,7 +1016,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
                 Button bt1 = findViewById(R.id.start_updates_button);
                 Button bt2 = findViewById(R.id.stop_updates_button);
-                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
@@ -1015,7 +1031,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views1 = {pb1, mapFragment, sw_carte, pb1, bt1, bt2, bt3, bt4, bt5, bt6,bt7,bt9,bt10,bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
+                View[] views1 = {pb1, mapFragment, sw_carte, pb1, bt1, bt2, bt4, bt5, bt6,bt7,bt9,bt10,bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);
                 }
