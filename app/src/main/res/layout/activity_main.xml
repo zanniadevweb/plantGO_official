@@ -11,6 +11,7 @@
         android:id="@+id/gameHorizontal"
         android:layout_width="145dp"
         android:layout_height="74dp"
+
         android:onClick="launchGameHorizontal"
         android:text="Horizontal Game"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,6 +48,7 @@
 
     <Button
         android:id="@+id/button"
+
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:onClick="displayAppPhoto"
@@ -84,6 +86,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.296" />
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"

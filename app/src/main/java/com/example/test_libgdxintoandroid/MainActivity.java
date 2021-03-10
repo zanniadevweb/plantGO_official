@@ -202,6 +202,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 }
             }
         });
+
         */
         /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -252,22 +253,27 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
 
         View[] views1 = { img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5/*,tv6*/};
+
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
         }
 
         if (!Modele.firstLoadingApplication) {
 
+
             View[] views2 = { bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5/*, tv6*/ };
+
             for (View view : views2) {
                 view.setVisibility(View.VISIBLE);
             }
         }
 
+
         // if (Modele.queteAcceptee) {
             //TextView tv1 = findViewById(R.id.textViewQueteEnCours);
             // tv1.setText("La quête est en cours");
         // }
+
 
         //creerFichier();
         if (Modele.firstLoadingApplication) {
@@ -361,8 +367,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
 
     public void accepterQuete() {
+
        // TextView tv1 = findViewById(R.id.textViewQueteEnCours);
         // tv1.setText("La quête est en cours");
+
         Modele.queteAcceptee = true;
     }
 
@@ -394,6 +402,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             if (savedInstanceState.keySet().contains(KEY_REQUESTING_LOCATION_UPDATES)) {
                mRequestingLocationUpdates = savedInstanceState.getBoolean(
                        KEY_REQUESTING_LOCATION_UPDATES);
+
             }
 
             // Update the value of mCurrentLocation from the Bundle and update the UI to show the
@@ -888,13 +897,17 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     private void lancerUnDe() {
         View mapFragment = findViewById(R.id.map);
+
         /* Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
+
 
         View[] views1 = {sw_carte, mapFragment };
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
         }
+
         */
+
         ImageView img1 = findViewById(R.id.jetDe);
         TextView tv1 = findViewById(R.id.resultatJetDe);
 
@@ -931,17 +944,20 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
                 // TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+
                 TextView tv8 = findViewById(R.id.longitude_text);
                 TextView tv9 = findViewById(R.id.latitude_text);
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
                 View[] views = {pb1,bt1,bt2, bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5/*,tv6*/,tv8,tv9,tv10,tv12 };
+
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
                 ImageView img1 = findViewById(R.id.jetDe);
                 img1.setVisibility(View.VISIBLE);
+
             }
             @Override
             public void onFinish() {
@@ -970,18 +986,22 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
+
                 // TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+
                 TextView tv8 = findViewById(R.id.longitude_text);
                 TextView tv9 = findViewById(R.id.latitude_text);
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
                 View[] views = {pb1,bt1,bt2,bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5/*,tv6*/,tv8,tv9,tv10,tv12 };
+
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
                 ImageView img1 = findViewById(R.id.jetDe);
                 img1.setVisibility(View.VISIBLE);
+
             }
             @Override
             public void onFinish() {
@@ -989,6 +1009,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 ProgressBar pb1 = findViewById(R.id.progressBar);
                 View mapFragment = findViewById(R.id.map);
                 // Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
+
                 Button bt1 = findViewById(R.id.start_updates_button);
                 Button bt2 = findViewById(R.id.stop_updates_button);
                 Button bt4 = findViewById(R.id.button);
@@ -998,13 +1019,17 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt11 = findViewById(R.id.button4);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
+
                // TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+
                 TextView tv8 = findViewById(R.id.longitude_text);
                 TextView tv9 = findViewById(R.id.latitude_text);
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
+
                 View[] views1 = {pb1, mapFragment, /*sw_carte,*/ pb1, bt1, bt2, bt4, bt5, bt6,bt7, bt11, tv4, tv5, /*tv6,*/ tv8, tv9, tv10, tv12 };
+
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);
                 }
@@ -1013,6 +1038,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv11 = findViewById(R.id.resultatJetDe);
 
                 View[] views2 = {img1, tv11 };
+
                 for (View view : views2) {
                     view.setVisibility(View.INVISIBLE);
                 }
@@ -1055,6 +1081,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         // TextView tv6 = findViewById(R.id.textViewQueteEnCours);
 
                         View[] views = {bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5/*, tv6*/ };
+
                         for (View viewButton : views) {
                             viewButton.setVisibility(View.VISIBLE);
                         }
