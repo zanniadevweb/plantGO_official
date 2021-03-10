@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="2020.11.25" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="210">
+ <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="3108" columns="111">
+  <image source="tileset_gutter.png" width="2012" height="504"/>
+ </tileset>
+ <tileset firstgid="3109" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="3108" columns="111">
+  <image source="tileset_gutter.png" width="2012" height="504"/>
+ </tileset>
+ <layer id="1" name="Background Color" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt08ENwCAMBEG+SRPuv6Y0kyrMGTQrzRdkC+pZqwAAAAAAAAAAALhCuu6Z0vuFbqm+d8+56f1yh6l1/aPUval5pjT9vZ3aDwf7uKE=
+  </data>
+ </layer>
+ <layer id="2" name="Graphic Layer" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztmcsyA0EUho/cLxtL7Nx5BTwCkmAfXgBJ8ArYIQleATvsXJ8gb4AkWIa9Df+UpEqlzKQnOZlOV52v6lvkMt1nus/pk6kQCYIgEF1GiK7gdaSzcRJxoiRMxXniUuUgSnQIj6Kdj2XyPazHiDbgZowvLi/nzuDaLMxpiN9khpEzI3DUJndU1/UeOf8AHxlyfx5jLMBFhbG+rbgRW59DfKr5xXkPbs5FlXuwcNqLJ7z3DF+Y8t/NHnDMXca1FVhlip/zXFfBzXp5Cfe6qnCDNbiFd0xrwZ3bKrQ6F9vBy73g3AOva8lC9UzkgjtnTWEsRDQOJ+AknILTId1RCZx4XUvtouv5yWTyqNUCLMJjeAJPpX4FDXA+P3FgQm/zhYn8MACDMATDYd1RCYJ+TOhtGdRqFubgFtyGO1K/gmBEbysjngqswlf4Bt8dYpwJEs3CueD/n9f8RB91P/3uYkkHiNYC7q4RhG5hQm9LRIiSMAWX4DJccfjP5Qx1ew4vbOrXqsFS3UYtppte231PEHoJt73NjgH85h6EQw6/vf/2Pa9122dVqXV5fEFwwk1v++q3H2cXdbsH9x3q1+pnq5q0emg+ymcBFqO/4zbmkBoWuNDV51r1QF01bNWZL4ZnfRhgtNQ0j+419tpezjeT/QEJgGZw
+  </data>
+ </layer>
+ <objectgroup id="3" name="Ground">
+  <object id="25" x="1440.67" y="192" width="1023.33" height="16"/>
+  <object id="28" x="2176" y="160" width="48" height="32"/>
+  <object id="29" x="2160" y="176" width="16" height="16"/>
+  <object id="32" x="2256.25" y="160" width="47.75" height="32"/>
+  <object id="33" x="2304" y="176" width="16" height="16"/>
+  <object id="34" x="2384" y="176" width="80.125" height="16"/>
+  <object id="41" x="2496" y="176" width="64" height="16"/>
+  <object id="42" x="2496" y="192" width="1344" height="16"/>
+  <object id="53" x="2912" y="176" width="47.5" height="16"/>
+  <object id="54" x="3200" y="176" width="16" height="16"/>
+  <object id="161" x="3008.5" y="176" width="48" height="15.5"/>
+  <object id="190" x="1104" y="208.25" width="336.5" height="10.75"/>
+  <object id="196" x="591.75" y="160.042" width="511.75" height="47.0833"/>
+  <object id="197" x="1440.79" y="159.125" width="46.25" height="31.75"/>
+  <object id="198" x="1488.38" y="176.625" width="15.25" height="14.25"/>
+  <object id="199" x="1136.5" y="127.5" width="63.5" height="31.5"/>
+  <object id="200" x="1216.33" y="144.667" width="48.1667" height="15.8333"/>
+  <object id="201" x="1297" y="144" width="63" height="17"/>
+  <object id="203" x="1375.5" y="127.75" width="32" height="15.75"/>
+  <object id="204" x="1.125" y="192.458" width="591.75" height="14.0833"/>
+  <object id="209" x="335.818" y="176.182" width="16.1818" height="16.5455"/>
+ </objectgroup>
+ <objectgroup id="7" name="Crabes">
+  <object id="139" x="368" y="176.667" width="16" height="16"/>
+  <object id="142" x="2768" y="176" width="16" height="16"/>
+  <object id="148" x="2225" y="175.667" width="16" height="16"/>
+  <object id="155" x="3104.33" y="175.333" width="16" height="16"/>
+  <object id="157" x="509.25" y="176" width="16" height="16"/>
+  <object id="172" x="719.333" y="144.333" width="16.6667" height="14.6667"/>
+  <object id="173" x="783.667" y="144.667" width="15.3333" height="14"/>
+  <object id="180" x="1552.33" y="175.667" width="15.6667" height="15.6667"/>
+  <object id="182" x="927.667" y="143.833" width="16.3333" height="16.3333"/>
+ </objectgroup>
+ <objectgroup id="9" name="PlanteCarnivore">
+  <object id="163" x="337.682" y="161.909" width="12" height="14.0909"/>
+ </objectgroup>
+ <objectgroup id="11" name="BloqueurEnnemiTerrestre">
+  <object id="176" x="1104.42" y="143.584" width="16" height="15.75"/>
+  <object id="179" x="1424" y="144.458" width="16" height="15.75"/>
+  <object id="185" x="575.333" y="175.667" width="15.3333" height="16"/>
+  <object id="187" x="352.667" y="176.333" width="14.6667" height="15.6667"/>
+  <object id="194" x="575.5" y="143.625" width="16" height="15.75"/>
+  <object id="205" x="1504.33" y="176" width="15.3333" height="15.3333"/>
+  <object id="206" x="2143.33" y="176" width="17" height="15.3333"/>
+  <object id="207" x="895.333" y="144" width="16" height="15.3333"/>
+  <object id="208" x="800" y="144" width="14.6667" height="16.6667"/>
+ </objectgroup>
+</map>
