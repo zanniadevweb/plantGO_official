@@ -36,18 +36,20 @@ public class ConsignesDeJeu extends AppCompatActivity {
         //}
 
         setContentView(R.layout.activity_consignesjeu);
+        if (Modele.resultatpartie.equals("Partie non déterminée")) {
+            setInfoGame();
+        }
     }
 
     public void launchSelectedGame(View view) {
-        if (Modele.resultatpartie == "Partie gagnée" || Modele.resultatpartie == "Partie perdue") {
+        if (Modele.resultatpartie.equals("Partie gagnée") || Modele.resultatpartie.equals("Partie perdue")) {
             Intent intent = new Intent(ConsignesDeJeu.this, MainActivity.class);
             ConsignesDeJeu.this.startActivity(intent);
         }
         else {
-            // -------------- Effacer affichage titre et consignes de jeu (+bouton d'affichage) une fois qu'on lance le jeu sélectionné --------------
+            // -------------- Effacer affichage titre et consignes de jeu une fois qu'on lance le jeu sélectionné --------------
             rendreInvisibleTitreEtConsignesJeu();
-            rendreInvisibleBoutonConsignesJeu();
-            // -------------- Effacer affichage titre et consignes de jeu (+bouton d'affichage) une fois qu'on lance le jeu sélectionné --------------
+            // -------------- Effacer affichage titre et consignes de jeu une fois qu'on lance le jeu sélectionné --------------
 
             changerTexteLancerJeuEnRetourMenu(); // Ce bouton est inactif avant lancement du jeu (else) puisque l'action spécifiée n'est effective qu'au retour du jeu (if)
 
@@ -57,7 +59,7 @@ public class ConsignesDeJeu extends AppCompatActivity {
         }
     }
 
-    public void setInfoGame(View view) {
+    public void setInfoGame() {
         // -------------- Rendre à nouveau visible l'affichage du titre et consignes de jeu qui ont pu préalablement être effacées au lancement du jeu --------------
         rendreVisibleTitreEtConsignesJeu();
         // -------------- Rendre à nouveau visible l'affichage du titre et consignes de jeu qui ont pu préalablement être effacées au lancement du jeu --------------
@@ -83,11 +85,6 @@ public class ConsignesDeJeu extends AppCompatActivity {
         TextView tv2 = findViewById(R.id.consignesJeu);
         tv1.setVisibility(View.INVISIBLE);
         tv2.setVisibility(View.INVISIBLE);
-    }
-
-    public void rendreInvisibleBoutonConsignesJeu() {
-        Button bt1 = findViewById(R.id.affichageConsignes);
-        bt1.setVisibility(View.INVISIBLE);
     }
 
     public void changerTexteLancerJeuEnRetourMenu() {
