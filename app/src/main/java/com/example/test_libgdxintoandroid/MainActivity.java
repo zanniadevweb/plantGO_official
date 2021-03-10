@@ -156,8 +156,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private String experienceActuelle = String.valueOf(Modele.experienceTotaleActuelle);
     private final String pipeSeparation = "|";
     private File mFile = new File(SAVE);
-    private Button mWrite = null;
-    private Button mRead = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,7 +240,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         buildLocationSettingsRequest();
 
         ImageView img1 = findViewById(R.id.jetDe);
-        Button bt1 = findViewById(R.id.write);
         Button bt3 = findViewById(R.id.buttonQueteAcceptee);
         Button bt4 = findViewById(R.id.button);
         Button bt5 = findViewById(R.id.button2);
@@ -261,7 +258,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
 
         if (Modele.firstLoadingApplication) {
-            bt1.setVisibility(View.INVISIBLE);
             bt3.setVisibility(View.INVISIBLE);
         }
         if (!Modele.firstLoadingApplication) {
@@ -282,7 +278,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         if (Modele.firstLoadingApplication) {
             chargerFichier();
         }
-        sauvegarderFichier();
+        if (!Modele.firstLoadingApplication) {
+            sauvegarderFichier();
+        }
 
 
 /*
@@ -300,12 +298,14 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
 
     public void launchGameHorizontal(View view) {
+        Modele.firstLoadingApplication = false;
         Modele.testBoolean = false;
         remettreZeroParametresJeu();
         lancerConsignesJeu();
     }
 
     public void launchGameVertical(View view) {
+        Modele.firstLoadingApplication = false;
         Modele.testBoolean = true;
         remettreZeroParametresJeu();
         lancerConsignesJeu();
@@ -371,18 +371,19 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         TextView tv1 = findViewById(R.id.textViewQueteEnCours);
         tv1.setText("La quête est en cours");
         Modele.queteAcceptee = true;
-        Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
     }
 
 
     // afficher profil
     public void displayProfile(View view) {
+        Modele.firstLoadingApplication = false;
         Intent intent = new Intent(MainActivity.this, ProfilActivity.class);
         MainActivity.this.startActivity(intent);
     }
 
     // afficher app. photo
     public void displayAppPhoto(View view) {
+        Modele.firstLoadingApplication = false;
         Intent intent = new Intent(MainActivity.this, AppPhotoActivity.class);
         MainActivity.this.startActivity(intent);
     }
@@ -934,7 +935,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
                 TextView tv0 = findViewById(R.id.textView);
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
@@ -947,7 +947,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
@@ -979,7 +979,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
                 TextView tv0 = findViewById(R.id.textView);
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
@@ -992,7 +991,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
@@ -1013,7 +1012,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
@@ -1023,7 +1021,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views1 = {pb1, mapFragment, sw_carte, pb1, bt1, bt2, bt4, bt5, bt6,bt7, bt10,bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
+                View[] views1 = {pb1, mapFragment, sw_carte, pb1, bt1, bt2, bt4, bt5, bt6,bt7, bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);
                 }
@@ -1062,9 +1060,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void chargerFichier() {
                 try {
-                    if (Modele.firstLoadingApplication) {
 
-                        Button bt1 = findViewById(R.id.write);
+                    if (Modele.firstLoadingApplication) {
                         Button bt3 = findViewById(R.id.buttonQueteAcceptee);
                         Button bt4 = findViewById(R.id.button);
                         Button bt5 = findViewById(R.id.button2);
@@ -1076,7 +1073,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         TextView tv5 = findViewById(R.id.planteQuete1);
                         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
 
-                        View[] views = {bt1, bt3, bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
+                        View[] views = {bt3, bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
                         for (View viewButton : views) {
                             viewButton.setVisibility(View.VISIBLE);
                         }
@@ -1102,8 +1099,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     Log.d("s0", "split0 : " + strFields0);
                     Log.d("s1", "split1 : " + strFields1);
                     Log.d("s2", "split2 : " + strFields2);
-                    Log.d("q", "quete en cours ? " + Modele.queteAcceptee);
-                    Modele.firstLoadingApplication = false;
+                    Log.d("qload", "quete en cours ? " + Modele.queteAcceptee);
                     if (input != null)
                         input.close();
 
@@ -1119,8 +1115,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         Log.d("s0", "split0 : " + strFields0);
                         Log.d("s1", "split1 : " + strFields1);
                         Log.d("s2", "split2 : " + strFields2);
-                        Log.d("q", "quete en cours ? " + Modele.queteAcceptee);
-                        Modele.firstLoadingApplication = false;
+                        Log.d("qload", "quete en cours ? " + Modele.queteAcceptee);
                         if (input != null)
                             input.close();
                     }
@@ -1138,14 +1133,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         if (!directory.exists())
             directory.mkdirs();
 
-        /* -------------------- BUT QUI DEVRA ETRE ATTEINT : SAUVEGARDER CHAQUE FOIS QUE L'ON REVIENT SUR MAINACTIVITY (APRES LE PREMIER LANCEMENT) -------------------- */
-
     mFile = new File(directory.getPath() + SAVE);
-        mWrite = findViewById(R.id.write);
-
-        mWrite.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
                 try {
                     // Flux interne
                     FileOutputStream output = openFileOutput(SAVE, MODE_PRIVATE);
@@ -1156,7 +1144,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
                     output.write(pipeSeparation.getBytes());
                     output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                    Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
+                    Log.d("qsave", "quete en cours ? " +  Modele.queteAcceptee);
 
                     if(output != null)
                         output.close();
@@ -1172,15 +1160,13 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
                         output.write(pipeSeparation.getBytes());
                         output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                        Log.d("q", "quete en cours ? " +  Modele.queteAcceptee);
+                        Log.d("qsave", "quete en cours ? " +  Modele.queteAcceptee);
                         if(output != null)
                             output.close();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-        });
     }
 
 
