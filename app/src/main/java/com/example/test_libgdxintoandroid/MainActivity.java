@@ -155,7 +155,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private String queteEstAcceptee = String.valueOf(Modele.queteAcceptee);
     private String experienceActuelle = String.valueOf(Modele.experienceTotaleActuelle);
     private final String pipeSeparation = "|";
-    private File mFile = null;
+    private File mFile = new File(SAVE);
     private Button mWrite = null;
     private Button mRead = null;
 
@@ -243,7 +243,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
         ImageView img1 = findViewById(R.id.jetDe);
         Button bt1 = findViewById(R.id.write);
-        Button bt2 = findViewById(R.id.read);
         Button bt3 = findViewById(R.id.buttonQueteAcceptee);
         Button bt4 = findViewById(R.id.button);
         Button bt5 = findViewById(R.id.button2);
@@ -266,7 +265,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             bt3.setVisibility(View.INVISIBLE);
         }
         if (!Modele.firstLoadingApplication) {
-            bt2.setVisibility(View.INVISIBLE);
 
             View[] views2 = { bt4, bt3, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
             for (View view : views2) {
@@ -281,7 +279,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
 
         //creerFichier();
-        chargerFichier();
+        if (Modele.firstLoadingApplication) {
+            chargerFichier();
+        }
         sauvegarderFichier();
 
 
@@ -934,7 +934,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt9 = findViewById(R.id.read);
                 Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
                 TextView tv0 = findViewById(R.id.textView);
@@ -948,7 +947,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
@@ -980,7 +979,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt9 = findViewById(R.id.read);
                 Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
                 TextView tv0 = findViewById(R.id.textView);
@@ -994,7 +992,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt9,bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt10,bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
@@ -1015,7 +1013,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt9 = findViewById(R.id.read);
                 Button bt10 = findViewById(R.id.write);
                 Button bt11 = findViewById(R.id.button4);
                 TextView tv4 = findViewById(R.id.planteAChercher);
@@ -1026,7 +1023,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views1 = {pb1, mapFragment, sw_carte, pb1, bt1, bt2, bt4, bt5, bt6,bt7,bt9,bt10,bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
+                View[] views1 = {pb1, mapFragment, sw_carte, pb1, bt1, bt2, bt4, bt5, bt6,bt7, bt10,bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);
                 }
@@ -1063,14 +1060,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             directory.mkdirs();
     }*/
 
-    /* --------------------- BUT QUI DEVRA ETRE ATTEINT : CHARGER LA SAUVEGARDE UNE SEULE FOIS AU LANCEMENT DE MAINACTIVITY -------------------- */
-
-
     public void chargerFichier() {
-        mRead = findViewById(R.id.read);
-        mRead.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
                 try {
                     if (Modele.firstLoadingApplication) {
 
@@ -1090,9 +1080,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         for (View viewButton : views) {
                             viewButton.setVisibility(View.VISIBLE);
                         }
-
-                        Button bt2 = findViewById(R.id.read);
-                        bt2.setVisibility(View.INVISIBLE);
                     }
 
                     FileInputStream input = openFileInput(SAVE);
@@ -1141,8 +1128,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-        });
     }
 
 
