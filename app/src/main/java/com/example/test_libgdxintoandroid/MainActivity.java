@@ -184,8 +184,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             //apparitionCoffre();
             TextView tv0 = findViewById(R.id.textViewQueteEnCours);
             tv0.setText("La quête est terminée");
-            Button bt3 = findViewById(R.id.buttonQueteAcceptee);
-            bt3.setVisibility(View.INVISIBLE);
         }
 
         Switch sw_carte = findViewById(R.id.masquer_afficher_carte);
@@ -240,7 +238,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         buildLocationSettingsRequest();
 
         ImageView img1 = findViewById(R.id.jetDe);
-        Button bt3 = findViewById(R.id.buttonQueteAcceptee);
         Button bt4 = findViewById(R.id.button);
         Button bt5 = findViewById(R.id.button2);
         Button bt6 = findViewById(R.id.gameHorizontal);
@@ -257,19 +254,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             view.setVisibility(View.INVISIBLE);
         }
 
-        if (Modele.firstLoadingApplication) {
-            bt3.setVisibility(View.INVISIBLE);
-        }
         if (!Modele.firstLoadingApplication) {
 
-            View[] views2 = { bt4, bt3, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
+            View[] views2 = { bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
             for (View view : views2) {
                 view.setVisibility(View.VISIBLE);
             }
         }
 
         if (Modele.queteAcceptee) {
-            bt3.setVisibility(View.INVISIBLE);
             TextView tv1 = findViewById(R.id.textViewQueteEnCours);
             tv1.setText("La quête est en cours");
         }
@@ -277,6 +270,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         //creerFichier();
         if (Modele.firstLoadingApplication) {
             chargerFichier();
+            accepterQuete();
         }
         if (!Modele.firstLoadingApplication) {
             sauvegarderFichier();
@@ -365,9 +359,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
 
-    public void accepterQuete(View view) {
-        Button bt3 = findViewById(R.id.buttonQueteAcceptee);
-        bt3.setVisibility(View.INVISIBLE);
+    public void accepterQuete() {
         TextView tv1 = findViewById(R.id.textViewQueteEnCours);
         tv1.setText("La quête est en cours");
         Modele.queteAcceptee = true;
@@ -930,7 +922,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 ProgressBar pb1 = findViewById(R.id.progressBar);
                 Button bt1 = findViewById(R.id.start_updates_button);
                 Button bt2 = findViewById(R.id.stop_updates_button);
-                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
@@ -947,7 +938,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2, bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
@@ -974,7 +965,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 ProgressBar pb1 = findViewById(R.id.progressBar);
                 Button bt1 = findViewById(R.id.start_updates_button);
                 Button bt2 = findViewById(R.id.stop_updates_button);
-                Button bt3 = findViewById(R.id.buttonQueteAcceptee);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
@@ -991,7 +981,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt3,bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
+                View[] views = {pb1,bt1,bt2,bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6,tv8,tv9,tv10,tv12 };
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
@@ -1062,7 +1052,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 try {
 
                     if (Modele.firstLoadingApplication) {
-                        Button bt3 = findViewById(R.id.buttonQueteAcceptee);
                         Button bt4 = findViewById(R.id.button);
                         Button bt5 = findViewById(R.id.button2);
                         Button bt6 = findViewById(R.id.gameHorizontal);
@@ -1073,7 +1062,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         TextView tv5 = findViewById(R.id.planteQuete1);
                         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
 
-                        View[] views = {bt3, bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
+                        View[] views = {bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
                         for (View viewButton : views) {
                             viewButton.setVisibility(View.VISIBLE);
                         }
