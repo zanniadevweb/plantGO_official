@@ -306,14 +306,13 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     public void testValeurRetourJeu(View view) {
-        String resultatWinLose = Modele.resultatpartie;
         TextView tv1 = findViewById(R.id.textView);
         ProgressBar pb = findViewById(R.id.progressBar);
 
         Integer tempsJeu = Modele.tempsPartie;
         TextView tv2 = findViewById(R.id.tempsDeJeu);
 
-        if (TextUtils.equals(resultatWinLose, "Partie gagnée") || Modele.resultatpartie == "Partie gagnée") {
+        if (Modele.resultatpartie == "Partie gagnée") {
             Integer experienceJeuGagne = 50;
             Integer experienceSupplementaireTemps = 0;
 
@@ -341,7 +340,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             pb.setProgress(Modele.experienceTotale);
 
         }
-        if (TextUtils.equals(resultatWinLose,"Partie perdue") || Modele.resultatpartie == "Partie perdue") {
+        if (Modele.resultatpartie == "Partie perdue") {
             tv1.setText( "Partie perdue. Action : PAS de gain expérience");
             tv2.setText("Temps PAS PRIS en compte");
             pb.setProgress(0);
@@ -355,7 +354,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void lancerConsignesJeu() {
         Intent intent = new Intent(MainActivity.this, ConsignesDeJeu.class);
-        MainActivity.this.startActivityForResult(intent, 1);
+        MainActivity.this.startActivity(intent);
     }
 
 
@@ -469,8 +468,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("testresultatpartie", Modele.resultatpartie);
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
