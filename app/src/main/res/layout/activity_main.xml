@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/stop_updates_button"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -95,35 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.296" />
-
-    <Button
-        android:id="@+id/start_updates_button"
-        android:layout_width="137dp"
-        android:layout_height="58dp"
-        android:onClick="startUpdatesButtonHandler"
-        android:text="@string/start_updates"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.036"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659" />
-
-    <Button
-        android:id="@+id/stop_updates_button"
-        android:layout_width="137dp"
-        android:layout_height="58dp"
-        android:enabled="false"
-        android:onClick="stopUpdatesButtonHandler"
-        android:text="@string/stop_updates"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.036"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.745" />
 
     <TextView
         android:id="@+id/last_update_time_text"

@@ -15,7 +15,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -125,8 +124,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private Location mCurrentLocation;
 
     // UI Widgets.
-    private Button mStartUpdatesButton;
-    private Button mStopUpdatesButton;
     private TextView mLastUpdateTimeTextView;
     private TextView mLatitudeTextView;
     private TextView mLongitudeTextView;
@@ -201,8 +198,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         /** --------------------------------------------------- Méthodes pour localisation -------------------------------------------------- **/
 
         // Locate the UI widgets.
-        mStartUpdatesButton = (Button) findViewById(R.id.start_updates_button);
-        mStopUpdatesButton = (Button) findViewById(R.id.stop_updates_button);
         mLatitudeTextView = (TextView) findViewById(R.id.latitude_text);
         mLongitudeTextView = (TextView) findViewById(R.id.longitude_text);
         mLastUpdateTimeTextView = (TextView) findViewById(R.id.last_update_time_text);
@@ -212,7 +207,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         mLongitudeLabel = getResources().getString(R.string.longitude_label);
         mLastUpdateTimeLabel = getResources().getString(R.string.last_update_time_label);
 
-        mRequestingLocationUpdates = false;
+        mRequestingLocationUpdates = true;
         mLastUpdateTime = "";
 
         // Update values using data stored in the Bundle.
@@ -472,28 +467,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     /**
-     * Handles the Start Updates button and requests start of location updates. Does nothing if
-     * updates have already been requested.
-     */
-    public void startUpdatesButtonHandler(View view) {
-        if (!mRequestingLocationUpdates) {
-            mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
-            startLocationUpdates();
-        }
-    }
-
-    /**
-     * Handles the Stop Updates button, and requests removal of location updates.
-     */
-    public void stopUpdatesButtonHandler(View view) {
-        // It is a good practice to remove location requests when the activity is in a paused or
-        // stopped state. Doing so helps battery performance and is especially
-        // recommended in applications that request frequent location updates.
-        stopLocationUpdates();
-    }
-
-    /**
      * Requests location updates from the FusedLocationApi. Note: we don't call this unless location
      * runtime permission has been granted.
      */
@@ -546,24 +519,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
      * Updates all UI fields.
      */
     private void updateUI() {
-        setButtonsEnabledState();
         updateLocationUI();
-    }
-
-    /**
-     * Disables both buttons when functionality is disabled due to insuffucient location settings.
-     * Otherwise ensures that only one button is enabled at any time. The Start Updates button is
-     * enabled if the user is not requesting location updates. The Stop Updates button is enabled
-     * if the user is requesting location updates.
-     */
-    private void setButtonsEnabledState() {
-        if (mRequestingLocationUpdates) {
-            mStartUpdatesButton.setEnabled(false);
-            mStopUpdatesButton.setEnabled(true);
-        } else {
-            mStartUpdatesButton.setEnabled(true);
-            mStopUpdatesButton.setEnabled(false);
-        }
     }
 
     /**
@@ -579,7 +535,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     mLastUpdateTimeLabel, mLastUpdateTime));
 
             double latitude = mCurrentLocation.getLatitude();
-            double latitude_plus_10 = mCurrentLocation.getLatitude() + 10;
             double longitude = mCurrentLocation.getLongitude();
 
             // The computed distance is stored in results[0].
@@ -648,7 +603,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
             Log.d("loc", "latitude " + latitude);
             Log.d("loc", "longitude " + longitude);
-            Log.d("loc", "latitude_plus_10 " + latitude_plus_10); // Test pour augmenter la latitude
             if (Modele.queteAcceptee) {
                 Log.d("loc", "distance " + distance[0]);
             }
@@ -682,7 +636,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         mRequestingLocationUpdates = false;
-                        setButtonsEnabledState();
                     }
                 });
     }
@@ -888,8 +841,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onTick(long millisUntilFinished) {
                 ProgressBar pb1 = findViewById(R.id.progressBar);
-                Button bt1 = findViewById(R.id.start_updates_button);
-                Button bt2 = findViewById(R.id.stop_updates_button);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
@@ -906,7 +857,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2, bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6, tv7, tv8,tv9,tv10,tv12 };
+                View[] views = {pb1, bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6, tv7, tv8,tv9,tv10,tv12 };
 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
@@ -933,8 +884,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onTick(long millisUntilFinished) {
                 ProgressBar pb1 = findViewById(R.id.progressBar);
-                Button bt1 = findViewById(R.id.start_updates_button);
-                Button bt2 = findViewById(R.id.stop_updates_button);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
@@ -953,7 +902,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1,bt1,bt2,bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6, tv8,tv9,tv10,tv12 };
+                View[] views = {pb1, bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6, tv8,tv9,tv10,tv12 };
 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
@@ -970,8 +919,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 ProgressBar pb1 = findViewById(R.id.progressBar);
                 View mapFragment = findViewById(R.id.map);
 
-                Button bt1 = findViewById(R.id.start_updates_button);
-                Button bt2 = findViewById(R.id.stop_updates_button);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
@@ -988,7 +935,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
 
-                View[] views1 = {pb1, mapFragment, pb1, bt1, bt2, bt4, bt5, bt6,bt7, bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
+                View[] views1 = {pb1, mapFragment, pb1, bt4, bt5, bt6,bt7, bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
 
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);

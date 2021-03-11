@@ -7,7 +7,10 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <!-- __________________ Permissions propres à Google Maps __________________ -->
+    <!-- Pour la localisation GPS (consomme plus de batterie) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Pour la localisation via réseau Wifi / 3G (consomme moins de batterie) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- __________________ Permissions propres à Firebase __________________ -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
