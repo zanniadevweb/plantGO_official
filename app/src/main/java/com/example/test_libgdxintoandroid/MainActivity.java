@@ -182,10 +182,21 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 coffreEnCours=true;
                 apparitionCoffre();
             }
+        }
+        if (Modele.queteTerminee && !Modele.popUpActif) {
+            Modele.popUpActif = true;
 
-            TextView tv0 = findViewById(R.id.textViewQueteEnCours);
-            tv0.setText("La quête est terminée");
+            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+            ImageView img2 = findViewById(R.id.fondMessage);
+            Button bt8 = findViewById(R.id.terminerQuete);
 
+            View[] views = {img2, bt8, tv6};
+
+            for (View view : views) {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            tv6.setText("La quête est terminée");
         }
 
         /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
@@ -231,29 +242,20 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         TextView tv3 = findViewById(R.id.tempsDeJeu);
         TextView tv4 = findViewById(R.id.planteAChercher);
         TextView tv5 = findViewById(R.id.planteQuete1);
-        TextView tv6 = findViewById(R.id.textViewQueteEnCours);
         TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = { img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5,tv6, tv7};
+        View[] views1 = { img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5,tv0, tv7};
 
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
         }
 
         if (!Modele.firstLoadingApplication) {
-
-
-            View[] views2 = { bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
+            View[] views2 = { bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5 };
 
             for (View view : views2) {
                 view.setVisibility(View.VISIBLE);
             }
-        }
-
-
-        if (Modele.queteAcceptee) {
-            TextView tv1 = findViewById(R.id.textViewQueteEnCours);
-            tv1.setText("La quête est en cours");
         }
 
         if (Modele.firstLoadingApplication) {
@@ -263,9 +265,21 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         if (!Modele.firstLoadingApplication) {
             sauvegarderFichier();
         }
-
     }
 
+    public void terminerQuete(View view) {
+        TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+        ImageView img2 = findViewById(R.id.fondMessage);
+        Button bt8 = findViewById(R.id.terminerQuete);
+
+        View[] views = {img2, bt8, tv6};
+
+        for (View view2 : views) {
+            view.setVisibility(View.INVISIBLE);
+        }
+
+        tv6.setText("");
+    }
 
     public void launchGameHorizontal(View view) {
         Modele.firstLoadingApplication = false;
@@ -335,10 +349,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
 
     public void accepterQuete() {
-
-        TextView tv1 = findViewById(R.id.textViewQueteEnCours);
-        tv1.setText("La quête est en cours");
-
         Modele.queteAcceptee = true;
     }
 

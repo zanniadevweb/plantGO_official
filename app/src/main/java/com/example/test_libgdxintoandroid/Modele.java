@@ -34,6 +34,7 @@ public class Modele {
     // Quêtes
     public static boolean queteAcceptee = false;
     public static boolean lancerDeDejaFait = false;
+    public static boolean popUpActif = false;
     public static String[] plantesQueteCourante = {"Vanilla planifolia"};
     public static LatLng marqueurCoffre;
     public static String planteCourante;
