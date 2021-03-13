@@ -199,10 +199,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
         /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
         ne s'exécute que si UNE plante a été reconnue ==> lancer de dé pour jouer ou non */
-        if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée") && !Modele.lancerDeDejaFait) {
-            Modele.lancerDeDejaFait = true;
-            //lancerUnDe();
-        }
         if (Modele.queteTerminee && !Modele.queteAcceptee) {
             if (!coffreEnCours)
             {
@@ -210,21 +206,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 apparitionCoffre();
             }
         }
-        if (Modele.queteTerminee && !Modele.popUpActif) {
-            if (!Modele.popUpDetruit) {
-                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-                ImageView img2 = findViewById(R.id.fondMessage);
-                Button bt8 = findViewById(R.id.b_terminerQuete);
-
-                View[] views = {img2, bt8, tv6};
-
-                for (View view : views) {
-                    view.setVisibility(View.VISIBLE);
-                }
-
-                tv6.setText("La quête est terminée");
-            }
-        }
+        afficherPopUpQueteTerminee();
 
         if (Modele.resultatpartie.equals("Partie gagnée") || Modele.resultatpartie.equals("Partie perdue")) {
             testValeurRetourJeu();
@@ -235,13 +217,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Button bt5 = findViewById(R.id.button2);
         Button bt6 = findViewById(R.id.gameHorizontal);
         Button bt7 = findViewById(R.id.gameVertical);
-        TextView tv0 = findViewById(R.id.textView);
+        TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
         TextView tv3 = findViewById(R.id.tempsDeJeu);
         TextView tv4 = findViewById(R.id.planteAChercher);
-        TextView tv5 = findViewById(R.id.planteQuete1);
         TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5, tv7};
+        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv7, tv8};
 
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
@@ -263,7 +244,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
 
         if (!Modele.firstLoadingApplication) {
-            View[] views2 = { bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5 };
+            View[] views2 = { bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv8 };
 
             for (View view : views2) {
                 view.setVisibility(View.VISIBLE);
@@ -301,6 +282,31 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
     }
 
+    public void lancerMiniJeuOuNon() {
+        if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée") && !Modele.lancerDeDejaFait) {
+            Modele.lancerDeDejaFait = true;
+            lancerUnDe();
+        }
+    }
+
+    public void afficherPopUpQueteTerminee() {
+        if (Modele.queteTerminee && !Modele.popUpActif) {
+            if (!Modele.popUpDetruit) {
+                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+                ImageView img2 = findViewById(R.id.fondMessage);
+                Button bt8 = findViewById(R.id.b_terminerQuete);
+
+                View[] views = {img2, bt8, tv6};
+
+                for (View view : views) {
+                    view.setVisibility(View.VISIBLE);
+                }
+
+                tv6.setText("La quête est terminée");
+            }
+        }
+    }
+
     public void terminerQuete() {
         Modele.queteTerminee = true;
     }
@@ -320,24 +326,26 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
 
         tv6.setText("");
+
+        lancerMiniJeuOuNon();
     }
 
     public void launchGameHorizontal(View view) {
         Modele.firstLoadingApplication = false;
-        Modele.testBoolean = false;
+        Modele.estLanceJeuVertical = false;
         remettreZeroParametresJeu();
         lancerConsignesJeu();
     }
 
     public void launchGameVertical(View view) {
         Modele.firstLoadingApplication = false;
-        Modele.testBoolean = true;
+        Modele.estLanceJeuVertical = true;
         remettreZeroParametresJeu();
         lancerConsignesJeu();
     }
 
     public void testValeurRetourJeu() {
-        TextView tv1 = findViewById(R.id.textView);
+        TextView tv1 = findViewById(R.id.texteResultatMiniJeu);
         tv1.setVisibility(View.VISIBLE);
         TextView tv2 = findViewById(R.id.tempsDeJeu);
         tv2.setVisibility(View.VISIBLE);
@@ -898,7 +906,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv0 = findViewById(R.id.textView);
+                TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
@@ -923,7 +931,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onFinish() {
                 // Lance un nombre aléatoire compris entre 1 (Jeu Horizontal) et 2 (Jeu Vertical)
-                Modele.random = new Random().nextInt(2) + 1; // [0, 1] + 1 => [1, 2] : Minimum 1 (si [0] + 1) et maximum 2 (si [1] + 1)
+                Modele.randomMiniJeu = new Random().nextInt(2) + 1; // [0, 1] + 1 => [1, 2] : Minimum 1 (si [0] + 1) et maximum 2 (si [1] + 1)
                 remettreZeroParametresJeu();
                 lancerConsignesJeu();
             }
@@ -939,7 +947,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv0 = findViewById(R.id.textView);
+                TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);

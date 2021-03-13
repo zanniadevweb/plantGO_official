@@ -12,12 +12,12 @@ public class AndroidLauncherRandom extends AndroidApplication {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if ( Modele.random == 1 || !Modele.testBoolean) {
+        if ( Modele.randomMiniJeu == 1 || !Modele.estLanceJeuVertical) {
             Modele.pasEncoreAjoutExperience = true;
             AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
             initialize(new GameHorizontal(), config);
         }
-        if ( Modele.random == 2 || Modele.testBoolean) {
+        if ( Modele.randomMiniJeu == 2 || Modele.estLanceJeuVertical) {
             Modele.pasEncoreAjoutExperience = true;
             AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
             initialize(new GameVertical(), config);

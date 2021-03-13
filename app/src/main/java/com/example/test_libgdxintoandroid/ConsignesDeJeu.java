@@ -64,11 +64,11 @@ public class ConsignesDeJeu extends AppCompatActivity {
         rendreVisibleTitreEtConsignesJeu();
         // -------------- Rendre à nouveau visible l'affichage du titre et consignes de jeu qui ont pu préalablement être effacées au lancement du jeu --------------
 
-        if ( Modele.random == 1 || Modele.testBoolean == false)    {
+        if ( Modele.randomMiniJeu == 1 || !Modele.estLanceJeuVertical)    {
             afficherInfosJeuHorizontal();
         }
 
-        if ( Modele.random == 2 || Modele.testBoolean == true)    {
+        if ( Modele.randomMiniJeu == 2 || Modele.estLanceJeuVertical)    {
             afficherInfosJeuVertical();
         }
     }

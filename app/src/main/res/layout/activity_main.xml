@@ -167,7 +167,7 @@
         app:layout_constraintVertical_bias="0.400" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/texteResultatMiniJeu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2dp"
@@ -217,7 +217,7 @@
         app:layout_constraintHorizontal_bias="0.500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
+        app:layout_constraintVertical_bias="0.550" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/jetDe"
@@ -241,7 +241,7 @@
         app:layout_constraintHorizontal_bias="0.500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.350" />
+        app:layout_constraintVertical_bias="0.600" />
 
     <TextView
         android:id="@+id/jeJoue"
