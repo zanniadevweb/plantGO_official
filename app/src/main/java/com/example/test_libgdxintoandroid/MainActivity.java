@@ -183,22 +183,22 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
         }
         if (Modele.queteTerminee && !Modele.popUpActif) {
-            Modele.popUpActif = true;
+            if (!Modele.popUpDetruit) {
+                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+                ImageView img2 = findViewById(R.id.fondMessage);
+                Button bt8 = findViewById(R.id.b_terminerQuete);
 
-            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-            ImageView img2 = findViewById(R.id.fondMessage);
-            Button bt8 = findViewById(R.id.terminerQuete);
+                View[] views = {img2, bt8, tv6};
 
-            View[] views = {img2, bt8, tv6};
+                for (View view : views) {
+                    view.setVisibility(View.VISIBLE);
+                }
 
-            for (View view : views) {
-                view.setVisibility(View.VISIBLE);
+                tv6.setText("La quête est terminée");
             }
-
-            tv6.setText("La quête est terminée");
         }
 
-        if (!Modele.resultatpartie.equals("Partie indeterminée")) {
+        if (Modele.resultatpartie.equals("Partie gagnée") || Modele.resultatpartie.equals("Partie perdue")) {
             testValeurRetourJeu();
         }
 
@@ -221,7 +221,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         mLongitudeLabel = getResources().getString(R.string.longitude_label);
         mLastUpdateTimeLabel = getResources().getString(R.string.last_update_time_label);
 
-        mRequestingLocationUpdates = true;
+        mRequestingLocationUpdates = false;
         mLastUpdateTime = "";
 
         // Update values using data stored in the Bundle.
@@ -247,10 +247,25 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         TextView tv5 = findViewById(R.id.planteQuete1);
         TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5,tv0, tv7};
+        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5, tv7, tv8};
 
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
+        }
+
+        if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
+            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+            ImageView img2 = findViewById(R.id.fondMessage);
+            Button bt8 = findViewById(R.id.b_terminerQuete);
+            img2.setAlpha((float) 0.0);
+
+            View[] views = {img2, bt8, tv6};
+
+            for (View view : views) {
+                view.setVisibility(View.INVISIBLE);
+            }
+
+            tv6.setText("");
         }
 
         if (!Modele.firstLoadingApplication) {
@@ -271,9 +286,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     public void terminerQuete(View view) {
+        Modele.popUpActif = true;
+        Modele.popUpDetruit = true;
         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
         ImageView img2 = findViewById(R.id.fondMessage);
-        Button bt8 = findViewById(R.id.terminerQuete);
+        Button bt8 = findViewById(R.id.b_terminerQuete);
+        img2.setAlpha((float) 0.0);
 
         View[] views = {img2, bt8, tv6};
 
@@ -333,7 +351,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     "\navec un bonus de " + experienceSupplementaireTemps + " xp. Expérience totale = " + Modele.experienceTotale + " xp");
 
         }
-        if (Modele.resultatpartie == "Partie perdue") {
+        if (Modele.resultatpartie.equals("Partie perdue")) {
             tv1.setText( "Partie perdue. Action : PAS de gain expérience");
             tv2.setText("Temps PAS PRIS en compte");
         }

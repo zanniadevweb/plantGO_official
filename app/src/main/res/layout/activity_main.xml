@@ -186,8 +186,6 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:src="@drawable/fondmessage"
-        android:elevation="2dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
@@ -200,8 +198,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:elevation="2dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
@@ -210,12 +206,11 @@
         app:layout_constraintVertical_bias="0.450" />
 
     <Button
-        android:id="@+id/terminerQuete"
+        android:id="@+id/b_terminerQuete"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:elevation="2dp"
         android:onClick="terminerQuete"
-        android:visibility="invisible"
         android:text="Ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
