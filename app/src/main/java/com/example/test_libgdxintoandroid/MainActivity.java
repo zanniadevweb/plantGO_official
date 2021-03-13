@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import java.util.Random;
@@ -199,6 +198,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             tv6.setText("La quête est terminée");
         }
 
+        if (!Modele.resultatpartie.equals("Partie indeterminée")) {
+            testValeurRetourJeu();
+        }
+
         /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -244,7 +247,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         TextView tv5 = findViewById(R.id.planteQuete1);
         TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = { img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5,tv0, tv7};
+        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5,tv0, tv7};
 
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
@@ -295,14 +298,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         lancerConsignesJeu();
     }
 
-    public void testValeurRetourJeu(View view) {
+    public void testValeurRetourJeu() {
         TextView tv1 = findViewById(R.id.textView);
-        ProgressBar pb = findViewById(R.id.progressBar);
+        tv1.setVisibility(View.VISIBLE);
+        TextView tv2 = findViewById(R.id.tempsDeJeu);
+        tv2.setVisibility(View.VISIBLE);
 
         Integer tempsJeu = Modele.tempsPartie;
-        TextView tv2 = findViewById(R.id.tempsDeJeu);
 
-        if (Modele.resultatpartie == "Partie gagnée") {
+        if (Modele.resultatpartie.equals("Partie gagnée")) {
             Integer experienceJeuGagne = 50;
             Integer experienceSupplementaireTemps = 0;
 
@@ -327,13 +331,11 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
             tv1.setText( "Partie gagnée. Action : gain expérience = " + experienceJeuGagne + " xp" +
                     "\navec un bonus de " + experienceSupplementaireTemps + " xp. Expérience totale = " + Modele.experienceTotale + " xp");
-            pb.setProgress(Modele.experienceTotale);
 
         }
         if (Modele.resultatpartie == "Partie perdue") {
             tv1.setText( "Partie perdue. Action : PAS de gain expérience");
             tv2.setText("Temps PAS PRIS en compte");
-            pb.setProgress(0);
         }
     }
 
@@ -850,12 +852,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                ProgressBar pb1 = findViewById(R.id.progressBar);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt11 = findViewById(R.id.button4);
                 TextView tv0 = findViewById(R.id.textView);
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
@@ -867,7 +867,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1, bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6, tv7, tv8,tv9,tv10,tv12 };
+                View[] views = {bt4,bt5,bt6,bt7, tv0,tv3,tv4,tv5,tv6, tv7, tv8,tv9,tv10,tv12 };
 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
@@ -893,26 +893,22 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                ProgressBar pb1 = findViewById(R.id.progressBar);
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt11 = findViewById(R.id.button4);
                 TextView tv0 = findViewById(R.id.textView);
                 TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
-
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
                 TextView tv7 = findViewById(R.id.jeJoue);
-
                 TextView tv8 = findViewById(R.id.longitude_text);
                 TextView tv9 = findViewById(R.id.latitude_text);
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {pb1, bt4,bt5,bt6,bt7, bt11,tv0,tv3,tv4,tv5,tv6, tv8,tv9,tv10,tv12 };
+                View[] views = {bt4,bt5,bt6,bt7, tv0,tv3,tv4,tv5,tv6, tv8,tv9,tv10,tv12 };
 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
@@ -925,27 +921,20 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
             @Override
             public void onFinish() {
-
-                ProgressBar pb1 = findViewById(R.id.progressBar);
                 View mapFragment = findViewById(R.id.map);
-
                 Button bt4 = findViewById(R.id.button);
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                Button bt11 = findViewById(R.id.button4);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
-
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-
                 TextView tv8 = findViewById(R.id.longitude_text);
                 TextView tv9 = findViewById(R.id.latitude_text);
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-
-                View[] views1 = {pb1, mapFragment, pb1, bt4, bt5, bt6,bt7, bt11, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
+                View[] views1 = {mapFragment, bt4, bt5, bt6,bt7, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
 
                 for (View view : views1) {
                     view.setVisibility(View.VISIBLE);
@@ -983,13 +972,11 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.button2);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv0 = findViewById(R.id.textView);
-                TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
 
-                View[] views = {bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv5, tv6 };
+                View[] views = {bt4, bt5, bt6, bt7, tv4, tv5, tv6 };
 
                 for (View viewButton : views) {
                     viewButton.setVisibility(View.VISIBLE);

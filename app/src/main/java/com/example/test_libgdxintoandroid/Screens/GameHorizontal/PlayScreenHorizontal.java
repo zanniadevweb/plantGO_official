@@ -132,7 +132,7 @@ public class PlayScreenHorizontal implements Screen {
             enJeu = false;
         }
 
-        if (gamecam.position.x > 32) {
+        if (gamecam.position.x >32) {
             music.stop();
             Modele.resultatpartie = "Partie gagnée";
             game.setScreen(new VictoryScreenHorizontal(game));
