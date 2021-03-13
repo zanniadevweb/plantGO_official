@@ -214,41 +214,18 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             testValeurRetourJeu();
         }
 
-        ImageView img1 = findViewById(R.id.jetDe);
-        TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
-        TextView tv3 = findViewById(R.id.tempsDeJeu);
-        TextView tv7 = findViewById(R.id.jeJoue);
-
-        View[] views1 = {img1, tv0, tv3, tv7};
-
-        for (View view : views1) {
-            view.setVisibility(View.INVISIBLE);
-        }
-
-        if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
-            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-            ImageView img2 = findViewById(R.id.fondMessage);
-            Button bt8 = findViewById(R.id.b_terminerQuete);
-            img2.setAlpha((float) 0.0);
-
-            View[] views = {img2, bt8, tv6};
-
-            for (View view : views) {
-                view.setVisibility(View.INVISIBLE);
-            }
-
-            tv6.setText("");
-        }
+        masquerMessagesEvenementiels();
 
         if (Modele.firstLoadingApplication) {
             chargerFichier();
             accepterQuete();
         }
         if (!Modele.firstLoadingApplication) {
-
             sauvegarderFichier();
         }
     }
+
+
 
     public void synchroniserCarteGoogleMaps () {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -370,6 +347,34 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         if (Modele.resultatpartie.equals("Partie perdue")) {
             tv1.setText( "Partie perdue. Action : PAS de gain expérience");
             tv2.setText("Temps PAS PRIS en compte");
+        }
+    }
+
+    public void masquerMessagesEvenementiels () {
+        ImageView img1 = findViewById(R.id.jetDe);
+        TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
+        TextView tv3 = findViewById(R.id.tempsDeJeu);
+        TextView tv7 = findViewById(R.id.jeJoue);
+
+        View[] views1 = {img1, tv0, tv3, tv7};
+
+        for (View view : views1) {
+            view.setVisibility(View.INVISIBLE);
+        }
+
+        if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
+            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+            ImageView img2 = findViewById(R.id.fondMessage);
+            Button bt8 = findViewById(R.id.b_terminerQuete);
+            img2.setAlpha((float) 0.0);
+
+            View[] views = {img2, bt8, tv6};
+
+            for (View view : views) {
+                view.setVisibility(View.INVISIBLE);
+            }
+
+            tv6.setText("");
         }
     }
 
