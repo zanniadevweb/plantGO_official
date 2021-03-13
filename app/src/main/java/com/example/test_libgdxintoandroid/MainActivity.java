@@ -339,19 +339,11 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     public void testValeurRetourJeu() {
-        TextView tv1 = findViewById(R.id.texteResultatMiniJeu);
-        tv1.setVisibility(View.VISIBLE);
-        TextView tv2 = findViewById(R.id.tempsDeJeu);
-        tv2.setVisibility(View.VISIBLE);
-
         Integer tempsJeu = Modele.tempsPartie;
 
         if (Modele.resultatpartie.equals("Partie gagnée")) {
             Integer experienceJeuGagne = 50;
             Integer experienceSupplementaireTemps = 0;
-
-            // Récupération du temps de jeu
-            tv2.setText("Temps de jeu = " + String.valueOf(tempsJeu) + " secondes");
 
             if (tempsJeu > 200) { // Temps Jeu compris entre 200 et 300 s
                 experienceSupplementaireTemps = 50;
@@ -369,31 +361,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Modele.pasEncoreAjoutExperience = false;
             }
 
-            tv1.setText( "Partie gagnée. Action : gain expérience = " + experienceJeuGagne + " xp" +
-                    "\navec un bonus de " + experienceSupplementaireTemps + " xp. Expérience totale = " + Modele.experienceTotale + " xp");
-
-        }
-        if (Modele.resultatpartie.equals("Partie perdue")) {
-            tv1.setText( "Partie perdue. Action : PAS de gain expérience");
-            tv2.setText("Temps PAS PRIS en compte");
         }
     }
 
     public void masquerMessagesEvenementiels () {
-        masquerResultatMiniJeu();
         masquerJetDe();
         masquerPopUpQueteTerminee();
-    }
-
-    public void masquerResultatMiniJeu() {
-        TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
-        TextView tv3 = findViewById(R.id.tempsDeJeu);
-
-        View[] views1 = {tv0, tv3};
-
-        for (View view : views1) {
-            view.setVisibility(View.INVISIBLE);
-        }
     }
 
     public void remettreZeroParametresJeu() {
@@ -898,8 +871,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.buttonPhoto);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
-                TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
@@ -909,7 +880,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {bt4,bt5,bt6,bt7, tv0,tv3,tv4,tv5,tv6, tv7, tv8,tv9,tv10,tv12 };
+                View[] views = {bt4,bt5,bt6,bt7, tv4,tv5,tv6, tv7, tv8,tv9,tv10,tv12 };
 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
@@ -939,8 +910,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt5 = findViewById(R.id.buttonPhoto);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
-                TextView tv3 = findViewById(R.id.tempsDeJeu);
                 TextView tv4 = findViewById(R.id.planteAChercher);
                 TextView tv5 = findViewById(R.id.planteQuete1);
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
@@ -950,7 +919,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 TextView tv10 = findViewById(R.id.last_update_time_text);
                 TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {bt4,bt5,bt6,bt7, tv0,tv3,tv4,tv5,tv6, tv8,tv9,tv10,tv12 };
+                View[] views = {bt4,bt5,bt6,bt7, tv4,tv5,tv6, tv8,tv9,tv10,tv12 };
 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
