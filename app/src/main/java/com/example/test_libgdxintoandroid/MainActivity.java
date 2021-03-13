@@ -158,22 +158,50 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         setContentView(R.layout.activity_main);
         overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
 
+        // Locate the UI widgets.
+        mLatitudeTextView = (TextView) findViewById(R.id.latitude_text);
+        mLongitudeTextView = (TextView) findViewById(R.id.longitude_text);
+        mLastUpdateTimeTextView = (TextView) findViewById(R.id.last_update_time_text);
+
+        // Set labels.
+        mLatitudeLabel = getResources().getString(R.string.latitude_label);
+        mLongitudeLabel = getResources().getString(R.string.longitude_label);
+        mLastUpdateTimeLabel = getResources().getString(R.string.last_update_time_label);
+
+        mRequestingLocationUpdates = true;
+        mLastUpdateTime = "";
+
+        // Update values using data stored in the Bundle.
+        updateValuesFromBundle(savedInstanceState);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mSettingsClient = LocationServices.getSettingsClient(this);
+
+        /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
+        synchroniserCarteGoogleMaps ();
+        /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
+
+        /** --------------------------------------------------- Méthodes pour localisation -------------------------------------------------- **/
+        lancerProtocolesLocalisation();
+        /** --------------------------------------------------- Méthodes pour localisation -------------------------------------------------- **/
+
+
+        /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
+        ne s'exécute que si TOUTES les plantes de la quête en cours ont été identifiées */
         String nomScientifique = Modele.planteCourante;
 
         TextView tv8 = findViewById(R.id.planteQuete1);
         tv8.setText(Modele.plantesQueteCourante[0]);
 
-        /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
-        ne s'exécute que si TOUTES les plantes de la quête en cours ont été identifiées */
-        if (Modele.isInTheWeeklyQuest(nomScientifique) && Modele.queteAcceptee) {
-            Modele.queteTerminee = true;
-            Modele.queteAcceptee = false;
+        if (Modele.isInTheWeeklyQuest(nomScientifique)) {
+            sontIdentifieesPlantesQueteEnCours();
         }
+
         /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
         ne s'exécute que si UNE plante a été reconnue ==> lancer de dé pour jouer ou non */
         if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée") && !Modele.lancerDeDejaFait) {
             Modele.lancerDeDejaFait = true;
-            lancerUnDe();
+            //lancerUnDe();
         }
         if (Modele.queteTerminee && !Modele.queteAcceptee) {
             if (!coffreEnCours)
@@ -202,40 +230,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             testValeurRetourJeu();
         }
 
-        /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
-
-        /** --------------------------------------------------- Méthodes pour localisation -------------------------------------------------- **/
-
-        // Locate the UI widgets.
-        mLatitudeTextView = (TextView) findViewById(R.id.latitude_text);
-        mLongitudeTextView = (TextView) findViewById(R.id.longitude_text);
-        mLastUpdateTimeTextView = (TextView) findViewById(R.id.last_update_time_text);
-
-        // Set labels.
-        mLatitudeLabel = getResources().getString(R.string.latitude_label);
-        mLongitudeLabel = getResources().getString(R.string.longitude_label);
-        mLastUpdateTimeLabel = getResources().getString(R.string.last_update_time_label);
-
-        mRequestingLocationUpdates = false;
-        mLastUpdateTime = "";
-
-        // Update values using data stored in the Bundle.
-        updateValuesFromBundle(savedInstanceState);
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        mSettingsClient = LocationServices.getSettingsClient(this);
-
-        // Kick off the process of building the LocationCallback, LocationRequest, and
-        // LocationSettingsRequest objects.
-        createLocationCallback();
-        createLocationRequest();
-        buildLocationSettingsRequest();
-
         ImageView img1 = findViewById(R.id.jetDe);
         Button bt4 = findViewById(R.id.button);
         Button bt5 = findViewById(R.id.button2);
@@ -247,7 +241,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         TextView tv5 = findViewById(R.id.planteQuete1);
         TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5, tv7, tv8};
+        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv5, tv7};
 
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
@@ -285,7 +279,33 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
     }
 
-    public void terminerQuete(View view) {
+    public void synchroniserCarteGoogleMaps () {
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    public void lancerProtocolesLocalisation() {
+        // Kick off the process of building the LocationCallback, LocationRequest, and
+        // LocationSettingsRequest objects.
+        createLocationCallback();
+        createLocationRequest();
+        buildLocationSettingsRequest();
+    }
+
+    public void sontIdentifieesPlantesQueteEnCours() {
+        if (Modele.queteAcceptee) {
+            terminerQuete();
+            accepterQueteRAZ();
+        }
+    }
+
+    public void terminerQuete() {
+        Modele.queteTerminee = true;
+    }
+
+    public void validerPopUpTerminerQuete(View view) {
         Modele.popUpActif = true;
         Modele.popUpDetruit = true;
         TextView tv6 = findViewById(R.id.textViewQueteEnCours);
@@ -370,6 +390,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void accepterQuete() {
         Modele.queteAcceptee = true;
+    }
+
+    public void accepterQueteRAZ() {
+        Modele.queteAcceptee = false;
     }
 
 
@@ -1093,4 +1117,3 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
 
 }
-
