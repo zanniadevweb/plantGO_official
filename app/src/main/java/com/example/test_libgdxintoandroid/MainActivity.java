@@ -225,7 +225,19 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
     }
 
+    // afficher profil
+    public void displayProfile(View view) {
+        Modele.firstLoadingApplication = false;
+        Intent intent = new Intent(MainActivity.this, ProfilActivity.class);
+        MainActivity.this.startActivity(intent);
+    }
 
+    // afficher app. photo
+    public void displayAppPhoto(View view) {
+        Modele.firstLoadingApplication = false;
+        Intent intent = new Intent(MainActivity.this, AppPhotoActivity.class);
+        MainActivity.this.startActivity(intent);
+    }
 
     public void synchroniserCarteGoogleMaps () {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -270,6 +282,23 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
                 tv6.setText("La quête est terminée");
             }
+    }
+
+    public void masquerPopUpQueteTerminee() {
+        if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
+            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
+            ImageView img2 = findViewById(R.id.fondMessage);
+            Button bt8 = findViewById(R.id.b_terminerQuete);
+            img2.setAlpha((float) 0.0);
+
+            View[] views = {img2, bt8, tv6};
+
+            for (View view : views) {
+                view.setVisibility(View.INVISIBLE);
+            }
+
+            tv6.setText("");
+        }
     }
 
     public void terminerQuete() {
@@ -330,7 +359,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             if (tempsJeu > 150 && tempsJeu < 200) { // Temps Jeu compris entre 150 et 200 s
                 experienceSupplementaireTemps = 25;
             }
-            if (tempsJeu > 250 && tempsJeu < 150) { // Temps Jeu compris entre 150 et 250 s
+            if (tempsJeu > 100 && tempsJeu < 150) { // Temps Jeu compris entre 100 et 150 s
                 experienceSupplementaireTemps = 10;
             }
 
@@ -351,30 +380,19 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     public void masquerMessagesEvenementiels () {
-        ImageView img1 = findViewById(R.id.jetDe);
+        masquerResultatMiniJeu();
+        masquerJetDe();
+        masquerPopUpQueteTerminee();
+    }
+
+    public void masquerResultatMiniJeu() {
         TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
         TextView tv3 = findViewById(R.id.tempsDeJeu);
-        TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = {img1, tv0, tv3, tv7};
+        View[] views1 = {tv0, tv3};
 
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
-        }
-
-        if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
-            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-            ImageView img2 = findViewById(R.id.fondMessage);
-            Button bt8 = findViewById(R.id.b_terminerQuete);
-            img2.setAlpha((float) 0.0);
-
-            View[] views = {img2, bt8, tv6};
-
-            for (View view : views) {
-                view.setVisibility(View.INVISIBLE);
-            }
-
-            tv6.setText("");
         }
     }
 
@@ -395,21 +413,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void accepterQueteRAZ() {
         Modele.queteAcceptee = false;
-    }
-
-
-    // afficher profil
-    public void displayProfile(View view) {
-        Modele.firstLoadingApplication = false;
-        Intent intent = new Intent(MainActivity.this, ProfilActivity.class);
-        MainActivity.this.startActivity(intent);
-    }
-
-    // afficher app. photo
-    public void displayAppPhoto(View view) {
-        Modele.firstLoadingApplication = false;
-        Intent intent = new Intent(MainActivity.this, AppPhotoActivity.class);
-        MainActivity.this.startActivity(intent);
     }
 
 
@@ -872,13 +875,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         View mapFragment = findViewById(R.id.map);
         mapFragment.setVisibility(View.INVISIBLE);
 
-        ImageView img1 = findViewById(R.id.jetDe);
-        TextView tv1 = findViewById(R.id.resultatJetDe);
 
-        View[] views2 = {img1, tv1 };
-        for (View view : views2) {
-            view.setVisibility(View.VISIBLE);
-        }
+        TextView tv1 = findViewById(R.id.resultatJetDe);
+        afficherJetDe();
 
         Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
         tv1.setText(String.valueOf(randomJouerOuNon));
@@ -915,9 +914,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
-                ImageView img1 = findViewById(R.id.jetDe);
-                img1.setVisibility(View.VISIBLE);
-                tv7.setVisibility(View.VISIBLE);
+
+                afficherJetDe();
+
                 tv7.setText("Vous allez jouer !");
 
             }
@@ -956,9 +955,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 for (View view : views) {
                     view.setVisibility(View.INVISIBLE);
                 }
-                ImageView img1 = findViewById(R.id.jetDe);
-                img1.setVisibility(View.VISIBLE);
-                tv7.setVisibility(View.VISIBLE);
+
+                afficherJetDe();
                 tv7.setText("Vous ne jouerez pas cette fois-ci !");
 
             }
@@ -983,18 +981,35 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     view.setVisibility(View.VISIBLE);
                 }
 
-                ImageView img1 = findViewById(R.id.jetDe);
-                TextView tv7 = findViewById(R.id.jeJoue);
-                TextView tv11 = findViewById(R.id.resultatJetDe);
+                masquerJetDe();
 
-                View[] views2 = {img1, tv7, tv11 };
-
-                for (View view : views2) {
-                    view.setVisibility(View.INVISIBLE);
-                }
             }
         }.start();
         countDownTimer.start();
+    }
+
+    public void masquerJetDe() {
+        ImageView img1 = findViewById(R.id.jetDe);
+        TextView tv7 = findViewById(R.id.jeJoue);
+        TextView tv11 = findViewById(R.id.resultatJetDe);
+
+        View[] views2 = {img1, tv7, tv11 };
+
+        for (View view : views2) {
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void afficherJetDe() {
+        ImageView img1 = findViewById(R.id.jetDe);
+        TextView tv7 = findViewById(R.id.jeJoue);
+        TextView tv11 = findViewById(R.id.resultatJetDe);
+
+        View[] views2 = {img1, tv7, tv11 };
+
+        for (View view : views2) {
+            view.setVisibility(View.VISIBLE);
+        }
     }
 
     private void apparitionCoffre() {
