@@ -43,7 +43,7 @@
         app:layout_constraintVertical_bias="0.972" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonProfil"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:onClick="displayProfile"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.058" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonPhoto"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:onClick="displayAppPhoto"

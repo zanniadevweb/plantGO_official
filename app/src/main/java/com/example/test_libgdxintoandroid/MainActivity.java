@@ -206,23 +206,20 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 apparitionCoffre();
             }
         }
-        afficherPopUpQueteTerminee();
+        if (Modele.queteTerminee && !Modele.popUpActif) {
+            afficherPopUpQueteTerminee();
+        }
 
         if (Modele.resultatpartie.equals("Partie gagnée") || Modele.resultatpartie.equals("Partie perdue")) {
             testValeurRetourJeu();
         }
 
         ImageView img1 = findViewById(R.id.jetDe);
-        Button bt4 = findViewById(R.id.button);
-        Button bt5 = findViewById(R.id.button2);
-        Button bt6 = findViewById(R.id.gameHorizontal);
-        Button bt7 = findViewById(R.id.gameVertical);
         TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
         TextView tv3 = findViewById(R.id.tempsDeJeu);
-        TextView tv4 = findViewById(R.id.planteAChercher);
         TextView tv7 = findViewById(R.id.jeJoue);
 
-        View[] views1 = {img1, bt4, bt6, bt5, bt7, tv0, tv3, tv4, tv7, tv8};
+        View[] views1 = {img1, tv0, tv3, tv7};
 
         for (View view : views1) {
             view.setVisibility(View.INVISIBLE);
@@ -243,19 +240,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             tv6.setText("");
         }
 
-        if (!Modele.firstLoadingApplication) {
-            View[] views2 = { bt4, bt5, bt6, bt7, tv0, tv3, tv4, tv8 };
-
-            for (View view : views2) {
-                view.setVisibility(View.VISIBLE);
-            }
-        }
-
         if (Modele.firstLoadingApplication) {
             chargerFichier();
             accepterQuete();
         }
         if (!Modele.firstLoadingApplication) {
+
             sauvegarderFichier();
         }
     }
@@ -290,7 +280,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     public void afficherPopUpQueteTerminee() {
-        if (Modele.queteTerminee && !Modele.popUpActif) {
             if (!Modele.popUpDetruit) {
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
                 ImageView img2 = findViewById(R.id.fondMessage);
@@ -304,7 +293,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
                 tv6.setText("La quête est terminée");
             }
-        }
     }
 
     public void terminerQuete() {
@@ -902,8 +890,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Button bt4 = findViewById(R.id.button);
-                Button bt5 = findViewById(R.id.button2);
+                Button bt4 = findViewById(R.id.buttonProfil);
+                Button bt5 = findViewById(R.id.buttonPhoto);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
                 TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
@@ -943,8 +931,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Button bt4 = findViewById(R.id.button);
-                Button bt5 = findViewById(R.id.button2);
+                Button bt4 = findViewById(R.id.buttonProfil);
+                Button bt5 = findViewById(R.id.buttonPhoto);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
                 TextView tv0 = findViewById(R.id.texteResultatMiniJeu);
@@ -972,8 +960,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onFinish() {
                 View mapFragment = findViewById(R.id.map);
-                Button bt4 = findViewById(R.id.button);
-                Button bt5 = findViewById(R.id.button2);
+                Button bt4 = findViewById(R.id.buttonProfil);
+                Button bt5 = findViewById(R.id.buttonPhoto);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
                 TextView tv4 = findViewById(R.id.planteAChercher);
@@ -1018,8 +1006,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         try {
 
             if (Modele.firstLoadingApplication) {
-                Button bt4 = findViewById(R.id.button);
-                Button bt5 = findViewById(R.id.button2);
+                Button bt4 = findViewById(R.id.buttonProfil);
+                Button bt5 = findViewById(R.id.buttonPhoto);
                 Button bt6 = findViewById(R.id.gameHorizontal);
                 Button bt7 = findViewById(R.id.gameVertical);
                 TextView tv4 = findViewById(R.id.planteAChercher);
