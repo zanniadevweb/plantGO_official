@@ -1,0 +1,279 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.test_libgdxintoandroid"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml
+10    <!-- __________________ Permissions propres à l'appareil photo __________________ -->
+11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+11-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:5:5-81
+11-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:5:22-78
+12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+12-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:6:5-80
+12-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:6:22-77
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:7:5-66
+13-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:7:22-64
+14
+15    <!-- __________________ Permissions propres à Google Maps __________________ -->
+16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+16-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:10:5-78
+16-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:10:22-76
+17    <!-- __________________ Permissions propres à Firebase __________________ -->
+18    <uses-permission android:name="android.permission.INTERNET" />
+18-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:7:5-66
+18-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:7:22-64
+19
+20    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+21    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+22    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+22-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:26:5-79
+22-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:26:22-76
+23
+24    <uses-feature
+24-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\992e8cfb5ebefe9d4df1160e6da6d33a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+25        android:glEsVersion="0x00020000"
+25-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\992e8cfb5ebefe9d4df1160e6da6d33a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+26        android:required="true" />
+26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\992e8cfb5ebefe9d4df1160e6da6d33a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+27
+28    <application
+28-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:14:5-90:19
+29        android:allowBackup="true"
+29-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:15:9-35
+30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+30-->[androidx.core:core:1.3.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\99b3c58706e1767bdcf520db3e313079\core-1.3.1\AndroidManifest.xml:24:18-86
+31        android:debuggable="true"
+32        android:extractNativeLibs="false"
+33        android:icon="@mipmap/ic_launcher"
+33-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:16:9-43
+34        android:label="@string/app_name"
+34-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:17:9-41
+35        android:requestLegacyExternalStorage="true"
+35-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:18:9-52
+36        android:roundIcon="@mipmap/ic_launcher_round"
+36-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:19:9-54
+37        android:supportsRtl="true"
+37-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:20:9-35
+38        android:testOnly="true"
+39        android:theme="@style/AppTheme" >
+39-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:21:9-40
+40
+41        <!--
+42          The API key for Google Maps-based APIs is defined as a string resource.
+43          (See the file "res/values/google_maps_api.xml").
+44          Note that the API key is linked to the encryption key used to sign the APK.
+45          You need a different API key for each encryption key, including the release key that is used to
+46          sign the APK for publishing.
+47          You can define the keys for the debug and release targets in src/debug/ and src/release/.
+48        -->
+49        <meta-data
+49-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:30:9-32:62
+50            android:name="com.google.android.geo.API_KEY"
+50-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:31:13-58
+51            android:value="res/values/google_maps_api.xml" />
+51-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:32:13-59
+52
+53        <activity
+53-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:33:9-42:20
+54            android:name="com.example.test_libgdxintoandroid.MainActivity"
+54-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:34:13-41
+55            android:configChanges="orientation"
+55-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:36:13-48
+56            android:label="@string/app_name"
+56-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:35:13-45
+57            android:screenOrientation="portrait" >
+57-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:37:13-49
+58            <intent-filter>
+58-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:38:13-41:29
+59                <action android:name="android.intent.action.MAIN" />
+59-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:39:17-69
+59-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:39:25-66
+60
+61                <category android:name="android.intent.category.LAUNCHER" />
+61-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:40:17-77
+61-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:40:27-74
+62            </intent-filter>
+63        </activity>
+64        <activity
+64-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:43:9-47:52
+65            android:name="com.example.test_libgdxintoandroid.AndroidLauncherRandom"
+65-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:44:13-50
+66            android:configChanges="orientation"
+66-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:46:13-48
+67            android:label="@string/app_name"
+67-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:45:13-45
+68            android:screenOrientation="landscape" />
+68-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:47:13-50
+69        <activity
+69-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:48:9-52:51
+70            android:name="com.example.test_libgdxintoandroid.ConsignesDeJeu"
+70-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:49:13-43
+71            android:configChanges="orientation"
+71-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:51:13-48
+72            android:label="@string/app_name"
+72-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:50:13-45
+73            android:screenOrientation="portrait" />
+73-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:52:13-49
+74        <activity
+74-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:53:9-57:51
+75            android:name="com.example.test_libgdxintoandroid.AppPhotoActivity"
+75-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:54:13-45
+76            android:configChanges="orientation"
+76-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:56:13-48
+77            android:label="@string/app_name"
+77-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:55:13-45
+78            android:screenOrientation="portrait" />
+78-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:57:13-49
+79        <activity
+79-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:58:9-62:51
+80            android:name="com.example.test_libgdxintoandroid.ProfilActivity"
+80-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:59:13-43
+81            android:configChanges="orientation"
+81-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:61:13-48
+82            android:label="@string/app_name"
+82-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:60:13-45
+83            android:screenOrientation="portrait" />
+83-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:62:13-49
+84        <activity
+84-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:63:9-67:51
+85            android:name="com.example.test_libgdxintoandroid.Inventaire"
+85-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:64:13-39
+86            android:configChanges="orientation"
+86-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:66:13-48
+87            android:label="@string/app_name"
+87-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:65:13-45
+88            android:screenOrientation="portrait" />
+88-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:67:13-49
+89        <activity
+89-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:68:9-72:51
+90            android:name="com.example.test_libgdxintoandroid.Personnage"
+90-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:69:13-39
+91            android:configChanges="orientation"
+91-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:71:13-48
+92            android:label="@string/app_name"
+92-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:70:13-45
+93            android:screenOrientation="portrait" />
+93-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:72:13-49
+94        <activity
+94-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:73:9-77:51
+95            android:name="com.example.test_libgdxintoandroid.JeuCoffreTresor"
+95-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:74:13-44
+96            android:configChanges="orientation"
+96-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:76:13-48
+97            android:label="@string/app_name"
+97-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:75:13-45
+98            android:screenOrientation="portrait" />
+98-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:77:13-49
+99        <activity
+99-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:78:9-80:52
+100            android:name="com.example.test_libgdxintoandroid.APIActivity"
+100-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:78:19-46
+101            android:configChanges="orientation"
+101-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:79:13-48
+102            android:screenOrientation="portrait" />
+102-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:80:13-49
+103        <activity
+103-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:81:9-83:52
+104            android:name="com.example.test_libgdxintoandroid.cartePlanteActivity"
+104-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:81:19-54
+105            android:configChanges="orientation"
+105-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:82:13-48
+106            android:screenOrientation="portrait" />
+106-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:83:13-49
+107        <activity
+107-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:84:9-86:52
+108            android:name="com.example.test_libgdxintoandroid.HerbierActivity"
+108-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:84:19-50
+109            android:configChanges="orientation"
+109-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:85:13-48
+110            android:screenOrientation="portrait" />
+110-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:86:13-49
+111        <activity
+111-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:87:9-89:52
+112            android:name="com.example.test_libgdxintoandroid.SauvegardeActivity"
+112-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:87:19-53
+113            android:configChanges="orientation"
+113-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:88:13-48
+114            android:screenOrientation="portrait" />
+114-->C:\Users\ybarr\AndroidStudioProjects\plantGO_official-main\plantGO_official-main\app\src\main\AndroidManifest.xml:89:13-49
+115
+116        <service
+116-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:30:9-36:19
+117            android:name="com.google.firebase.components.ComponentDiscoveryService"
+117-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:31:13-84
+118            android:directBootAware="true"
+118-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:35:13-43
+119            android:exported="false" >
+119-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:32:13-37
+120            <meta-data
+120-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:33:13-35:85
+121                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+121-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:34:17-107
+122                android:value="com.google.firebase.components.ComponentRegistrar" />
+122-->[com.google.firebase:firebase-storage:19.2.1] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\965c1966f23c30ce37cf3d416f6c2d11\jetified-firebase-storage-19.2.1\AndroidManifest.xml:35:17-82
+123            <!--
+124                This registrar is not defined in the dynamic-module-support sdk itself to allow non-firebase
+125                clients to use it as well, by defining this registrar in their own core/common library.
+126            -->
+127            <meta-data
+127-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:43:13-45:85
+128                android:name="com.google.firebase.components:com.google.firebase.dynamicloading.DynamicLoadingRegistrar"
+128-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:44:17-121
+129                android:value="com.google.firebase.components.ComponentRegistrar" />
+129-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:45:17-82
+130        </service> <!-- Needs to be explicitly declared on P+ -->
+131        <uses-library
+131-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\992e8cfb5ebefe9d4df1160e6da6d33a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+132            android:name="org.apache.http.legacy"
+132-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\992e8cfb5ebefe9d4df1160e6da6d33a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+133            android:required="false" />
+133-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\992e8cfb5ebefe9d4df1160e6da6d33a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+134
+135        <activity
+135-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\4bbdeffd9f6b4aec59de66a7c42c8dea\jetified-play-services-base-17.5.0\AndroidManifest.xml:23:9-26:75
+136            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+136-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\4bbdeffd9f6b4aec59de66a7c42c8dea\jetified-play-services-base-17.5.0\AndroidManifest.xml:24:13-79
+137            android:exported="false"
+137-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\4bbdeffd9f6b4aec59de66a7c42c8dea\jetified-play-services-base-17.5.0\AndroidManifest.xml:25:13-37
+138            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+138-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\4bbdeffd9f6b4aec59de66a7c42c8dea\jetified-play-services-base-17.5.0\AndroidManifest.xml:26:13-72
+139
+140        <provider
+140-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:26:9-31:39
+141            android:name="com.google.firebase.provider.FirebaseInitProvider"
+141-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:27:13-77
+142            android:authorities="com.example.test_libgdxintoandroid.firebaseinitprovider"
+142-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:28:13-72
+143            android:directBootAware="true"
+143-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:29:13-43
+144            android:exported="false"
+144-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:30:13-37
+145            android:initOrder="100" />
+145-->[com.google.firebase:firebase-common:19.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\72ad50cf2f688c4d0808b71ed685d629\jetified-firebase-common-19.5.0\AndroidManifest.xml:31:13-36
+146
+147        <meta-data
+147-->[com.google.android.gms:play-services-basement:17.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\db081818d8e0d41138f8d1eb691c9579\jetified-play-services-basement-17.5.0\AndroidManifest.xml:23:9-25:69
+148            android:name="com.google.android.gms.version"
+148-->[com.google.android.gms:play-services-basement:17.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\db081818d8e0d41138f8d1eb691c9579\jetified-play-services-basement-17.5.0\AndroidManifest.xml:24:13-58
+149            android:value="@integer/google_play_services_version" />
+149-->[com.google.android.gms:play-services-basement:17.5.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\db081818d8e0d41138f8d1eb691c9579\jetified-play-services-basement-17.5.0\AndroidManifest.xml:25:13-66
+150
+151        <provider
+151-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\63deb442d862564675d853ec985b9b05\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
+152            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+152-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\63deb442d862564675d853ec985b9b05\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:26:13-79
+153            android:authorities="com.example.test_libgdxintoandroid.lifecycle-process"
+153-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\63deb442d862564675d853ec985b9b05\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:27:13-69
+154            android:exported="false"
+154-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\63deb442d862564675d853ec985b9b05\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:28:13-37
+155            android:multiprocess="true" />
+155-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\ybarr\.gradle\caches\transforms-2\files-2.1\63deb442d862564675d853ec985b9b05\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:29:13-40
+156    </application>
+157
+158</manifest>

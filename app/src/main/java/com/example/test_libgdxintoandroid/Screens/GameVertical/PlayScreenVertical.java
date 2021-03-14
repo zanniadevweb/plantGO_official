@@ -139,13 +139,6 @@ public class PlayScreenVertical implements Screen{
             enJeu = false;
         }
 
-        // Condition victoire arriver au sommet de la carte
-        if (gamecam.position.y > 15) {
-            music.stop();
-            Modele.resultatpartie = "Partie gagnée";
-            game.setScreen(new VictoryScreenVertical(game));
-        }
-
         // Condition victoire collecter tous les déchets
         if(Modele.compteurDechetCollecte < 1) {
             Modele.resultatpartie = "Partie gagnée";
