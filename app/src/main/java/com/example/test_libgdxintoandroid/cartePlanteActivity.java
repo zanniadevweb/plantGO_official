@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Toast;
 
 public class cartePlanteActivity extends AppCompatActivity {
+    Plante planteAssociee;
+    String description;
+    int niveauDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
