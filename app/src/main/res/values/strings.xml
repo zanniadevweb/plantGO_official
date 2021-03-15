@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">test_libGDXintoAndroid</string>
+    <string name="app_name">plantGO</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>

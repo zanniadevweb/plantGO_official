@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "test_libGDXintoAndroid"
+rootProject.name = "plantGO"
