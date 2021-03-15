@@ -840,6 +840,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         // Rendre invisible au départ
         Modele.circle.setVisible(false);
 
+        // Définit un niveau de zoom centré sur le Pays basque et le marqueur de la première quête -> Documentation Zoom : https://developers.google.com/maps/documentation/android-sdk/views
+        mMap.setMinZoomPreference(10.0f);
+
+
     }
 
     public Integer timeCountInMilliSeconds = 4000;

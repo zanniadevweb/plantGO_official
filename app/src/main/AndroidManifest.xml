@@ -4,7 +4,6 @@
     <!-- __________________ Permissions propres à l'appareil photo __________________ -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <!-- __________________ Permissions propres à Google Maps __________________ -->
     <!-- Pour la localisation GPS (consomme plus de batterie) -->
