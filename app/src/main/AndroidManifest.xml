@@ -31,7 +31,7 @@
      -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="res/values/google_maps_api.xml" />
+            android:value="AIzaSyC8Q2Ka2SrYfMnIRm4mEzilEwbys8SCE4w" />
         <activity
             android:name="com.example.plantGO.MainActivity"
             android:label="@string/app_name"
