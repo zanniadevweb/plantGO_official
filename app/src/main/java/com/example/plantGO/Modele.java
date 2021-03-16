@@ -17,6 +17,7 @@ public class Modele {
     public static Integer jetonRejouer = 1;
     public static Integer experienceTotaleActuelle = 0;
     public static boolean pasEncoreAjoutExperience = true;
+    public static boolean partieDejaLance = false;
 
 
     // Attributs propres au jeu du coffre au trésor et à l'inventaire (backpack)

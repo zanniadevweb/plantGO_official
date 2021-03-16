@@ -210,10 +210,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             afficherPopUpQueteTerminee();
         }
 
-        if (Modele.resultatpartie.equals("Partie gagnée") || Modele.resultatpartie.equals("Partie perdue")) {
-            testValeurRetourJeu();
-        }
-
         masquerMessagesEvenementiels();
 
         if (Modele.firstLoadingApplication) {
@@ -327,6 +323,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     public void launchGameHorizontal(View view) {
         Modele.firstLoadingApplication = false;
         Modele.estLanceJeuVertical = false;
+        Modele.partieDejaLance = false;
         remettreZeroParametresJeu();
         lancerConsignesJeu();
     }
@@ -334,34 +331,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     public void launchGameVertical(View view) {
         Modele.firstLoadingApplication = false;
         Modele.estLanceJeuVertical = true;
+        Modele.partieDejaLance = false;
         remettreZeroParametresJeu();
         lancerConsignesJeu();
-    }
-
-    public void testValeurRetourJeu() {
-        Integer tempsJeu = Modele.tempsPartie;
-
-        if (Modele.resultatpartie.equals("Partie gagnée")) {
-            Integer experienceJeuGagne = 50;
-            Integer experienceSupplementaireTemps = 0;
-
-            if (tempsJeu > 200) { // Temps Jeu compris entre 200 et 300 s
-                experienceSupplementaireTemps = 50;
-            }
-            if (tempsJeu > 150 && tempsJeu < 200) { // Temps Jeu compris entre 150 et 200 s
-                experienceSupplementaireTemps = 25;
-            }
-            if (tempsJeu > 100 && tempsJeu < 150) { // Temps Jeu compris entre 100 et 150 s
-                experienceSupplementaireTemps = 10;
-            }
-
-            Modele.experienceTotale = experienceJeuGagne + experienceSupplementaireTemps;
-            if (Modele.pasEncoreAjoutExperience) {
-                Modele.experienceTotaleActuelle = Modele.experienceTotaleActuelle + Modele.experienceTotale;
-                Modele.pasEncoreAjoutExperience = false;
-            }
-
-        }
     }
 
     public void masquerMessagesEvenementiels () {
@@ -899,6 +871,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             public void onFinish() {
                 // Lance un nombre aléatoire compris entre 1 (Jeu Horizontal) et 2 (Jeu Vertical)
                 Modele.randomMiniJeu = new Random().nextInt(2) + 1; // [0, 1] + 1 => [1, 2] : Minimum 1 (si [0] + 1) et maximum 2 (si [1] + 1)
+                Modele.partieDejaLance = false;
                 remettreZeroParametresJeu();
                 lancerConsignesJeu();
             }
