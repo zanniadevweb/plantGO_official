@@ -160,16 +160,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Inflate the layout as per google doc instructions
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-
         // add the inflated view to the Included view.
-        ActivityMainBinding bindingIncludedLayout = binding;
         setContentView(binding.getRoot());
-
-        //setContentView(R.layout.activity_main);
-        overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
+        //supprimer l'animation au changement d'activité
+        overridePendingTransition(0,0);
 
         // Locate the UI widgets.
         mLatitudeTextView = (TextView) findViewById(R.id.latitude_text);
@@ -279,27 +275,27 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void afficherPopUpQueteTerminee() {
             if (!Modele.popUpDetruit) {
-                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-                Button bt8 = findViewById(R.id.b_terminerQuete);
-
                 binding.textViewQueteEnCours.setVisibility(View.VISIBLE);
                 binding.fondMessage.setVisibility(View.VISIBLE);
+
+                Button bt8 = findViewById(R.id.b_terminerQuete);
                 bt8.setVisibility(View.VISIBLE);
 
+                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
                 tv6.setText("La quête est terminée");
             }
     }
 
     public void masquerPopUpQueteTerminee() {
         if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
-            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-            Button bt8 = findViewById(R.id.b_terminerQuete);
-
             binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
             binding.fondMessage.setVisibility(View.INVISIBLE);
             binding.fondMessage.setAlpha((float) 0.0);
+
+            Button bt8 = findViewById(R.id.b_terminerQuete);
             bt8.setVisibility(View.INVISIBLE);
 
+            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
             tv6.setText("");
         }
     }
@@ -355,7 +351,257 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Modele.queteAcceptee = false;
     }
 
+    public Integer timeCountInMilliSeconds = 4000;
 
+    private void lancerUnDe() {
+        View mapFragment = findViewById(R.id.map);
+        mapFragment.setVisibility(View.INVISIBLE);
+
+        TextView tv1 = findViewById(R.id.resultatJetDe);
+        afficherJetDe();
+
+        Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
+        tv1.setText(String.valueOf(randomJouerOuNon));
+
+        if (randomJouerOuNon > 3) {
+            timerAvantJeu();
+        }
+        if (randomJouerOuNon <= 3) {
+            timerSiPasJeu();
+        }
+    }
+
+    private void timerAvantJeu() {
+        CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                TextView tv7 = findViewById(R.id.jeJoue);
+
+                binding.buttonProfil.setVisibility(View.INVISIBLE);
+                binding.buttonPhoto.setVisibility(View.INVISIBLE);
+                binding.gameHorizontal.setVisibility(View.INVISIBLE);
+                binding.gameVertical.setVisibility(View.INVISIBLE);
+                binding.planteAChercher.setVisibility(View.INVISIBLE);
+                binding.planteQuete1.setVisibility(View.INVISIBLE);
+                binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
+                binding.jeJoue.setVisibility(View.INVISIBLE);
+                binding.marqueurQueteText.setVisibility(View.INVISIBLE);
+
+                afficherJetDe();
+
+                tv7.setText("Vous allez jouer !");
+
+            }
+            @Override
+            public void onFinish() {
+                // Lance un nombre aléatoire compris entre 1 (Jeu Horizontal) et 2 (Jeu Vertical)
+                Modele.randomMiniJeu = new Random().nextInt(2) + 1; // [0, 1] + 1 => [1, 2] : Minimum 1 (si [0] + 1) et maximum 2 (si [1] + 1)
+                Modele.partieDejaLance = false;
+                remettreZeroParametresJeu();
+                lancerConsignesJeu();
+            }
+        }.start();
+        countDownTimer.start();
+    }
+
+    private void timerSiPasJeu() {
+        CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                TextView tv7 = findViewById(R.id.jeJoue);
+
+                binding.buttonProfil.setVisibility(View.INVISIBLE);
+                binding.buttonPhoto.setVisibility(View.INVISIBLE);
+                binding.gameHorizontal.setVisibility(View.INVISIBLE);
+                binding.gameVertical.setVisibility(View.INVISIBLE);
+                binding.planteAChercher.setVisibility(View.INVISIBLE);
+                binding.planteQuete1.setVisibility(View.INVISIBLE);
+                binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
+                binding.jeJoue.setVisibility(View.INVISIBLE);
+                binding.marqueurQueteText.setVisibility(View.INVISIBLE);
+
+                afficherJetDe();
+                tv7.setText("Vous ne jouerez pas cette fois-ci !");
+
+            }
+            @Override
+            public void onFinish() {
+                View mapFragment = findViewById(R.id.map);
+                mapFragment.setVisibility(View.VISIBLE);
+
+                binding.buttonProfil.setVisibility(View.VISIBLE);
+                binding.buttonPhoto.setVisibility(View.VISIBLE);
+                binding.gameHorizontal.setVisibility(View.VISIBLE);
+                binding.gameVertical.setVisibility(View.VISIBLE);
+                binding.planteAChercher.setVisibility(View.VISIBLE);
+                binding.planteQuete1.setVisibility(View.VISIBLE);
+                binding.textViewQueteEnCours.setVisibility(View.VISIBLE);
+                binding.longitudeText.setVisibility(View.VISIBLE);
+                binding.latitudeText.setVisibility(View.VISIBLE);
+                binding.lastUpdateTimeText.setVisibility(View.VISIBLE);
+                binding.marqueurQueteText.setVisibility(View.VISIBLE);
+
+                masquerJetDe();
+
+            }
+        }.start();
+        countDownTimer.start();
+    }
+
+    public void masquerJetDe() {
+        binding.jetDe.setVisibility(View.INVISIBLE);
+        binding.jeJoue.setVisibility(View.INVISIBLE);
+        binding.resultatJetDe.setVisibility(View.INVISIBLE);
+    }
+
+    public void afficherJetDe() {
+        binding.jetDe.setVisibility(View.VISIBLE);
+        binding.jeJoue.setVisibility(View.VISIBLE);
+        binding.resultatJetDe.setVisibility(View.VISIBLE);
+    }
+
+    private void apparitionCoffre() {
+        //lat : 43.47834-43.47645=0,00189=210m // min 43.47645, max 43,48023
+        //lng : -1.50798+1.50538=0,0026=210m // min -1,51058, max -1.50538
+        Modele.randomLat = Math.random()* 0.00378 + (Modele.marqueurQuete.latitude-0.00189); //créer une longitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
+        Modele.randomLng = Math.random()* 0.0052 +(Modele.marqueurQuete.longitude-0.0026); //créer une latitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
+        Modele.marqueurCoffre = new LatLng(Modele.randomLat,Modele.randomLng);
+        //mMap.addMarker(new MarkerOptions().position(Modele.marqueurCoffre ).title("Coffre").icon(BitmapDescriptorFactory.fromResource((R.drawable.tresor)))); ---- lIGNE QUI CRASHE
+
+    }
+
+    public void chargerFichier() {
+        try {
+            FileInputStream input = openFileInput(SAVE);
+            int value;
+            // On utilise un StringBuffer pour construire la chaîne au fur et à mesure
+            StringBuffer lu = new StringBuffer();
+            // On lit les caractères les uns après les autres
+            while ((value = input.read()) != -1) {
+                // On écrit dans le fichier le caractère lu
+                lu.append((char) value);
+            }
+            String strFields0 = lu.toString().split("\\|")[0];
+            String strFields1 = lu.toString().split("\\|")[1];
+            String strFields2 = lu.toString().split("\\|")[2];
+
+            Toast.makeText(MainActivity.this, "Lecture sauvegarde Interne : " + lu.toString(), Toast.LENGTH_SHORT).show();
+            Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+            Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+            Modele.queteAcceptee = Boolean.valueOf(strFields2); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+            Log.d("s0", "split0 : " + strFields0);
+            Log.d("s1", "split1 : " + strFields1);
+            Log.d("s2", "split2 : " + strFields2);
+            Log.d("qload", "quete en cours ? " + Modele.queteAcceptee);
+            if (input != null)
+                input.close();
+
+            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                lu = new StringBuffer();
+                input = new FileInputStream(mFile);
+                while ((value = input.read()) != -1)
+                    lu.append((char) value);
+                Toast.makeText(MainActivity.this, "Lecture sauvegarde Externe : " + lu.toString(), Toast.LENGTH_SHORT).show();
+                Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                Modele.queteAcceptee = Boolean.valueOf(strFields2); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
+                Log.d("s0", "split0 : " + strFields0);
+                Log.d("s1", "split1 : " + strFields1);
+                Log.d("s2", "split2 : " + strFields2);
+                Log.d("qload", "quete en cours ? " + Modele.queteAcceptee);
+                if (input != null)
+                    input.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void sauvegarderFichier () {
+        // On crée un fichier qui correspond à l'emplacement extérieur
+        File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getPackageName());
+        if (!directory.exists())
+            directory.mkdirs();
+
+        mFile = new File(directory.getPath() + SAVE);
+        try {
+            // Flux interne
+            FileOutputStream output = openFileOutput(SAVE, MODE_PRIVATE);
+
+            // On écrit dans le flux interne
+            output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+            output.write(pipeSeparation.getBytes());
+            output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+            output.write(pipeSeparation.getBytes());
+            output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+            Log.d("qsave", "quete en cours ? " +  Modele.queteAcceptee);
+
+            if(output != null)
+                output.close();
+
+            // Si le fichier est lisible et qu'on peut écrire dedans
+            if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                    && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
+                // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
+                mFile.createNewFile();
+                output = new FileOutputStream(mFile);
+                output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                output.write(pipeSeparation.getBytes());
+                output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                output.write(pipeSeparation.getBytes());
+                output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
+                Log.d("qsave", "quete en cours ? " +  Modele.queteAcceptee);
+                if(output != null)
+                    output.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
+    private GoogleMap mMap; // Attribut propre à Google Maps
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Anglet and move the camera
+        Modele.marqueurQuete = new LatLng(43.47834075276044, -1.5079883577079218);
+        //Marker marqueurQuete = mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.marqueurQuete));
+        Modele.circle = mMap.addCircle(new CircleOptions()
+                .center(Modele.marqueurQuete)
+                .radius(210)
+                .strokeColor(Color.RED)
+                .fillColor(Color.TRANSPARENT));
+
+        // Rendre invisible au départ
+        Modele.circle.setVisible(false);
+
+        // Définit un niveau de zoom centré sur le Pays basque et le marqueur de la première quête -> Documentation Zoom : https://developers.google.com/maps/documentation/android-sdk/views
+        mMap.setMinZoomPreference(10.0f);
+
+
+    }
+    /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
+
+
+
+    /** --------------------------------------------------- Méthodes pour localisation -------------------------------------------------- **/
     /**
      * Updates fields based on data stored in the bundle.
      *
@@ -771,258 +1017,5 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             }
         }
     }
-
     /** --------------------------------------------------- Méthodes pour localisation -------------------------------------------------- **/
-
-
-
-
-    /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
-
-    private GoogleMap mMap; // Attribut propre à Google Maps
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Anglet and move the camera
-        Modele.marqueurQuete = new LatLng(43.47834075276044, -1.5079883577079218);
-        //Marker marqueurQuete = mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.marqueurQuete));
-        Modele.circle = mMap.addCircle(new CircleOptions()
-                .center(Modele.marqueurQuete)
-                .radius(210)
-                .strokeColor(Color.RED)
-                .fillColor(Color.TRANSPARENT));
-
-        // Rendre invisible au départ
-        Modele.circle.setVisible(false);
-
-        // Définit un niveau de zoom centré sur le Pays basque et le marqueur de la première quête -> Documentation Zoom : https://developers.google.com/maps/documentation/android-sdk/views
-        mMap.setMinZoomPreference(10.0f);
-
-
-    }
-
-    public Integer timeCountInMilliSeconds = 4000;
-
-    private void lancerUnDe() {
-        View mapFragment = findViewById(R.id.map);
-        mapFragment.setVisibility(View.INVISIBLE);
-
-        TextView tv1 = findViewById(R.id.resultatJetDe);
-        afficherJetDe();
-
-        Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
-        tv1.setText(String.valueOf(randomJouerOuNon));
-
-        if (randomJouerOuNon > 3) {
-            timerAvantJeu();
-        }
-        if (randomJouerOuNon <= 3) {
-            timerSiPasJeu();
-        }
-    }
-
-    private void timerAvantJeu() {
-        CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                TextView tv7 = findViewById(R.id.jeJoue);
-
-                binding.buttonProfil.setVisibility(View.INVISIBLE);
-                binding.buttonPhoto.setVisibility(View.INVISIBLE);
-                binding.gameHorizontal.setVisibility(View.INVISIBLE);
-                binding.gameVertical.setVisibility(View.INVISIBLE);
-                binding.planteAChercher.setVisibility(View.INVISIBLE);
-                binding.planteQuete1.setVisibility(View.INVISIBLE);
-                binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
-                binding.jeJoue.setVisibility(View.INVISIBLE);
-                binding.marqueurQueteText.setVisibility(View.INVISIBLE);
-
-                afficherJetDe();
-
-                tv7.setText("Vous allez jouer !");
-
-            }
-            @Override
-            public void onFinish() {
-                // Lance un nombre aléatoire compris entre 1 (Jeu Horizontal) et 2 (Jeu Vertical)
-                Modele.randomMiniJeu = new Random().nextInt(2) + 1; // [0, 1] + 1 => [1, 2] : Minimum 1 (si [0] + 1) et maximum 2 (si [1] + 1)
-                Modele.partieDejaLance = false;
-                remettreZeroParametresJeu();
-                lancerConsignesJeu();
-            }
-        }.start();
-        countDownTimer.start();
-    }
-
-    private void timerSiPasJeu() {
-        CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                TextView tv7 = findViewById(R.id.jeJoue);
-
-                binding.buttonProfil.setVisibility(View.INVISIBLE);
-                binding.buttonPhoto.setVisibility(View.INVISIBLE);
-                binding.gameHorizontal.setVisibility(View.INVISIBLE);
-                binding.gameVertical.setVisibility(View.INVISIBLE);
-                binding.planteAChercher.setVisibility(View.INVISIBLE);
-                binding.planteQuete1.setVisibility(View.INVISIBLE);
-                binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
-                binding.jeJoue.setVisibility(View.INVISIBLE);
-                binding.marqueurQueteText.setVisibility(View.INVISIBLE);
-
-                afficherJetDe();
-                tv7.setText("Vous ne jouerez pas cette fois-ci !");
-
-            }
-            @Override
-            public void onFinish() {
-                View mapFragment = findViewById(R.id.map);
-                mapFragment.setVisibility(View.VISIBLE);
-
-                binding.buttonProfil.setVisibility(View.VISIBLE);
-                binding.buttonPhoto.setVisibility(View.VISIBLE);
-                binding.gameHorizontal.setVisibility(View.VISIBLE);
-                binding.gameVertical.setVisibility(View.VISIBLE);
-                binding.planteAChercher.setVisibility(View.VISIBLE);
-                binding.planteQuete1.setVisibility(View.VISIBLE);
-                binding.textViewQueteEnCours.setVisibility(View.VISIBLE);
-                binding.longitudeText.setVisibility(View.VISIBLE);
-                binding.latitudeText.setVisibility(View.VISIBLE);
-                binding.lastUpdateTimeText.setVisibility(View.VISIBLE);
-                binding.marqueurQueteText.setVisibility(View.VISIBLE);
-
-                masquerJetDe();
-
-            }
-        }.start();
-        countDownTimer.start();
-    }
-
-    public void masquerJetDe() {
-        binding.jetDe.setVisibility(View.INVISIBLE);
-        binding.jeJoue.setVisibility(View.INVISIBLE);
-        binding.resultatJetDe.setVisibility(View.INVISIBLE);
-    }
-
-    public void afficherJetDe() {
-        binding.jetDe.setVisibility(View.VISIBLE);
-        binding.jeJoue.setVisibility(View.VISIBLE);
-        binding.resultatJetDe.setVisibility(View.VISIBLE);
-    }
-
-    private void apparitionCoffre() {
-        //lat : 43.47834-43.47645=0,00189=210m // min 43.47645, max 43,48023
-        //lng : -1.50798+1.50538=0,0026=210m // min -1,51058, max -1.50538
-        Modele.randomLat = Math.random()* 0.00378 + (Modele.marqueurQuete.latitude-0.00189); //créer une longitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
-        Modele.randomLng = Math.random()* 0.0052 +(Modele.marqueurQuete.longitude-0.0026); //créer une latitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
-        Modele.marqueurCoffre = new LatLng(Modele.randomLat,Modele.randomLng);
-        //mMap.addMarker(new MarkerOptions().position(Modele.marqueurCoffre ).title("Coffre").icon(BitmapDescriptorFactory.fromResource((R.drawable.tresor)))); ---- lIGNE QUI CRASHE
-
-    }
-
-    public void chargerFichier() {
-        try {
-            FileInputStream input = openFileInput(SAVE);
-            int value;
-            // On utilise un StringBuffer pour construire la chaîne au fur et à mesure
-            StringBuffer lu = new StringBuffer();
-            // On lit les caractères les uns après les autres
-            while ((value = input.read()) != -1) {
-                // On écrit dans le fichier le caractère lu
-                lu.append((char) value);
-            }
-            String strFields0 = lu.toString().split("\\|")[0];
-            String strFields1 = lu.toString().split("\\|")[1];
-            String strFields2 = lu.toString().split("\\|")[2];
-
-            Toast.makeText(MainActivity.this, "Lecture sauvegarde Interne : " + lu.toString(), Toast.LENGTH_SHORT).show();
-            Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-            Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-            Modele.queteAcceptee = Boolean.valueOf(strFields2); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-            Log.d("s0", "split0 : " + strFields0);
-            Log.d("s1", "split1 : " + strFields1);
-            Log.d("s2", "split2 : " + strFields2);
-            Log.d("qload", "quete en cours ? " + Modele.queteAcceptee);
-            if (input != null)
-                input.close();
-
-            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                lu = new StringBuffer();
-                input = new FileInputStream(mFile);
-                while ((value = input.read()) != -1)
-                    lu.append((char) value);
-                Toast.makeText(MainActivity.this, "Lecture sauvegarde Externe : " + lu.toString(), Toast.LENGTH_SHORT).show();
-                Modele.jeuCoffreTresorGagne = Boolean.valueOf(strFields0); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                Modele.experienceTotaleActuelle = Integer.valueOf(strFields1); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                Modele.queteAcceptee = Boolean.valueOf(strFields2); // VARIABLE A CHANGER SELON LA DONNEE A LIRE POUR INITIALISER LA VARIABLE LOCALE
-                Log.d("s0", "split0 : " + strFields0);
-                Log.d("s1", "split1 : " + strFields1);
-                Log.d("s2", "split2 : " + strFields2);
-                Log.d("qload", "quete en cours ? " + Modele.queteAcceptee);
-                if (input != null)
-                    input.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    public void sauvegarderFichier () {
-        // On crée un fichier qui correspond à l'emplacement extérieur
-        File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getPackageName());
-        if (!directory.exists())
-            directory.mkdirs();
-
-        mFile = new File(directory.getPath() + SAVE);
-        try {
-            // Flux interne
-            FileOutputStream output = openFileOutput(SAVE, MODE_PRIVATE);
-
-            // On écrit dans le flux interne
-            output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-            output.write(pipeSeparation.getBytes());
-            output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-            output.write(pipeSeparation.getBytes());
-            output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-            Log.d("qsave", "quete en cours ? " +  Modele.queteAcceptee);
-
-            if(output != null)
-                output.close();
-
-            // Si le fichier est lisible et qu'on peut écrire dedans
-            if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
-                // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
-                mFile.createNewFile();
-                output = new FileOutputStream(mFile);
-                output.write(resultatJeuCoffreTresor.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                output.write(pipeSeparation.getBytes());
-                output.write(experienceActuelle.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                output.write(pipeSeparation.getBytes());
-                output.write(queteEstAcceptee.getBytes()); // VARIABLE A CHANGER SELON LA DONNEE A ECRIRE
-                Log.d("qsave", "quete en cours ? " +  Modele.queteAcceptee);
-                if(output != null)
-                    output.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

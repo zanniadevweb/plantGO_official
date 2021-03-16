@@ -7,17 +7,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+import com.example.plantGO.databinding.ActivityConsignesjeuBinding;
+import com.example.plantGO.databinding.ActivityJeucoffretresorBinding;
 
 public class ConsignesDeJeu extends AppCompatActivity {
+
+
+    // Attribut permet d'utiliser le ViewBinding (c'est un databinding dynamique, au lieu du classique mais statique setContentView(R.layout.toto). Permet d'enlever tous les findviewbyid !
+    private @NonNull
+    ActivityConsignesjeuBinding binding;
+
     // Avant le lancement d'un mini-jeu l'application est dans l'état "onCreate"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consignesjeu);
-        overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
+        // Inflate the layout as per google doc instructions
+        binding = ActivityConsignesjeuBinding.inflate(getLayoutInflater());
+        // add the inflated view to the Included view.
+        setContentView(binding.getRoot());
+        //supprimer l'animation au changement d'activité
+        overridePendingTransition(0,0);
 
         if (Modele.resultatpartie.equals("Partie non déterminée") && !(Modele.partieDejaLance)) {
             masquerLabelsExperienceTempsJeu();
@@ -37,7 +50,7 @@ public class ConsignesDeJeu extends AppCompatActivity {
             changerTexteLancerJeuEnRetourMenu();
             masquerLabelsConsignesJeu();
             TextView tv0 = findViewById(R.id.texteVictoireDefaite);
-            tv0.setVisibility(View.VISIBLE);
+            binding.texteVictoireDefaite.setVisibility(View.VISIBLE);
             afficherLabelsExperienceTempsJeu();
 
             if (Modele.resultatpartie.equals("Partie gagnée")) {
@@ -86,17 +99,13 @@ public class ConsignesDeJeu extends AppCompatActivity {
     }
 
     public void afficherLabelsConsignesJeu() {
-        TextView tv1 = findViewById(R.id.titreJeu);
-        TextView tv2 = findViewById(R.id.consignesJeu);
-        tv1.setVisibility(View.VISIBLE);
-        tv2.setVisibility(View.VISIBLE);
+        binding.titreJeu.setVisibility(View.VISIBLE);
+        binding.consignesJeu.setVisibility(View.VISIBLE);
     }
 
     public void masquerLabelsConsignesJeu() {
-        TextView tv1 = findViewById(R.id.titreJeu);
-        TextView tv2 = findViewById(R.id.consignesJeu);
-        tv1.setVisibility(View.INVISIBLE);
-        tv2.setVisibility(View.INVISIBLE);
+        binding.titreJeu.setVisibility(View.INVISIBLE);
+        binding.consignesJeu.setVisibility(View.INVISIBLE);
     }
 
     public void changerTexteLancerJeuEnRetourMenu() {
@@ -119,8 +128,7 @@ public class ConsignesDeJeu extends AppCompatActivity {
         String consignesJeuVertical = "Déplacez-vous avec les touches directionnelles gauche "
                 + "\net droite. La touche haut permet de sauter."
                 + "\nDétruisez tous les déchets en sautant dessus pour gagner.";
-        ImageView imgv0 = findViewById(R.id.gifConsignesJeuVertical);
-        imgv0.setVisibility(View.VISIBLE);
+        binding.gifConsignesJeuVertical.setVisibility(View.VISIBLE);
         TextView tv1 = findViewById(R.id.titreJeu);
         TextView tv2 = findViewById(R.id.consignesJeu);
         tv1.setText(titreJeuVertical);
@@ -172,25 +180,13 @@ public class ConsignesDeJeu extends AppCompatActivity {
     }
 
     public void afficherLabelsExperienceTempsJeu() {
-        TextView tv1 = findViewById(R.id.texteResultatMiniJeu);
-        TextView tv2 = findViewById(R.id.tempsDeJeu);
-
-        View[] views = {tv1, tv2};
-
-        for (View view : views) {
-            view.setVisibility(View.VISIBLE);
-        }
+        binding.texteResultatMiniJeu.setVisibility(View.VISIBLE);
+        binding.tempsDeJeu.setVisibility(View.VISIBLE);
     }
 
     public void masquerLabelsExperienceTempsJeu() {
-        TextView tv1 = findViewById(R.id.texteResultatMiniJeu);
-        TextView tv2 = findViewById(R.id.tempsDeJeu);
-
-        View[] views = {tv1, tv2};
-
-        for (View view : views) {
-            view.setVisibility(View.INVISIBLE);
-        }
+        binding.texteResultatMiniJeu.setVisibility(View.INVISIBLE);
+        binding.tempsDeJeu.setVisibility(View.INVISIBLE);
     }
 
 }

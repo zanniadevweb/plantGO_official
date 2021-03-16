@@ -5,37 +5,42 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.plantGO.databinding.ActivityJeucoffretresorBinding;
 
 public class JeuCoffreTresor extends AppCompatActivity {
     public Integer timeCountInMilliSeconds = 5000;
     public static boolean jeuPasEncoreGagne = true;
 
+    // Attribut permet d'utiliser le ViewBinding (c'est un databinding dynamique, au lieu du classique mais statique setContentView(R.layout.toto). Permet d'enlever tous les findviewbyid !
+    private @NonNull
+    ActivityJeucoffretresorBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jeucoffretresor);
+        // Inflate the layout as per google doc instructions
+        binding = ActivityJeucoffretresorBinding.inflate(getLayoutInflater());
+        // add the inflated view to the Included view.
+        setContentView(binding.getRoot());
+        //supprimer l'animation au changement d'activité
+        overridePendingTransition(0,0);
 
-        ProgressBar pb = findViewById(R.id.progressBar);
-        ImageView imgv1 = findViewById(R.id.gifChest);
-        ImageView imgv2 = findViewById(R.id.gifShovel);
-        ImageView imgv3 = findViewById(R.id.idle);
-        ImageView imgv4 = findViewById(R.id.imageViewTorso2);
-        ImageView imgv5 = findViewById(R.id.imageViewHat2);
-        Button bt3 = findViewById(R.id.buttonSuite);
-        Button bt2 = findViewById(R.id.buttonRemplir);
-        TextView tv4 = findViewById(R.id.textViewTorso2);
-        TextView tv5 = findViewById(R.id.textViewHat2);
-
-        View[] views = { pb, imgv1, imgv2, imgv3, imgv4, imgv5, imgv5, bt2, bt3, tv4, tv5 };
-        for (View view : views) {
-            view.setVisibility(View.INVISIBLE);
-        }
+        binding.progressBar.setVisibility(View.INVISIBLE);
+        binding.gifChest.setVisibility(View.INVISIBLE);
+        binding.gifShovel.setVisibility(View.INVISIBLE);
+        binding.idle.setVisibility(View.INVISIBLE);
+        binding.imageViewTorso2.setVisibility(View.INVISIBLE);
+        binding.imageViewHat2.setVisibility(View.INVISIBLE);
+        binding.buttonSuite.setVisibility(View.INVISIBLE);
+        binding.buttonRemplir.setVisibility(View.INVISIBLE);
+        binding.textViewTorso2.setVisibility(View.INVISIBLE);
+        binding.textViewHat2.setVisibility(View.INVISIBLE);
     }
 
     public void remplirBarre(View view) {
@@ -45,8 +50,7 @@ public class JeuCoffreTresor extends AppCompatActivity {
 
     public void viderBarre(View view) {
         startCountDownTimer();
-        Button bt2 = findViewById(R.id.buttonRemplir);
-        bt2.setVisibility(View.VISIBLE);
+        binding.buttonRemplir.setVisibility(View.VISIBLE);
     }
 
     private void setProgressBarValues() {
@@ -61,30 +65,20 @@ public class JeuCoffreTresor extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                Log.e("seconds remaining : ", "seconds remaining : " + millisUntilFinished / 1000);
                 Integer tempsRestant = Math.toIntExact(millisUntilFinished / 1000);
-
                 pb.incrementProgressBy(-1); // Quand le timer est actif
 
-                if ((millisUntilFinished / 1000) > 0 && pb.getProgress() < 99 && jeuPasEncoreGagne == true) { // Quand le timer est actif
+                if ((millisUntilFinished / 1000) > 0 && pb.getProgress() < 99 && jeuPasEncoreGagne) { // Quand le timer est actif
 
-                    Button bt1 = findViewById(R.id.buttonVider);
-                    ImageView imgv3 = findViewById(R.id.idle);
-                    ImageView imgv4 = findViewById(R.id.closedChest);
+                    binding.buttonVider.setVisibility(View.INVISIBLE);
+                    binding.idle.setVisibility(View.INVISIBLE);
+                    binding.closedChest.setVisibility(View.INVISIBLE);
 
-                    View[] views1 = { bt1, imgv3, imgv4 };
-                    for (View view : views1) {
-                        view.setVisibility(View.INVISIBLE);
-                    }
+                    binding.gifShovel.setVisibility(View.VISIBLE);
+                    binding.chrono.setVisibility(View.VISIBLE);
+                    binding.progressBar.setVisibility(View.VISIBLE);
 
-                    ImageView imgv1 = findViewById(R.id.gifShovel);
                     TextView tv2 = findViewById(R.id.chrono);
-
-                    View[] views2 = { pb, imgv1, tv2 };
-                    for (View view : views2) {
-                        view.setVisibility(View.VISIBLE);
-                    }
-
                     tv2.setText(String.valueOf(tempsRestant));
 
                     TextView tv1 = findViewById(R.id.textView);
@@ -94,53 +88,36 @@ public class JeuCoffreTresor extends AppCompatActivity {
                 if (pb.getProgress() >= 99) { // Quand le joueur a gagné (barre remplie)
                     jeuPasEncoreGagne = false; // Signale que le joueur a gagné
 
-                    ImageView imgv1 = findViewById(R.id.gifShovel);
-                    Button bt1 = findViewById(R.id.buttonVider);
-                    Button bt2 = findViewById(R.id.buttonRemplir);
+                    binding.gifShovel.setVisibility(View.INVISIBLE);
+                    binding.buttonVider.setVisibility(View.INVISIBLE);
+                    binding.buttonRemplir.setVisibility(View.INVISIBLE);
+                    binding.chrono.setVisibility(View.INVISIBLE);
+                    binding.progressBar.setVisibility(View.INVISIBLE);
+
+                    binding.gifChest.setVisibility(View.VISIBLE);
+                    binding.imageViewTorso2.setVisibility(View.VISIBLE);
+                    binding.imageViewHat2.setVisibility(View.VISIBLE);
+                    binding.buttonSuite.setVisibility(View.VISIBLE);
+                    binding.textViewTorso2.setVisibility(View.VISIBLE);
+                    binding.textViewHat2.setVisibility(View.VISIBLE);
+
                     TextView tv1 = findViewById(R.id.textView);
-                    TextView tv2 = findViewById(R.id.chrono);
-
-                    View[] views1 = { pb, imgv1, bt1, bt2, tv2 };
-                    for (View view : views1) {
-                        view.setVisibility(View.INVISIBLE);
-                    }
-
-                    ImageView imgv2 = findViewById(R.id.gifChest);
-                    ImageView imgv4 = findViewById(R.id.imageViewTorso2);
-                    ImageView imgv5 = findViewById(R.id.imageViewHat2);
-                    Button bt3 = findViewById(R.id.buttonSuite);
-                    TextView tv4 = findViewById(R.id.textViewTorso2);
-                    TextView tv5 = findViewById(R.id.textViewHat2);
-
-                    View[] views2 = { imgv2, imgv4, imgv5, bt3, tv4, tv5 };
-                    for (View view : views2) {
-                        view.setVisibility(View.VISIBLE);
-                    }
-
                     tv1.setText("C'est gagné. Vous avez débloqué les récompenses suivantes :");
                 }
             }
 
             @Override
             public void onFinish() {
-                if (pb.getProgress() < 99 && jeuPasEncoreGagne == true) { // Quand le timer est terminé
-                    Button bt2 = findViewById(R.id.buttonRemplir);
-                    ImageView imgv1 = findViewById(R.id.gifShovel);
-                    ImageView imgv3 = findViewById(R.id.idle);
-                    Button bt1 = findViewById(R.id.buttonVider);
+                if (pb.getProgress() < 99 && jeuPasEncoreGagne) { // Quand le timer est terminé
+                    binding.gifShovel.setVisibility(View.INVISIBLE);
+                    binding.buttonRemplir.setVisibility(View.INVISIBLE);
+                    binding.chrono.setVisibility(View.INVISIBLE);
+                    binding.progressBar.setVisibility(View.INVISIBLE);
+
+                    binding.buttonVider.setVisibility(View.VISIBLE);
+                    binding.idle.setVisibility(View.VISIBLE);
+
                     TextView tv1 = findViewById(R.id.textView);
-                    TextView tv2 = findViewById(R.id.chrono);
-
-                    View[] views1 = { pb, imgv1, bt2, tv2 };
-                    for (View view : views1) {
-                        view.setVisibility(View.INVISIBLE);
-                    }
-
-                    View[] views2 = { bt1, imgv3 };
-                    for (View view : views2) {
-                        view.setVisibility(View.VISIBLE);
-                    }
-
                     tv1.setText("Relancez le chronomètre");
                 }
                 setProgressBarValues(); // call to initialize the progress bar values
