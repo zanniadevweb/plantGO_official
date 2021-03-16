@@ -16,6 +16,18 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    // Faire le choix de la version pour [Android Gradle Plugin 3.6.0] (1) ou [Android Studio 4.0 et +] (2)
+      // --------------------- 1. [Android Gradle Plugin 3.6.0] Permet l'usage de la fonctionnalité 'ViewBinding' : https://medium.com/androiddevelopers/use-view-binding-to-replace-findviewbyid-c83942471fc -------------------- //
+    /*viewBinding {
+        enabled = true
+    }*/
+
+    // --------------------- 2. [Android Studio 4.0 et +] Permet l'usage de la fonctionnalité 'ViewBinding' : https://medium.com/androiddevelopers/use-view-binding-to-replace-findviewbyid-c83942471fc -------------------- //
+    buildFeatures {
+        viewBinding = true
+    }
+    // ----------------------------------------- //
+
     defaultConfig {
         applicationId "com.example.test_libgdxintoandroid"
         minSdkVersion 24

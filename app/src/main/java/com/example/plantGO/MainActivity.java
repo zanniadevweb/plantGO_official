@@ -26,6 +26,8 @@ import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import com.example.plantGO.databinding.ActivityMainBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 //* Import propre à la lecture / écriture de fichiers *//
@@ -143,6 +145,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
      */
     private String mLastUpdateTime;
 
+    // Attribut permet d'utiliser le ViewBinding (c'est un databinding dynamique, au lieu du classique mais statique setContentView(R.layout.toto). Permet d'enlever tous les findviewbyid !
+    private @NonNull ActivityMainBinding binding;
+    
 
     private String SAVE = "sauvegarde.txt"; // resultatJeuCoffreTresor[0] | experienceActuelle[1] | queteAcceptee[2]
     private String resultatJeuCoffreTresor = String.valueOf(Modele.jeuCoffreTresorGagne);
@@ -155,7 +160,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        // Inflate the layout as per google doc instructions
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        // add the inflated view to the Included view.
+        ActivityMainBinding bindingIncludedLayout = binding;
+        setContentView(binding.getRoot());
+
+        //setContentView(R.layout.activity_main);
         overridePendingTransition(0,0); //supprimer l'animation au changement d'activité
 
         // Locate the UI widgets.
@@ -267,14 +280,11 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     public void afficherPopUpQueteTerminee() {
             if (!Modele.popUpDetruit) {
                 TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-                ImageView img2 = findViewById(R.id.fondMessage);
                 Button bt8 = findViewById(R.id.b_terminerQuete);
 
-                View[] views = {img2, bt8, tv6};
-
-                for (View view : views) {
-                    view.setVisibility(View.VISIBLE);
-                }
+                binding.textViewQueteEnCours.setVisibility(View.VISIBLE);
+                binding.fondMessage.setVisibility(View.VISIBLE);
+                bt8.setVisibility(View.VISIBLE);
 
                 tv6.setText("La quête est terminée");
             }
@@ -283,15 +293,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     public void masquerPopUpQueteTerminee() {
         if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
             TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-            ImageView img2 = findViewById(R.id.fondMessage);
             Button bt8 = findViewById(R.id.b_terminerQuete);
-            img2.setAlpha((float) 0.0);
 
-            View[] views = {img2, bt8, tv6};
-
-            for (View view : views) {
-                view.setVisibility(View.INVISIBLE);
-            }
+            binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
+            binding.fondMessage.setVisibility(View.INVISIBLE);
+            binding.fondMessage.setAlpha((float) 0.0);
+            bt8.setVisibility(View.INVISIBLE);
 
             tv6.setText("");
         }
@@ -304,19 +311,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     public void validerPopUpTerminerQuete(View view) {
         Modele.popUpActif = true;
         Modele.popUpDetruit = true;
-        TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-        ImageView img2 = findViewById(R.id.fondMessage);
-        Button bt8 = findViewById(R.id.b_terminerQuete);
-        img2.setAlpha((float) 0.0);
-
-        View[] views = {img2, bt8, tv6};
-
-        for (View view2 : views) {
-            view.setVisibility(View.INVISIBLE);
-        }
-
-        tv6.setText("");
-
+        masquerPopUpQueteTerminee();
         lancerMiniJeuOuNon();
     }
 
@@ -824,7 +819,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         View mapFragment = findViewById(R.id.map);
         mapFragment.setVisibility(View.INVISIBLE);
 
-
         TextView tv1 = findViewById(R.id.resultatJetDe);
         afficherJetDe();
 
@@ -843,24 +837,17 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Button bt4 = findViewById(R.id.buttonProfil);
-                Button bt5 = findViewById(R.id.buttonPhoto);
-                Button bt6 = findViewById(R.id.gameHorizontal);
-                Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv4 = findViewById(R.id.planteAChercher);
-                TextView tv5 = findViewById(R.id.planteQuete1);
-                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
                 TextView tv7 = findViewById(R.id.jeJoue);
-                TextView tv8 = findViewById(R.id.longitude_text);
-                TextView tv9 = findViewById(R.id.latitude_text);
-                TextView tv10 = findViewById(R.id.last_update_time_text);
-                TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {bt4,bt5,bt6,bt7, tv4,tv5,tv6, tv7, tv8,tv9,tv10,tv12 };
-
-                for (View view : views) {
-                    view.setVisibility(View.INVISIBLE);
-                }
+                binding.buttonProfil.setVisibility(View.INVISIBLE);
+                binding.buttonPhoto.setVisibility(View.INVISIBLE);
+                binding.gameHorizontal.setVisibility(View.INVISIBLE);
+                binding.gameVertical.setVisibility(View.INVISIBLE);
+                binding.planteAChercher.setVisibility(View.INVISIBLE);
+                binding.planteQuete1.setVisibility(View.INVISIBLE);
+                binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
+                binding.jeJoue.setVisibility(View.INVISIBLE);
+                binding.marqueurQueteText.setVisibility(View.INVISIBLE);
 
                 afficherJetDe();
 
@@ -883,24 +870,17 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Button bt4 = findViewById(R.id.buttonProfil);
-                Button bt5 = findViewById(R.id.buttonPhoto);
-                Button bt6 = findViewById(R.id.gameHorizontal);
-                Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv4 = findViewById(R.id.planteAChercher);
-                TextView tv5 = findViewById(R.id.planteQuete1);
-                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
                 TextView tv7 = findViewById(R.id.jeJoue);
-                TextView tv8 = findViewById(R.id.longitude_text);
-                TextView tv9 = findViewById(R.id.latitude_text);
-                TextView tv10 = findViewById(R.id.last_update_time_text);
-                TextView tv12 = findViewById(R.id.marqueur_quete_text);
 
-                View[] views = {bt4,bt5,bt6,bt7, tv4,tv5,tv6, tv8,tv9,tv10,tv12 };
-
-                for (View view : views) {
-                    view.setVisibility(View.INVISIBLE);
-                }
+                binding.buttonProfil.setVisibility(View.INVISIBLE);
+                binding.buttonPhoto.setVisibility(View.INVISIBLE);
+                binding.gameHorizontal.setVisibility(View.INVISIBLE);
+                binding.gameVertical.setVisibility(View.INVISIBLE);
+                binding.planteAChercher.setVisibility(View.INVISIBLE);
+                binding.planteQuete1.setVisibility(View.INVISIBLE);
+                binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
+                binding.jeJoue.setVisibility(View.INVISIBLE);
+                binding.marqueurQueteText.setVisibility(View.INVISIBLE);
 
                 afficherJetDe();
                 tv7.setText("Vous ne jouerez pas cette fois-ci !");
@@ -909,23 +889,19 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             @Override
             public void onFinish() {
                 View mapFragment = findViewById(R.id.map);
-                Button bt4 = findViewById(R.id.buttonProfil);
-                Button bt5 = findViewById(R.id.buttonPhoto);
-                Button bt6 = findViewById(R.id.gameHorizontal);
-                Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv4 = findViewById(R.id.planteAChercher);
-                TextView tv5 = findViewById(R.id.planteQuete1);
-                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-                TextView tv8 = findViewById(R.id.longitude_text);
-                TextView tv9 = findViewById(R.id.latitude_text);
-                TextView tv10 = findViewById(R.id.last_update_time_text);
-                TextView tv12 = findViewById(R.id.marqueur_quete_text);
+                mapFragment.setVisibility(View.VISIBLE);
 
-                View[] views1 = {mapFragment, bt4, bt5, bt6,bt7, tv4, tv5, tv6, tv8, tv9, tv10, tv12 };
-
-                for (View view : views1) {
-                    view.setVisibility(View.VISIBLE);
-                }
+                binding.buttonProfil.setVisibility(View.VISIBLE);
+                binding.buttonPhoto.setVisibility(View.VISIBLE);
+                binding.gameHorizontal.setVisibility(View.VISIBLE);
+                binding.gameVertical.setVisibility(View.VISIBLE);
+                binding.planteAChercher.setVisibility(View.VISIBLE);
+                binding.planteQuete1.setVisibility(View.VISIBLE);
+                binding.textViewQueteEnCours.setVisibility(View.VISIBLE);
+                binding.longitudeText.setVisibility(View.VISIBLE);
+                binding.latitudeText.setVisibility(View.VISIBLE);
+                binding.lastUpdateTimeText.setVisibility(View.VISIBLE);
+                binding.marqueurQueteText.setVisibility(View.VISIBLE);
 
                 masquerJetDe();
 
@@ -935,27 +911,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
     public void masquerJetDe() {
-        ImageView img1 = findViewById(R.id.jetDe);
-        TextView tv7 = findViewById(R.id.jeJoue);
-        TextView tv11 = findViewById(R.id.resultatJetDe);
-
-        View[] views2 = {img1, tv7, tv11 };
-
-        for (View view : views2) {
-            view.setVisibility(View.INVISIBLE);
-        }
+        binding.jetDe.setVisibility(View.INVISIBLE);
+        binding.jeJoue.setVisibility(View.INVISIBLE);
+        binding.resultatJetDe.setVisibility(View.INVISIBLE);
     }
 
     public void afficherJetDe() {
-        ImageView img1 = findViewById(R.id.jetDe);
-        TextView tv7 = findViewById(R.id.jeJoue);
-        TextView tv11 = findViewById(R.id.resultatJetDe);
-
-        View[] views2 = {img1, tv7, tv11 };
-
-        for (View view : views2) {
-            view.setVisibility(View.VISIBLE);
-        }
+        binding.jetDe.setVisibility(View.VISIBLE);
+        binding.jeJoue.setVisibility(View.VISIBLE);
+        binding.resultatJetDe.setVisibility(View.VISIBLE);
     }
 
     private void apparitionCoffre() {
@@ -970,23 +934,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void chargerFichier() {
         try {
-
-            if (Modele.firstLoadingApplication) {
-                Button bt4 = findViewById(R.id.buttonProfil);
-                Button bt5 = findViewById(R.id.buttonPhoto);
-                Button bt6 = findViewById(R.id.gameHorizontal);
-                Button bt7 = findViewById(R.id.gameVertical);
-                TextView tv4 = findViewById(R.id.planteAChercher);
-                TextView tv5 = findViewById(R.id.planteQuete1);
-                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-
-                View[] views = {bt4, bt5, bt6, bt7, tv4, tv5, tv6 };
-
-                for (View viewButton : views) {
-                    viewButton.setVisibility(View.VISIBLE);
-                }
-            }
-
             FileInputStream input = openFileInput(SAVE);
             int value;
             // On utilise un StringBuffer pour construire la chaîne au fur et à mesure
