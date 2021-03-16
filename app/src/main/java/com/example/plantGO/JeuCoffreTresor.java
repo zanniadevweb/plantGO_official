@@ -3,10 +3,8 @@ package com.example.plantGO;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,8 +42,7 @@ public class JeuCoffreTresor extends AppCompatActivity {
     }
 
     public void remplirBarre(View view) {
-        ProgressBar pb = findViewById(R.id.progressBar);
-        pb.incrementProgressBy(12); // Remplir la barre de progression
+        binding.progressBar.incrementProgressBy(12); // Remplir la barre de progression
     }
 
     public void viderBarre(View view) {
@@ -54,9 +51,8 @@ public class JeuCoffreTresor extends AppCompatActivity {
     }
 
     private void setProgressBarValues() {
-        ProgressBar pb = findViewById(R.id.progressBar);
-        pb.setMax((int) timeCountInMilliSeconds / 50);
-        pb.setProgress((int) timeCountInMilliSeconds / 1000);
+        binding.progressBar.setMax((int) timeCountInMilliSeconds / 50);
+        binding.progressBar.setProgress((int) timeCountInMilliSeconds / 1000);
     }
 
     private void startCountDownTimer() {
@@ -78,11 +74,8 @@ public class JeuCoffreTresor extends AppCompatActivity {
                     binding.chrono.setVisibility(View.VISIBLE);
                     binding.progressBar.setVisibility(View.VISIBLE);
 
-                    TextView tv2 = findViewById(R.id.chrono);
-                    tv2.setText(String.valueOf(tempsRestant));
-
-                    TextView tv1 = findViewById(R.id.textView);
-                    tv1.setText("Appuyez le plus vite possible avant la fin du temps imparti !!!");
+                    binding.chrono.setText(String.valueOf(tempsRestant));
+                    binding.textView.setText("Appuyez le plus vite possible avant la fin du temps imparti !!!");
                 }
 
                 if (pb.getProgress() >= 99) { // Quand le joueur a gagné (barre remplie)
@@ -101,8 +94,7 @@ public class JeuCoffreTresor extends AppCompatActivity {
                     binding.textViewTorso2.setVisibility(View.VISIBLE);
                     binding.textViewHat2.setVisibility(View.VISIBLE);
 
-                    TextView tv1 = findViewById(R.id.textView);
-                    tv1.setText("C'est gagné. Vous avez débloqué les récompenses suivantes :");
+                    binding.textView.setText("C'est gagné. Vous avez débloqué les récompenses suivantes :");
                 }
             }
 
@@ -117,8 +109,7 @@ public class JeuCoffreTresor extends AppCompatActivity {
                     binding.buttonVider.setVisibility(View.VISIBLE);
                     binding.idle.setVisibility(View.VISIBLE);
 
-                    TextView tv1 = findViewById(R.id.textView);
-                    tv1.setText("Relancez le chronomètre");
+                    binding.textView.setText("Relancez le chronomètre");
                 }
                 setProgressBarValues(); // call to initialize the progress bar values
             }

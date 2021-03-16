@@ -3,16 +3,12 @@ package com.example.plantGO;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.example.plantGO.databinding.ActivityConsignesjeuBinding;
-import com.example.plantGO.databinding.ActivityJeucoffretresorBinding;
 
 public class ConsignesDeJeu extends AppCompatActivity {
 
@@ -34,10 +30,8 @@ public class ConsignesDeJeu extends AppCompatActivity {
 
         if (Modele.resultatpartie.equals("Partie non déterminée") && !(Modele.partieDejaLance)) {
             masquerLabelsExperienceTempsJeu();
-            TextView tv0 = findViewById(R.id.texteVictoireDefaite);
-            tv0.setVisibility(View.INVISIBLE);
-            ImageView imgv0 = findViewById(R.id.gifConsignesJeuVertical);
-            imgv0.setVisibility(View.VISIBLE);
+            binding.texteVictoireDefaite.setVisibility(View.INVISIBLE);
+            binding.gifConsignesJeuVertical.setVisibility(View.VISIBLE);
             afficherInformationsJeu();
         }
     }
@@ -49,16 +43,15 @@ public class ConsignesDeJeu extends AppCompatActivity {
         if (Modele.partieDejaLance) {
             changerTexteLancerJeuEnRetourMenu();
             masquerLabelsConsignesJeu();
-            TextView tv0 = findViewById(R.id.texteVictoireDefaite);
             binding.texteVictoireDefaite.setVisibility(View.VISIBLE);
             afficherLabelsExperienceTempsJeu();
 
             if (Modele.resultatpartie.equals("Partie gagnée")) {
-                tv0.setText("Vous avez gagné !");
+                binding.texteVictoireDefaite.setText("Vous avez gagné !");
                 afficheExperienceTempsJeuSiGagne();
             }
             if (Modele.resultatpartie.equals("Partie perdue")) {
-                tv0.setText("Vous avez perdu !");
+                binding.texteVictoireDefaite.setText("Vous avez perdu !");
                 afficheMessagePasGainExperienceSiPerdu();
             }
         }
@@ -109,18 +102,15 @@ public class ConsignesDeJeu extends AppCompatActivity {
     }
 
     public void changerTexteLancerJeuEnRetourMenu() {
-        Button bt2 = findViewById(R.id.lancerJeu);
-        bt2.setText("<== Retour au menu principal");
+        binding.lancerJeu.setText("<== Retour au menu principal");
     }
 
     public void afficherTexteConsignesJeuHorizontal() {
         String titreJeuHorizontal = "Jeu Horizontal";
         String consignesJeuHorizontal = "Appuyez sur la touche haut pour sauter."
                 + "\nAllez au bout du niveau pour gagner.";
-        TextView tv1 = findViewById(R.id.titreJeu);
-        TextView tv2 = findViewById(R.id.consignesJeu);
-        tv1.setText(titreJeuHorizontal);
-        tv2.setText(consignesJeuHorizontal);
+        binding.titreJeu.setText(titreJeuHorizontal);
+        binding.consignesJeu.setText(consignesJeuHorizontal);
     }
 
     public void afficherTexteConsignesJeuVertical() {
@@ -129,16 +119,11 @@ public class ConsignesDeJeu extends AppCompatActivity {
                 + "\net droite. La touche haut permet de sauter."
                 + "\nDétruisez tous les déchets en sautant dessus pour gagner.";
         binding.gifConsignesJeuVertical.setVisibility(View.VISIBLE);
-        TextView tv1 = findViewById(R.id.titreJeu);
-        TextView tv2 = findViewById(R.id.consignesJeu);
-        tv1.setText(titreJeuVertical);
-        tv2.setText(consignesJeuVertical);
+        binding.titreJeu.setText(titreJeuVertical);
+        binding.consignesJeu.setText(consignesJeuVertical);
     }
 
     public void afficheExperienceTempsJeuSiGagne() {
-        TextView tv1 = findViewById(R.id.texteResultatMiniJeu);
-        TextView tv2 = findViewById(R.id.tempsDeJeu);
-
         Integer tempsJeu = Modele.tempsPartie;
 
         if (Modele.resultatpartie.equals("Partie gagnée")) {
@@ -161,22 +146,19 @@ public class ConsignesDeJeu extends AppCompatActivity {
                 Modele.pasEncoreAjoutExperience = false;
             }
 
-            tv1.setText( "Gain expérience = " + experienceJeuGagne + " xp" +
+            binding.texteResultatMiniJeu.setText( "Gain expérience = " + experienceJeuGagne + " xp" +
                     "\navec un bonus de " + experienceSupplementaireTemps + " xp. Expérience totale = " + Modele.experienceTotale + " xp");
 
             // Récupération du temps de jeu
-            tv2.setText("Temps de jeu = " + String.valueOf(tempsJeu) + " secondes");
+            binding.tempsDeJeu.setText("Temps de jeu = " + String.valueOf(tempsJeu) + " secondes");
 
         }
 
     }
 
     public void afficheMessagePasGainExperienceSiPerdu() {
-        TextView tv1 = findViewById(R.id.texteResultatMiniJeu);
-        TextView tv2 = findViewById(R.id.tempsDeJeu);
-
-        tv1.setText( "PAS de gain expérience");
-        tv2.setText("Temps PAS PRIS en compte");
+        binding.texteResultatMiniJeu.setText( "PAS de gain expérience");
+        binding.tempsDeJeu.setText("Temps PAS PRIS en compte");
     }
 
     public void afficherLabelsExperienceTempsJeu() {

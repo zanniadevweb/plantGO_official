@@ -15,7 +15,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -199,8 +198,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         ne s'exécute que si TOUTES les plantes de la quête en cours ont été identifiées */
         String nomScientifique = Modele.planteCourante;
 
-        TextView tv8 = findViewById(R.id.planteQuete1);
-        tv8.setText(Modele.plantesQueteCourante[0]);
+        binding.planteQuete1.setText(Modele.plantesQueteCourante[0]);
 
         if (Modele.isInTheWeeklyQuest(nomScientifique)) {
             sontIdentifieesPlantesQueteEnCours();
@@ -281,8 +279,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Button bt8 = findViewById(R.id.b_terminerQuete);
                 bt8.setVisibility(View.VISIBLE);
 
-                TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-                tv6.setText("La quête est terminée");
+                binding.textViewQueteEnCours.setText("La quête est terminée");
             }
     }
 
@@ -295,8 +292,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             Button bt8 = findViewById(R.id.b_terminerQuete);
             bt8.setVisibility(View.INVISIBLE);
 
-            TextView tv6 = findViewById(R.id.textViewQueteEnCours);
-            tv6.setText("");
+            binding.textViewQueteEnCours.setText("");
         }
     }
 
@@ -357,11 +353,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         View mapFragment = findViewById(R.id.map);
         mapFragment.setVisibility(View.INVISIBLE);
 
-        TextView tv1 = findViewById(R.id.resultatJetDe);
         afficherJetDe();
 
         Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
-        tv1.setText(String.valueOf(randomJouerOuNon));
+        binding.resultatJetDe.setText(String.valueOf(randomJouerOuNon));
 
         if (randomJouerOuNon > 3) {
             timerAvantJeu();
@@ -375,8 +370,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                TextView tv7 = findViewById(R.id.jeJoue);
-
                 binding.buttonProfil.setVisibility(View.INVISIBLE);
                 binding.buttonPhoto.setVisibility(View.INVISIBLE);
                 binding.gameHorizontal.setVisibility(View.INVISIBLE);
@@ -389,7 +382,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
                 afficherJetDe();
 
-                tv7.setText("Vous allez jouer !");
+                binding.jeJoue.setText("Vous allez jouer !");
 
             }
             @Override
@@ -408,8 +401,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                TextView tv7 = findViewById(R.id.jeJoue);
-
                 binding.buttonProfil.setVisibility(View.INVISIBLE);
                 binding.buttonPhoto.setVisibility(View.INVISIBLE);
                 binding.gameHorizontal.setVisibility(View.INVISIBLE);
@@ -421,7 +412,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 binding.marqueurQueteText.setVisibility(View.INVISIBLE);
 
                 afficherJetDe();
-                tv7.setText("Vous ne jouerez pas cette fois-ci !");
+                binding.jeJoue.setText("Vous ne jouerez pas cette fois-ci !");
 
             }
             @Override
@@ -810,12 +801,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 Modele.MyMarker = null;
 
                 if (distance[0] < 210) { // Si distance est inférieure à 210 mètres
-                    TextView tv5 = findViewById(R.id.marqueur_quete_text);
                     String nom_plante1 = getString(R.string.nom_plante1);
-                    tv5.setText("Vous êtes dans la zone de quête (+ ou - 210 mètres) du centre. C'est ici que vous trouverez un(e) " + nom_plante1);
+                    binding.marqueurQueteText.setText("Vous êtes dans la zone de quête (+ ou - 210 mètres) du centre. C'est ici que vous trouverez un(e) " + nom_plante1);
                 } else {
-                    TextView tv5 = findViewById(R.id.marqueur_quete_text);
-                    tv5.setText("(Hors zone de quête)");
+                    binding.marqueurQueteText.setText("(Hors zone de quête)");
                 }
             }
 
@@ -832,14 +821,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                         distance2); // Résultat = distance
 
                 if (distance2[0] < 20) { // Si distance est inférieure à 20 mètres
-                    TextView tv5 = findViewById(R.id.marqueur_quete_text);
-                    tv5.setText("Vous êtes proche du coffre ");
+                    binding.marqueurQueteText.setText("Vous êtes proche du coffre ");
                     //lancer le mini-jeu du coffre
                     Intent intent = new Intent(MainActivity.this, JeuCoffreTresor.class);
                     MainActivity.this.startActivity(intent);
                 } else {
-                    TextView tv5 = findViewById(R.id.marqueur_quete_text);
-                    tv5.setText("Vous êtes loin du coffre");
+                    binding.marqueurQueteText.setText("Vous êtes loin du coffre");
                 }
             }
             //mMap.clear();

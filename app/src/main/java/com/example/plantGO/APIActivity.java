@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -25,6 +25,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import com.example.plantGO.databinding.ActivityAPIBinding;
+
 public class APIActivity extends AppCompatActivity {
     /*
      * La photo prise par l'utilisateur se trouve à un emplacement défini en dur dans la code. ( -> Réécriture du fichier de destination à chaque prise de photo)
@@ -37,16 +39,21 @@ public class APIActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private Uri uri = Modele.imageURI;
 
-    TextView tv;
+    // Attribut permet d'utiliser le ViewBinding (c'est un databinding dynamique, au lieu du classique mais statique setContentView(R.layout.toto). Permet d'enlever tous les findviewbyid !
+    private @NonNull
+    com.example.plantGO.databinding.ActivityAPIBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_a_p_i);
+        // Inflate the layout as per google doc instructions
+        binding = ActivityAPIBinding.inflate(getLayoutInflater());
+        // add the inflated view to the Included view.
+        setContentView(binding.getRoot());
+        //supprimer l'animation au changement d'activité
+        overridePendingTransition(0,0);
 
         storageRef = FirebaseStorage.getInstance().getReference();
-
-        tv = findViewById(R.id.textView5);
 
         uploadImage(uri);
 
@@ -93,7 +100,7 @@ public class APIActivity extends AppCompatActivity {
                 this::onResponse,
 
                 /* En cas d'erreur */
-                error -> { tv.setText("Erreur envoie à l'API "); }
+                error -> { binding.resultatRequeteAPI.setText("Erreur envoie à l'API "); }
         );
 
 
@@ -112,7 +119,7 @@ public class APIActivity extends AppCompatActivity {
             if (!Modele.isInTheWeeklyQuest(nomScientifique))
                     nomScientifique = "Pas dans la quête hebdomadaire !";
 
-            tv.setText(nomScientifique);
+            binding.resultatRequeteAPI.setText(nomScientifique);
         }
         catch (JSONException e)
             { e.printStackTrace(); }
