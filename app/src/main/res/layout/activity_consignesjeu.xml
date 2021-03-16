@@ -8,15 +8,15 @@
     android:paddingTop="?attr/actionBarSize">
 
     <Button
-    android:id="@+id/lancerJeu"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="436dp"
-    android:onClick="lancerJeuOuRetourMenuPrincipal"
-    android:text="Lancer le jeu choisi"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/lancerJeu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="580dp"
+        android:onClick="lancerJeuOuRetourMenuPrincipal"
+        android:text="Lancer le jeu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/consignesJeu"
@@ -84,5 +84,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.227" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifConsignesJeuVertical"
+        android:layout_width="164dp"
+        android:layout_height="330dp"
+        android:src="@drawable/consignesjeuvertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,9 +2,9 @@ package com.example.plantGO;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +23,8 @@ public class ConsignesDeJeu extends AppCompatActivity {
             masquerLabelsExperienceTempsJeu();
             TextView tv0 = findViewById(R.id.texteVictoireDefaite);
             tv0.setVisibility(View.INVISIBLE);
+            ImageView imgv0 = findViewById(R.id.gifConsignesJeuVertical);
+            imgv0.setVisibility(View.VISIBLE);
             afficherInformationsJeu();
         }
     }
@@ -116,7 +118,9 @@ public class ConsignesDeJeu extends AppCompatActivity {
         String titreJeuVertical = "Jeu Vertical";
         String consignesJeuVertical = "Déplacez-vous avec les touches directionnelles gauche "
                 + "\net droite. La touche haut permet de sauter."
-                + "\nCollectez tous les déchets pour gagner.";
+                + "\nDétruisez tous les déchets en sautant dessus pour gagner.";
+        ImageView imgv0 = findViewById(R.id.gifConsignesJeuVertical);
+        imgv0.setVisibility(View.VISIBLE);
         TextView tv1 = findViewById(R.id.titreJeu);
         TextView tv2 = findViewById(R.id.consignesJeu);
         tv1.setText(titreJeuVertical);
