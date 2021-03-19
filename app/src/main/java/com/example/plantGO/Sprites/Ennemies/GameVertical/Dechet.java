@@ -49,7 +49,7 @@ public class Dechet extends EnnemiVertical
             stateTime = 0;
             // Permet d'enclencher la victoire si tous les déchets sont ramassés
             Modele.compteurDechetCollecte--;
-            HudVertical.ramasseUnDechet(1);
+            HudVertical.ecraseUnDechet(1);
         }
         else if(!destroyed) {
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);

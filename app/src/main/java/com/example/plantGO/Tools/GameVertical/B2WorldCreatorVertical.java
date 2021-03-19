@@ -17,11 +17,9 @@ import com.example.plantGO.Sprites.Ennemies.EnnemiVertical;
 import com.example.plantGO.Sprites.Ennemies.GameVertical.Serpent;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
-import com.example.plantGO.Sprites.Ennemies.GameVertical.Tonneau;
 
 public class B2WorldCreatorVertical {
     private Array<Serpent> serpents;
-    private Array<Tonneau> tonneaux;
     private Array<Dechet> dechets;
 
     public B2WorldCreatorVertical(PlayScreenVertical screen) {
@@ -65,22 +63,12 @@ public class B2WorldCreatorVertical {
             body.createFixture(fdef);
         }
 
-        //create all goombas
+        //créer les serpents
         serpents = new Array<Serpent>();
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             serpents.add(new Serpent(screen, rect.getX() / GameVertical.PPM, rect.getY() / GameVertical.PPM));
         }
-
-        //créer les tonneaux
-        tonneaux = new Array<Tonneau>();
-        //while (Modele.compteurTonneau == 0) {
-        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            tonneaux.add(new Tonneau(screen, rect.getX() / GameVertical.PPM, rect.getY() / GameVertical.PPM));
-            //Modele.compteurTonneau++;
-        }
-        //}
 
         //créer les dechets à collecter
         dechets = new Array<Dechet>();
@@ -96,9 +84,6 @@ public class B2WorldCreatorVertical {
         Array<EnnemiVertical> enemies = new Array<EnnemiVertical>();
         enemies.addAll(serpents);
         enemies.addAll(dechets);
-        //while (Modele.compteurTonneau == 0) {
-            enemies.addAll(tonneaux);
-        //}
         return enemies;
     }
 }

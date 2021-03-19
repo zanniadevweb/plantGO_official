@@ -30,8 +30,8 @@ public class HudVertical implements Disposable{
     private Label countdownLabel;
     private static Label scoreLabel;
     private Label timeLabel;
-    private Label levelLabel;
-    private Label worldLabel;
+    private Label worldLabel1;
+    private Label worldLabel2;
     private Label marioLabel;
 
     public HudVertical(SpriteBatch sb){
@@ -56,18 +56,18 @@ public class HudVertical implements Disposable{
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TEMPS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("les dechets", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("Collecte tous", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel1 = new Label("Ecrase tous", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel2 = new Label("les dechets", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         marioLabel = new Label("DECHETS RESTANTS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(marioLabel).expandX().padTop(10);
-        table.add(worldLabel).expandX().padTop(10);
+        table.add(worldLabel1).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
         //add a second row to our table
         table.row();
         table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
+        table.add(worldLabel2).expandX();
         table.add(countdownLabel).expandX();
 
         //add our table to the stage
@@ -77,7 +77,7 @@ public class HudVertical implements Disposable{
 
     public void update(float dt){
        timeCount += dt;
-        if(timeCount >= 1 && PlayScreenVertical.enJeu == false){
+        if(timeCount >= 1 && !PlayScreenVertical.enJeu){
             worldTimer--;
             Modele.tempsPartie = worldTimer; // Permet de récupérer le temps de jeu
             countdownLabel.setText(String.format("%03d", worldTimer));
@@ -90,7 +90,7 @@ public class HudVertical implements Disposable{
         scoreLabel.setText(String.format("%06d", score));
     }
 
-    public static void ramasseUnDechet(int value){
+    public static void ecraseUnDechet(int value){
         score -= value;
         scoreLabel.setText(String.format("%06d", score));
     }

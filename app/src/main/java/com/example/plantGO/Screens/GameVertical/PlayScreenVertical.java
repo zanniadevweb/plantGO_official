@@ -126,7 +126,7 @@ public class PlayScreenVertical implements Screen{
         //Gdx.app.log("Camera x", "Cam position is: " + gamecam.position.x);
 
         /*************************************** PERMET DE METTRE EN PAUSE  ******************************************/
-            if ((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && enJeu == false && player.currentState != MyCharacterVertical.State.DEAD) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && !enJeu && player.currentState != MyCharacterVertical.State.DEAD) {
             /*Modele.resultatpartie = "Partie perdue";
             Gdx.app.exit();*/
                 music.stop();
@@ -134,7 +134,7 @@ public class PlayScreenVertical implements Screen{
             }
 
         // PERMET DANNULER LA PAUSE
-        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enJeu == true) {
+        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enJeu) {
             music.play();
             enJeu = false;
         }

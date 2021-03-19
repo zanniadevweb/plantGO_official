@@ -121,13 +121,13 @@ public class PlayScreenHorizontal implements Screen {
         //Gdx.app.log("Camera x", "Cam position is: " + gamecam.position.x);
 
         /*************************************** PERMET DE METTRE EN PAUSE  ******************************************/
-        if (((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && enJeu == false && player.currentState != MyCharacterHorizontal.State.DEAD)) {
+        if (((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && !enJeu && player.currentState != MyCharacterHorizontal.State.DEAD)) {
             music.stop();
             enJeu = true;
         }
 
         // PERMET DANNULER LA PAUSE
-        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enJeu == true) {
+        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enJeu) {
             music.play();
             enJeu = false;
         }

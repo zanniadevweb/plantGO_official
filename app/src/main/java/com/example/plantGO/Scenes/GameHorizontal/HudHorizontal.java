@@ -24,21 +24,16 @@ public class HudHorizontal implements Disposable{
     private Integer worldTimer;
     //private boolean timeUp; // true when the world timer reaches 0
     private float timeCount;
-    private static Integer score;
 
     //Scene2D widgets
     private Label countdownLabel;
-    private static Label scoreLabel;
     private Label timeLabel;
-    private Label levelLabel;
     private Label worldLabel;
-    private Label marioLabel;
 
     public HudHorizontal(SpriteBatch sb){
         //define our tracking variables
         worldTimer = 300;
         timeCount = 0;
-        score = 0;
 
 
         //setup the HUD viewport using a new camera seperate from our gamecam
@@ -55,20 +50,14 @@ public class HudHorizontal implements Disposable{
 
         //define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("du niveau", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("Va au bout", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        marioLabel = new Label("MARIO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeLabel = new Label("TEMPS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel = new Label("Va au bout du niveau sans être touché", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
-        table.add(marioLabel).expandX().padTop(10);
-        table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
+        table.add(worldLabel).expandX().padTop(10);
         //add a second row to our table
         table.row();
-        table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
 
         //add our table to the stage
@@ -78,7 +67,7 @@ public class HudHorizontal implements Disposable{
 
     public void update(float dt){
        timeCount += dt;
-        if(timeCount >= 1 && PlayScreenHorizontal.enJeu == false){
+        if(timeCount >= 1 && !PlayScreenHorizontal.enJeu){
             worldTimer--;
             Modele.tempsPartie = worldTimer; // Permet de récupérer le temps de jeu
             countdownLabel.setText(String.format("%03d", worldTimer));
@@ -86,16 +75,9 @@ public class HudHorizontal implements Disposable{
         }
     }
 
-    public static void addScore(int value){
-        score += value;
-        scoreLabel.setText(String.format("%06d", score));
-    }
-
     @Override
     public void dispose()
     {
         stage.dispose();
     }
-
-    /*public boolean isTimeUp() { return timeUp; }*/
 }

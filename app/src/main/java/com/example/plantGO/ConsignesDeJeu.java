@@ -31,7 +31,6 @@ public class ConsignesDeJeu extends AppCompatActivity {
         if (Modele.resultatpartie.equals("Partie non déterminée") && !(Modele.partieDejaLance)) {
             masquerLabelsExperienceTempsJeu();
             binding.texteVictoireDefaite.setVisibility(View.INVISIBLE);
-            binding.gifConsignesJeuVertical.setVisibility(View.VISIBLE);
             afficherInformationsJeu();
         }
     }
@@ -45,6 +44,10 @@ public class ConsignesDeJeu extends AppCompatActivity {
             masquerLabelsConsignesJeu();
             binding.texteVictoireDefaite.setVisibility(View.VISIBLE);
             afficherLabelsExperienceTempsJeu();
+
+            if ( Modele.randomMiniJeu == 2)    {
+                binding.gifConsignesJeuVertical.setVisibility(View.INVISIBLE);
+            }
 
             if (Modele.resultatpartie.equals("Partie gagnée")) {
                 binding.texteVictoireDefaite.setText("Vous avez gagné !");
