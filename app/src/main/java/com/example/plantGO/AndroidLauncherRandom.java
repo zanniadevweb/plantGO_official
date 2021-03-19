@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.example.plantGO.LibGDXLaunchers.GameHorizontal;
-import com.example.plantGO.LibGDXLaunchers.GameVertical;
+import com.example.plantGO.libGDX.LibGDXLaunchers.GameHorizontal;
+import com.example.plantGO.libGDX.LibGDXLaunchers.GameVertical;
 
 public class AndroidLauncherRandom extends AndroidApplication {
 
