@@ -19,7 +19,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.example.plantGO.Modele;
 import com.example.plantGO.libGDX.LibGDXLaunchers.GameHorizontal;
-import com.example.plantGO.libGDX.LibGDXLaunchers.GameVertical;
 import com.example.plantGO.libGDX.Scenes.GameHorizontal.HudHorizontal;
 import com.example.plantGO.libGDX.Scenes.HudPause;
 import com.example.plantGO.libGDX.Sprites.GameHorizontal.MyCharacterHorizontal;
@@ -52,7 +51,7 @@ public class PlayScreenHorizontal implements Screen {
     private Box2DDebugRenderer b2dr;
     private B2WorldCreatorHorizontal creator;
 
-    public static boolean enJeu = false; // si false, le jeu est en pause, sinon il ne l'est pas : true
+    public static boolean enPause = false; // si false, le jeu est en cours, sinon il ne l'est pas : false
 
     //sprites
     private MyCharacterHorizontal player; // Character class object
@@ -77,7 +76,7 @@ public class PlayScreenHorizontal implements Screen {
         //create our game HUD for scores/timers/level info
         hud = new HudHorizontal(game.batch);
 
-        if(!enJeu) { // Si le jeu est en pause
+        if(!enPause) { // Si le jeu est en pause
             hudPause = new HudPause(game.batch);
         }
 
@@ -123,15 +122,15 @@ public class PlayScreenHorizontal implements Screen {
         //Gdx.app.log("Camera x", "Cam position is: " + gamecam.position.x);
 
         /*************************************** PERMET DE METTRE EN PAUSE  ******************************************/
-        if (((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && !enJeu && player.currentState != MyCharacterHorizontal.State.DEAD)) {
+        if (((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && !enPause && player.currentState != MyCharacterHorizontal.State.DEAD)) {
             music.stop();
-            enJeu = true;
+            enPause = true;
         }
 
         // PERMET DANNULER LA PAUSE
-        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enJeu) {
+        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enPause) {
             music.play();
-            enJeu = false;
+            enPause = false;
         }
 
         if (gamecam.position.x >32) {
@@ -142,7 +141,7 @@ public class PlayScreenHorizontal implements Screen {
         }
 
         //control our player using immediate impulses
-       if(player.currentState != MyCharacterHorizontal.State.DEAD && !enJeu) {
+       if(player.currentState != MyCharacterHorizontal.State.DEAD && !enPause) {
             if ((Gdx.input.isKeyPressed(Input.Keys.UP) || gameController.isUpPressed()) && player.b2body.getLinearVelocity().y == 0) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 40f), player.b2body.getWorldCenter(), true); // 30f par défaut
                 player.b2body.setGravityScale(5.0f);
@@ -159,7 +158,7 @@ public class PlayScreenHorizontal implements Screen {
         handleInput(dt);
 
         //takes 1 step in the physics simulation(60 times per second)
-        if(!enJeu) {
+        if(!enPause) {
             //takes 1 step in the physics simulation(60 times per second)
             world.step(1 / 60f, 6, 2);
         }
@@ -173,7 +172,7 @@ public class PlayScreenHorizontal implements Screen {
         }
 
         hud.update(dt);
-        if(!enJeu) {
+        if(!enPause) {
             hudPause.update(dt);
         }
 
@@ -218,7 +217,7 @@ public class PlayScreenHorizontal implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
-        if(enJeu) {
+        if(enPause) {
             hudPause.stage.draw();
         }
 
@@ -236,7 +235,7 @@ public class PlayScreenHorizontal implements Screen {
         }
 
         if(Gdx.app.getType() == Application.ApplicationType.Android)
-            if(!enJeu) { // Si le jeu est en pause
+            if(!enPause) { // Si le jeu est en pause
             gameController.draw();
             }
     }

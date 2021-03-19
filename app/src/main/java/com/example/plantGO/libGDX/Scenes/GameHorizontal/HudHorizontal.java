@@ -67,7 +67,7 @@ public class HudHorizontal implements Disposable{
 
     public void update(float dt){
        timeCount += dt;
-        if(timeCount >= 1 && !PlayScreenHorizontal.enJeu){
+        if(timeCount >= 1 && !PlayScreenHorizontal.enPause){
             worldTimer--;
             Modele.tempsPartie = worldTimer; // Permet de récupérer le temps de jeu
             countdownLabel.setText(String.format("%03d", worldTimer));

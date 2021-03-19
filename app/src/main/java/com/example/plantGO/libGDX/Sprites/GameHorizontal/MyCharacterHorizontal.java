@@ -160,7 +160,7 @@ public class MyCharacterHorizontal extends Sprite {
 
     public void defineGdx(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(15 / GameHorizontal.PPM, 10 / GameHorizontal.PPM);
+        bdef.position.set(90 / GameHorizontal.PPM, 13 / GameHorizontal.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

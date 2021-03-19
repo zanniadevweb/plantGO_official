@@ -51,7 +51,7 @@ public class PlayScreenVertical implements Screen{
     private Box2DDebugRenderer b2dr;
     private B2WorldCreatorVertical creator;
 
-    public static boolean enJeu = false; // si false, le jeu est en pause, sinon il ne l'est pas : true
+    public static boolean enPause = false; // si false, le jeu est en cours, sinon il ne l'est pas : false
 
     //sprites
     private MyCharacterVertical player; // Character class object
@@ -77,7 +77,7 @@ public class PlayScreenVertical implements Screen{
         //create our game HUD for scores/timers/level info
         hud = new HudVertical(game.batch);
 
-        if(!enJeu) { // Si le jeu est en pause
+        if(!enPause) { // Si le jeu est en pause
             hudPause = new HudPause(game.batch);
         }
 
@@ -127,17 +127,17 @@ public class PlayScreenVertical implements Screen{
         //Gdx.app.log("Camera x", "Cam position is: " + gamecam.position.x);
 
         /*************************************** PERMET DE METTRE EN PAUSE  ******************************************/
-            if ((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && !enJeu && player.currentState != MyCharacterVertical.State.DEAD) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && !enPause && player.currentState != MyCharacterVertical.State.DEAD) {
             /*Modele.resultatpartie = "Partie perdue";
             Gdx.app.exit();*/
                 music.stop();
-                enJeu = true;
+                enPause = true;
             }
 
         // PERMET DANNULER LA PAUSE
-        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enJeu) {
+        if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && enPause) {
             music.play();
-            enJeu = false;
+            enPause = false;
         }
 
         // Condition victoire collecter tous les déchets
@@ -149,7 +149,7 @@ public class PlayScreenVertical implements Screen{
         }
 
         //control our player using immediate impulses
-        if(player.currentState != MyCharacterVertical.State.DEAD && !enJeu) {
+        if(player.currentState != MyCharacterVertical.State.DEAD && !enPause) {
             if ((gameController.isRightPressed() || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && player.b2body.getLinearVelocity().x <= 2) {
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(),true);
             }
@@ -166,7 +166,7 @@ public class PlayScreenVertical implements Screen{
         //handle user input first
         handleInput(dt);
 
-        if(!enJeu) {
+        if(!enPause) {
         //takes 1 step in the physics simulation(60 times per second)
         world.step(1 / 60f, 6, 2);
         }
@@ -181,7 +181,7 @@ public class PlayScreenVertical implements Screen{
         }
 
         hud.update(dt);
-        if(!enJeu) {
+        if(!enPause) {
             hudPause.update(dt);
         }
 
@@ -230,7 +230,7 @@ public class PlayScreenVertical implements Screen{
 
         hud.stage.draw();
 
-        if(enJeu) {
+        if(enPause) {
             hudPause.stage.draw();
         }
 
@@ -247,7 +247,7 @@ public class PlayScreenVertical implements Screen{
             }
         }
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
-            if(!enJeu) { // Si le jeu est en pause
+            if(!enPause) { // Si le jeu est en pause
                 gameController.draw();
             }
         }
