@@ -71,7 +71,7 @@ public class GameControllerVertical {
         table.left().bottom();
 
         Image upImg = new Image(new Texture("flatDark25.png"));
-        upImg.setSize(100, 100);
+        upImg.setSize(90, 90);
         upImg.addListener(new InputListener() {
 
             @Override
@@ -101,7 +101,7 @@ public class GameControllerVertical {
         });
 
         Image rightImg = new Image(new Texture("flatDark24.png"));
-        rightImg.setSize(100, 100);
+        rightImg.setSize(90, 90);
         rightImg.addListener(new InputListener() {
 
             @Override
@@ -117,7 +117,7 @@ public class GameControllerVertical {
         });
 
         Image leftImg = new Image(new Texture("flatDark23.png"));
-        leftImg.setSize(100, 100);
+        leftImg.setSize(90, 90);
         leftImg.addListener(new InputListener() {
 
             @Override

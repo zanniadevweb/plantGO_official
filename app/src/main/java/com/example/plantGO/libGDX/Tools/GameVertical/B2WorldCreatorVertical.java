@@ -72,7 +72,7 @@ public class B2WorldCreatorVertical {
 
         //créer les dechets à collecter
         dechets = new Array<Dechet>();
-        for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             dechets.add(new Dechet(screen, rect.getX() / GameVertical.PPM, rect.getY() / GameVertical.PPM));
             Modele.compteurDechetCollecte++;

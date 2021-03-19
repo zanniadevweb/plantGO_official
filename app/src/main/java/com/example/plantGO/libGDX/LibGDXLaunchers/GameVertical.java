@@ -39,6 +39,7 @@ public class GameVertical extends Game {
         manager.load("audio/sounds/stomp.wav", Sound.class);
         manager.load("audio/sounds/lose.wav", Sound.class);
         manager.load("audio/sounds/win.wav", Sound.class);
+        manager.load("audio/sounds/dechet.wav", Sound.class);
 
         manager.finishLoading();
 

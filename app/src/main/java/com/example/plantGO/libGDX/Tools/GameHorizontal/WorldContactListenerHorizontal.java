@@ -46,7 +46,7 @@ public class WorldContactListenerHorizontal implements ContactListener {
                 else
                     ((MyCharacterHorizontal) fixB.getUserData()).hit();
                 break;
-            case GameHorizontal.ENNEMY_BIT | GameHorizontal.ENNEMY_BIT:
+            case GameHorizontal.ENNEMY_BIT:
                 ((EnnemiHorizontal)fixA.getUserData()).reverseVelocity(true, false);
                 ((EnnemiHorizontal)fixB.getUserData()).reverseVelocity(true, false);
                 break;

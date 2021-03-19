@@ -59,7 +59,7 @@ public class B2WorldCreatorHorizontal {
             body.createFixture(fdef);
         }
 
-        //create all goombas
+        //créer les crabes
         crabes = new Array<Crabe>();
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();

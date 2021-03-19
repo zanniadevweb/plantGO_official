@@ -98,6 +98,6 @@ public class Dechet extends EnnemiVertical
     @Override
     public void hitOnHead(MyCharacterVertical mario) {
         setToDestroy = true;
-        GameVertical.manager.get("audio/sounds/stomp.wav", Sound.class).play();
+        GameVertical.manager.get("audio/sounds/dechet.wav", Sound.class).play();
     }
 }

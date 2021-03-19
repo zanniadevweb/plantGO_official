@@ -134,7 +134,7 @@ public class PlayScreenHorizontal implements Screen {
             enJeu = false;
         }
 
-        if (gamecam.position.x >4) {
+        if (gamecam.position.x >32) {
             music.stop();
             Modele.resultatpartie = "Partie gagnée";
             GameHorizontal.manager.get("audio/sounds/win.wav", Sound.class).play();

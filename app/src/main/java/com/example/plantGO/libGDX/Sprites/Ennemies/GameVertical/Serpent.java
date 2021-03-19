@@ -38,7 +38,6 @@ public class Serpent extends EnnemiVertical
         setBounds(getX(), getY(), 16 / GameVertical.PPM, 16 / GameVertical.PPM);
         setToDestroy = false;
         destroyed = false;
-        velocity = new Vector2(-1, -3); // Vitesse : y = -2 -> plus rapide
     }
 
     public void update(float dt){

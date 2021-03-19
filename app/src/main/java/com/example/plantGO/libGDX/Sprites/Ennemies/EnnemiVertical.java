@@ -18,7 +18,7 @@ public abstract class EnnemiVertical extends Sprite {
         this.screen = screen;
         setPosition(x, y);
         defineEnnemy();
-        velocity = new Vector2(-1, -2);
+        velocity = new Vector2(-1, -3);
     }
 
     protected abstract void defineEnnemy();
