@@ -36,7 +36,7 @@ Si vous avez trouvé un bug, veuillez nous adresser vos remarques à l'adresse e
 ?
 
 
-Crédits
+Crédits artistiques - Banques d'images et de sons
 -------
 
 **[Musiques]**
@@ -49,6 +49,7 @@ Site internet ‘Computoser’. URL : http://computoser.com/
 
    • Site internet ‘jsfxr’. URL : https://sfxr.me/
 ⇒ Sons généré aléatoirement via un algorithme (écrasement ennemis / déchets)
+
    • Site internet ‘mixkit‘. URL : https://mixkit.co/free-sound-effects
 => Sons téléchargés : ‘Game Level Completed’ et ‘Player losing or failing’
 
