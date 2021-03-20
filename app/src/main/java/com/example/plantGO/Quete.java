@@ -9,8 +9,14 @@ public class Quete { // classe basée sur un pattern de Singleton
     Boolean estTerminee = false;
     // constr
     private Quete(){
-        for (int i=0; i<6; i++){}
+        // for (int i=0; i<6; i++){}
             // listePlantes.put(/*Plante aléatoire*/, false);
+        Plante Erable = new Plante("Erable","Erabulu");
+        listePlantes.put(Erable, false);
+
+        Plante Tilleul = new Plante("Tilleul","Tillulu");
+        listePlantes.put(Tilleul, false);
+
     }
 
     // instance unique du singleton
@@ -21,6 +27,24 @@ public class Quete { // classe basée sur un pattern de Singleton
         if (INSTANCE == null)
             INSTANCE = new Quete();
         return INSTANCE;
+    }
+
+    // changer de quete
+    public static synchronized  Quete nouvelleQuete(){
+        INSTANCE = new Quete();
+        return INSTANCE;
+    }
+
+    // to string
+    public String toString(){
+        String listePlantesString = "";
+        Plante plante;
+        if (INSTANCE != null )
+            for (Map.Entry comboPlante_estTrouvee : listePlantes.entrySet()) {
+                plante = (Plante)comboPlante_estTrouvee.getKey();
+                listePlantesString += plante.getNomCommun() + "\n";
+            }
+        return listePlantesString;
     }
 
     // quand une plante est trouvée

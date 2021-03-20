@@ -21,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+
+import java.util.Map;
 import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
@@ -196,13 +198,19 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
         /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
         ne s'exécute que si TOUTES les plantes de la quête en cours ont été identifiées */
-        String nomScientifique = Modele.planteCourante;
+        // actualise ou crée un quête
+        Modele.queteCourante = Quete.getInstance();
 
-        binding.planteQuete1.setText(Modele.plantesQueteCourante[0]);
+        binding.planteQuete1.setText(Modele.queteCourante.toString());
 
-        if (Modele.isInTheWeeklyQuest(nomScientifique)) {
-            sontIdentifieesPlantesQueteEnCours();
-        }
+
+        if (Modele.planteCourante != null)
+            if (Modele.queteCourante.estTerminée())
+                if (Modele.queteAcceptee) {
+                    terminerQuete();
+                    accepterQueteRAZ();
+                }
+
 
         /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
         ne s'exécute que si UNE plante a été reconnue ==> lancer de dé pour jouer ou non */
@@ -257,12 +265,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         buildLocationSettingsRequest();
     }
 
-    public void sontIdentifieesPlantesQueteEnCours() {
-        if (Modele.queteAcceptee) {
-            terminerQuete();
-            accepterQueteRAZ();
-        }
-    }
 
     public void lancerMiniJeuOuNon() {
         if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée") && !Modele.lancerDeDejaFait) {
@@ -370,8 +372,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                binding.buttonProfil.setVisibility(View.INVISIBLE);
-                binding.buttonPhoto.setVisibility(View.INVISIBLE);
+                binding.btn_profil.setVisibility(View.INVISIBLE);
+                binding.btn_photo.setVisibility(View.INVISIBLE);
                 binding.gameHorizontal.setVisibility(View.INVISIBLE);
                 binding.gameVertical.setVisibility(View.INVISIBLE);
                 binding.planteAChercher.setVisibility(View.INVISIBLE);
@@ -401,8 +403,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                binding.buttonProfil.setVisibility(View.INVISIBLE);
-                binding.buttonPhoto.setVisibility(View.INVISIBLE);
+                binding.btn_profil.setVisibility(View.INVISIBLE);
+                binding.btn_photo.setVisibility(View.INVISIBLE);
                 binding.gameHorizontal.setVisibility(View.INVISIBLE);
                 binding.gameVertical.setVisibility(View.INVISIBLE);
                 binding.planteAChercher.setVisibility(View.INVISIBLE);
@@ -420,8 +422,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                 View mapFragment = findViewById(R.id.map);
                 mapFragment.setVisibility(View.VISIBLE);
 
-                binding.buttonProfil.setVisibility(View.VISIBLE);
-                binding.buttonPhoto.setVisibility(View.VISIBLE);
+                binding.btn_profil.setVisibility(View.VISIBLE);
+                binding.btn_photo.setVisibility(View.VISIBLE);
                 binding.gameHorizontal.setVisibility(View.VISIBLE);
                 binding.gameVertical.setVisibility(View.VISIBLE);
                 binding.planteAChercher.setVisibility(View.VISIBLE);

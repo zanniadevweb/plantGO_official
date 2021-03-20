@@ -6,6 +6,9 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import java.util.Map;
+import java.util.Vector;
+
 public class Modele {
     // Attributs propres à libGDX
     public static String resultatpartie = "Partie non déterminée";
@@ -37,17 +40,12 @@ public class Modele {
     public static boolean lancerDeDejaFait = false;
     public static boolean popUpActif = false;
     public static boolean popUpDetruit = false;
-    public static String[] plantesQueteCourante = {"Vanilla planifolia"};
+    public static Quete queteCourante = Quete.getInstance();
     public static LatLng marqueurCoffre;
-    public static String planteCourante;
+    public static Plante planteCourante;
 
-    public static boolean isInTheWeeklyQuest(String currentPlant) {
-        for ( String plant : plantesQueteCourante ) {
-            if (plant.equals(currentPlant))
-                return true;
-        }
-        return false;
-    }
+
+
 
     public static boolean queteTerminee = false; // Si true : Active le lancer de dé et lance un jeu au hasard parmi les deux par défaut si résultat > 3
 
