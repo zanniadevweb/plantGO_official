@@ -7,19 +7,21 @@
     tools:context=".Inventaire">
 
     <!-- viewpager to show images -->
-
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/jaunePlantGO"
+        app:fabCustomSize="80dp"
         android:onClick="displayProfile"
-        android:text="Retour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/genderneutraluser" />
 
     <ImageView
         android:id="@+id/imageViewTorso"
@@ -50,6 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Torse 1"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.219"
@@ -62,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chapeau 1"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.729"
@@ -76,6 +80,7 @@
         android:checked="true"
         android:clickable="false"
         android:text="Disponible"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
@@ -90,6 +95,7 @@
         android:checked="true"
         android:clickable="false"
         android:text="Disponible"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.776"
@@ -104,6 +110,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Torse 2"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.219"
@@ -116,6 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chapeau 2"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.773"
@@ -153,6 +161,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:text="Verrouillé"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.154"
@@ -166,6 +175,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:text="Verrouillé"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="vertPlantGO">#40ed00</color>
+    <color name="jaunePlantGO">#fdb500</color>
+    <color name="bleuPlantGO">#54b0f1</color>
+    <color name="backgroundColor">#fd0043</color>
 </resources>

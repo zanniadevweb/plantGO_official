@@ -32,16 +32,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975" />
 
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_photo"
-        android:layout_width="77dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         android:onClick="displayAppPhoto"
+        app:fabCustomSize="80dp"
+        app:backgroundTint="@color/jaunePlantGO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintVertical_bias="0.057"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
@@ -63,9 +66,10 @@
         android:id="@+id/planteAChercher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Plantes à chercher"
+        android:text="Plantes à chercher :"
         android:textColor="#000000"
         android:textSize="20dp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toTopOf="@+id/planteQuete1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.114"
@@ -79,6 +83,7 @@
         android:layout_height="wrap_content"
         android:textColor="#4C4C4C"
         android:textSize="20dp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.097"
@@ -93,6 +98,7 @@
         android:text="Last update time :"
         android:textSize="@dimen/default_text_size"
         android:visibility="gone"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
@@ -107,6 +113,7 @@
         android:text="Latitude :"
         android:textSize="@dimen/default_text_size"
         android:visibility="gone"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.028"
@@ -121,6 +128,7 @@
         android:text="Longitude :"
         android:textSize="@dimen/default_text_size"
         android:visibility="gone"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
@@ -136,6 +144,7 @@
         android:textColor="#FF0000"
         android:textColorHint="#000000"
         android:textSize="@dimen/default_text_size"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
@@ -160,6 +169,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
@@ -198,6 +208,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
@@ -210,6 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
@@ -217,18 +229,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.700" />
 
-    <ImageView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_profil"
-        android:layout_width="70dp"
-        android:layout_height="67dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/jaunePlantGO"
+        app:fabCustomSize="80dp"
         android:onClick="displayProfile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
+        app:layout_constraintVertical_bias="0.057"
         app:srcCompat="@drawable/genderneutraluser" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

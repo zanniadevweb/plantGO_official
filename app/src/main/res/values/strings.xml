@@ -7,8 +7,6 @@
 
     <string name="title_activity_maps">Map</string>
 
-
-
     <string name="latitude_label">Latitude</string>
     <string name="longitude_label">Longitude</string>
     <string name="last_update_time_label">Last location update time</string>

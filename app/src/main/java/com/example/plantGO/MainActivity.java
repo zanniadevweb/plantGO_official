@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.example.plantGO.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 //* Import propre à la lecture / écriture de fichiers *//
@@ -373,9 +374,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                ImageView btn_profil = findViewById(R.id.btn_profil);
+                FloatingActionButton btn_profil = findViewById(R.id.btn_profil);
                 btn_profil.setVisibility(View.INVISIBLE);
-                ImageView btn_photo = findViewById(R.id.btn_photo);
+                FloatingActionButton btn_photo = findViewById(R.id.btn_photo);
                 btn_photo.setVisibility(View.INVISIBLE);
                 binding.gameHorizontal.setVisibility(View.INVISIBLE);
                 binding.gameVertical.setVisibility(View.INVISIBLE);
@@ -426,9 +427,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             public void onFinish() {
                 View mapFragment = findViewById(R.id.map);
                 mapFragment.setVisibility(View.VISIBLE);
-                ImageView btn_profil = findViewById(R.id.btn_profil);
+                FloatingActionButton btn_profil = findViewById(R.id.btn_profil);
                 btn_profil.setVisibility(View.VISIBLE);
-                ImageView btn_photo = findViewById(R.id.btn_photo);
+                FloatingActionButton btn_photo = findViewById(R.id.btn_photo);
                 btn_photo.setVisibility(View.VISIBLE);
                 binding.gameHorizontal.setVisibility(View.VISIBLE);
                 binding.gameVertical.setVisibility(View.VISIBLE);

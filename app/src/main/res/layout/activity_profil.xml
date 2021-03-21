@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:onClick="displayHerbier"
         android:text="Herbier"
+        android:fontFamily="@font/boutons"
+        app:backgroundTint="@color/vertPlantGO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.832"
@@ -19,18 +21,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/jaunePlantGO"
+        app:fabCustomSize="80dp"
         android:onClick="displayAccueil"
-        android:text="Retour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/ic_home_black_24dp" />
 
     <Button
         android:id="@+id/buttonBackpack"
@@ -38,6 +43,8 @@
         android:layout_height="wrap_content"
         android:onClick="displayBackpack"
         android:text="Sac à dos"
+        android:fontFamily="@font/boutons"
+        app:backgroundTint="@color/vertPlantGO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.173"
@@ -51,6 +58,8 @@
         android:layout_height="wrap_content"
         android:onClick="displayCharacter"
         android:text="Personnage"
+        android:fontFamily="@font/boutons"
+        app:backgroundTint="@color/vertPlantGO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +71,12 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="102dp"
         android:layout_height="22dp"
+        android:backgroundTint="@color/bleuPlantGO"
         android:max="@string/experience_maximum"
+        android:scaleY="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.239" />
@@ -75,9 +86,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Expérience totale"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.871"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.238" />
@@ -87,11 +99,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:textSize="20sp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
+        app:layout_constraintVertical_bias="0.28" />
+
+    <ImageView
+        android:layout_width="61dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.219"
+        app:srcCompat="@drawable/drop_water" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
