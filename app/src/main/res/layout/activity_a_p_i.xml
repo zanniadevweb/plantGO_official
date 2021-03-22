@@ -6,6 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".APIActivity">
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonAccueil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="displayAccueil"
+            app:backgroundTint="@color/jaunePlantGO"
+            app:fabCustomSize="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_home_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="5sp"
+            android:elevation="7dp"
+            android:fontFamily="@font/boutons"
+            android:text="Accueil"
+            android:textColor="#000000" />
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/resultatRequeteAPI"
         android:layout_width="wrap_content"
@@ -28,19 +64,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.304" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/buttonAccueil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:backgroundTint="@color/jaunePlantGO"
-        app:fabCustomSize="80dp"
-        android:onClick="displayAccueil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/ic_home_black_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
