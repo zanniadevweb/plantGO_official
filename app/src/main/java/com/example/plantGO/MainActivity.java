@@ -280,8 +280,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             if (!Modele.popUpDetruit) {
                 CardView crdview1 = findViewById(R.id.card_viewQueteTerminee);
                 crdview1.setVisibility(View.VISIBLE);
-
-                binding.textViewQueteEnCours.setText("La quête est terminée");
             }
     }
 

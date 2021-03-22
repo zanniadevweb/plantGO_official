@@ -22,29 +22,109 @@
         app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/arrow_left" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:fontFamily="@font/texte"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_viewCartePlante1"
+        android:layout_width="358dp"
+        android:layout_height="563dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/bleuPlantGO"
+        app:cardCornerRadius="6dp"
+        app:contentPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.214" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="257dp"
-        android:layout_height="263dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247"
-        app:srcCompat="@drawable/plante_random" />
+        app:layout_constraintVertical_bias="0.885">
+
+        <ImageView
+            android:id="@+id/imageViewPlante1"
+            android:layout_width="257dp"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.247"
+            app:srcCompat="@drawable/plante_random" />
+
+        <TextView
+            android:id="@+id/textViewNomCommun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:fontFamily="@font/texte"
+            android:text="Nom commun : Arbus Rustica"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.450" />
+
+        <TextView
+            android:id="@+id/textViewDescriptionBasique"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:fontFamily="@font/texte"
+            android:text="Description basique : Ceci est une description basique"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.450" />
+
+        <View
+            android:id="@+id/Dv_LigneSeparation1"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:background="@color/jaunePlantGO"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNomCommun" />
+
+        <TextView
+            android:id="@+id/textViewDescriptionAvancee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal|center"
+            android:fontFamily="@font/texte"
+            android:text="Description avancéee : Dépensez de l'expérience en appuyant sur '+' pour débloquer"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.450" />
+
+        <View
+            android:id="@+id/Dv_LigneSeparation2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_gravity="bottom|center"
+            android:background="@color/jaunePlantGO"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionBasique" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonDescriptionAvancee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end|right"
+            android:onClick="displayHerbier"
+            app:fabCustomSize="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023"
+            app:srcCompat="@drawable/plus" />
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button6"
