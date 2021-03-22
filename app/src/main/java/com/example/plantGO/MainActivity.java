@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
 import java.util.Map;
@@ -277,11 +278,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void afficherPopUpQueteTerminee() {
             if (!Modele.popUpDetruit) {
-                binding.textViewQueteEnCours.setVisibility(View.VISIBLE);
-                binding.fondMessage.setVisibility(View.VISIBLE);
-
-                Button bt8 = findViewById(R.id.b_terminerQuete);
-                bt8.setVisibility(View.VISIBLE);
+                CardView crdview1 = findViewById(R.id.card_viewQueteTerminee);
+                crdview1.setVisibility(View.VISIBLE);
 
                 binding.textViewQueteEnCours.setText("La quête est terminée");
             }
@@ -289,12 +287,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void masquerPopUpQueteTerminee() {
         if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
-            binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
-            binding.fondMessage.setVisibility(View.INVISIBLE);
-            binding.fondMessage.setAlpha((float) 0.0);
-
-            Button bt8 = findViewById(R.id.b_terminerQuete);
-            bt8.setVisibility(View.INVISIBLE);
+            CardView crdview1 = findViewById(R.id.card_viewQueteTerminee);
+            crdview1.setVisibility(View.INVISIBLE);;
 
             binding.textViewQueteEnCours.setText("");
         }

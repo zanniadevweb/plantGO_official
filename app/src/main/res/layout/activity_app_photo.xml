@@ -22,17 +22,6 @@
         app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/ic_home_black_24dp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="App. photo"
-        android:fontFamily="@font/texte"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/buttonTakePicture"
         android:layout_width="wrap_content"
@@ -46,5 +35,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.364" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_viewAvertissement"
+        android:layout_width="364dp"
+        android:layout_height="198dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/bleuPlantGO"
+        app:cardCornerRadius="6dp"
+        app:contentPadding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.885">
+
+        <ImageView
+            android:id="@+id/imageViewAvertissement"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/attention" />
+
+        <TextView
+            android:id="@+id/info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal|bottom"
+            android:fontFamily="@font/texte"
+            android:text="Les plantes sont nos amis ! Respectez la nature en prenant vos photographies. Veillez à ne pas marcher dans les zones où se trouvent des espèces protégées. "
+            android:textSize="20sp" />
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

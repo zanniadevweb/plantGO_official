@@ -152,44 +152,54 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.098" />
 
-    <ImageView
-        android:id="@+id/fondMessage"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:src="@drawable/fondmessage"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_viewQueteTerminee"
+        android:layout_width="371dp"
+        android:layout_height="121dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/bleuPlantGO"
+        app:cardCornerRadius="6dp"
+        app:contentPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.500" />
+        app:layout_constraintVertical_bias="0.885">
 
-    <TextView
-        android:id="@+id/textViewQueteEnCours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:fontFamily="@font/texte"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.450" />
+        <TextView
+            android:id="@+id/textViewQueteEnCours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal|center"
+            android:fontFamily="@font/texte"
+            android:text="La quête est terminée"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.450" />
 
-    <Button
-        android:id="@+id/b_terminerQuete"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:elevation="2dp"
-        android:onClick="validerPopUpTerminerQuete"
-        android:text="Ok"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.550" />
+        <Button
+            android:id="@+id/b_terminerQuete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:elevation="2dp"
+            android:fontFamily="@font/boutons"
+            android:onClick="validerPopUpTerminerQuete"
+            android:text="Ok"
+            app:backgroundTint="@color/vertPlantGO"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.550" />
+
+    </androidx.cardview.widget.CardView>
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/jetDe"

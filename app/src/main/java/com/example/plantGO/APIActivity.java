@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -134,7 +135,7 @@ public class APIActivity extends AppCompatActivity {
 
 
     // retour accueil
-    public void displayAccueil() {
+    public void displayAccueil(View view) {
         Intent intent = new Intent(APIActivity.this, MainActivity.class);
         APIActivity.this.startActivity(intent);
     }

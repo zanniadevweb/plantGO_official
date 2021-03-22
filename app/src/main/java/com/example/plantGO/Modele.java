@@ -43,10 +43,6 @@ public class Modele {
     public static Quete queteCourante = Quete.getInstance();
     public static LatLng marqueurCoffre;
     public static Plante planteCourante;
-
-
-
-
     public static boolean queteTerminee = false; // Si true : Active le lancer de dé et lance un jeu au hasard parmi les deux par défaut si résultat > 3
 
     // Google Maps

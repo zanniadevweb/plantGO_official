@@ -127,6 +127,9 @@ public class AppPhotoActivity extends AppCompatActivity {
         sendToApi();
     }
 
+
+
+
     // Envoyer l'image à l'api : récupérer le résultat
     // image : directory.getPath() + "/myphoto.jpg"
 
