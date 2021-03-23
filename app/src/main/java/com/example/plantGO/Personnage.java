@@ -3,6 +3,7 @@ package com.example.plantGO;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -34,7 +35,6 @@ public class Personnage extends AppCompatActivity {
 
     //Creating Object of ViewPagerAdapter
     ViewPagerAdapter mViewPagerAdapterTorso;
-
 
     //Creating Object of ViewPagerAdapter
     ViewPagerAdapter mViewPagerAdapterPants;
@@ -97,6 +97,21 @@ public class Personnage extends AppCompatActivity {
 
     static void PantsaddElement(int element) {
         imagesPants.add(element);
+    }
+
+    public void changerCouleurPeau1 (View view) {
+        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
+        imageViewPersonnage.setImageResource(R.drawable.male_color1);
+    }
+
+    public void changerCouleurPeau2 (View view) {
+        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
+        imageViewPersonnage.setImageResource(R.drawable.male_color2);
+    }
+
+    public void changerCouleurPeau3 (View view) {
+        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
+        imageViewPersonnage.setImageResource(R.drawable.male_color3);
     }
 
 

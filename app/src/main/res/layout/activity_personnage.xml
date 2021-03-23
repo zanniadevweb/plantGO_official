@@ -7,10 +7,103 @@
     android:layout_height="match_parent"
     tools:context=".Personnage">
 
-    <!-- viewpager to show images -->
+    <LinearLayout
+        android:id="@+id/linearLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal|bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        android:layout_marginLeft="20sp">
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerCouleurPeau1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerCouleurPeau1"
+                app:backgroundTint="@color/couleurPeau1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerCouleurPeau2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerCouleurPeau2"
+                app:backgroundTint="@color/couleurPeau2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerCouleurPeau3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerCouleurPeau3"
+                app:backgroundTint="@color/couleurPeau3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+    </LinearLayout>
+
+
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewPersonnage"
         android:layout_width="245dp"
         android:layout_height="519dp"
         android:src="@drawable/male_color2"
@@ -39,7 +132,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPersonnage"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.viewpager.widget.ViewPager
@@ -50,7 +143,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPersonnage"
         app:layout_constraintVertical_bias="0.0" />
 
     <FrameLayout

@@ -3,5 +3,7 @@
     <color name="vertPlantGO">#40ed00</color>
     <color name="jaunePlantGO">#fdb500</color>
     <color name="bleuPlantGO">#54b0f1</color>
-    <color name="backgroundColor">#fd0043</color>
+    <color name="couleurPeau1">#fcce9c</color>
+    <color name="couleurPeau2">#c48744</color>
+    <color name="couleurPeau3">#714824</color>
 </resources>
