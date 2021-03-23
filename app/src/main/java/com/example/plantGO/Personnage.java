@@ -126,10 +126,10 @@ public class Personnage extends AppCompatActivity {
     public void changerCouleurPeau3 (View view) {
         ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
         if (Modele.genre.equals("1")) {
-            imageViewPersonnage.setImageResource(R.drawable.male_color2);
+            imageViewPersonnage.setImageResource(R.drawable.male_color3);
         }
         if (Modele.genre.equals("2")) {
-            imageViewPersonnage.setImageResource(R.drawable.female_color2);
+            imageViewPersonnage.setImageResource(R.drawable.female_color3);
         }
         Modele.couleurPeau = "3";
     }
