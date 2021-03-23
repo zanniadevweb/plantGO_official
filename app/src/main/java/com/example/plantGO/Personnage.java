@@ -12,22 +12,32 @@ import java.util.ArrayList;
 public class Personnage extends AppCompatActivity {
 
     //creating object of ViewPager
+    ViewPager mViewPagerHat;
+
+    //creating object of ViewPager
     ViewPager mViewPagerTorso;
 
     //creating object of ViewPager
-    ViewPager mViewPagerHat;
+    ViewPager mViewPagerPants;
+
+    //images array list
+    public static ArrayList<Integer> imagesHat = new ArrayList<Integer>(); //{R.drawable.hat1, R.drawable.hat2};
 
     //images array list
     public static ArrayList<Integer> imagesTorso = new ArrayList<Integer>(); // {R.drawable.torso1, R.drawable.torso2};
 
     //images array list
-    public static ArrayList<Integer> imagesHat = new ArrayList<Integer>(); //{R.drawable.hat1, R.drawable.hat2};
+    public static ArrayList<Integer> imagesPants = new ArrayList<Integer>(); //{R.drawable.hat1, R.drawable.hat2};
+
+    //Creating Object of ViewPagerAdapter
+    ViewPagerAdapter mViewPagerAdapterHat;
 
     //Creating Object of ViewPagerAdapter
     ViewPagerAdapter mViewPagerAdapterTorso;
 
+
     //Creating Object of ViewPagerAdapter
-    ViewPagerAdapter mViewPagerAdapterHat;
+    ViewPagerAdapter mViewPagerAdapterPants;
 
 
     @Override
@@ -36,8 +46,9 @@ public class Personnage extends AppCompatActivity {
         setContentView(R.layout.activity_personnage);
 
         if (Modele.unSetDeBase) {
-            TorsoaddElement(R.drawable.torso1);
             HataddElement(R.drawable.hat1);
+            TorsoaddElement(R.drawable.haut_forestier_male);
+            PantsaddElement(R.drawable.bas_forestier_male);
             Modele.unSetDeBase = false;
         }
 
@@ -48,32 +59,46 @@ public class Personnage extends AppCompatActivity {
         }
 
         //Initializing the ViewPager Object
-        mViewPagerTorso = (ViewPager)findViewById(R.id.viewPagerMain);
+        mViewPagerHat = (ViewPager)findViewById(R.id.viewPagerChapeau);
 
         //Initializing the ViewPager Object
-        mViewPagerHat = (ViewPager)findViewById(R.id.viewPagerSecondary);
+        mViewPagerTorso = (ViewPager)findViewById(R.id.viewPagerHaut);
+
+        //Initializing the ViewPager Object
+        mViewPagerPants = (ViewPager)findViewById(R.id.viewPagerBas);
+
+        //Initializing the ViewPagerAdapter
+        mViewPagerAdapterHat = new ViewPagerAdapter(Personnage.this, imagesHat);
 
         //Initializing the ViewPagerAdapter
         mViewPagerAdapterTorso = new ViewPagerAdapter(Personnage.this, imagesTorso);
 
         //Initializing the ViewPagerAdapter
-        mViewPagerAdapterHat = new ViewPagerAdapter(Personnage.this, imagesHat);
+        mViewPagerAdapterPants = new ViewPagerAdapter(Personnage.this, imagesPants);
+
+        //Adding the Adapter to the ViewPager
+        mViewPagerHat.setAdapter(mViewPagerAdapterHat);
 
         //Adding the Adapter to the ViewPager
         mViewPagerTorso.setAdapter(mViewPagerAdapterTorso);
 
         //Adding the Adapter to the ViewPager
-        mViewPagerHat.setAdapter(mViewPagerAdapterHat);
+        mViewPagerPants.setAdapter(mViewPagerAdapterPants);
 
+    }
+
+    static void HataddElement(int element) {
+        imagesHat.add(element);
     }
 
     static void TorsoaddElement(int element) {
         imagesTorso.add(element);
     }
 
-    static void HataddElement(int element) {
-        imagesHat.add(element);
+    static void PantsaddElement(int element) {
+        imagesPants.add(element);
     }
+
 
     public void displayProfile(View view) {
         Intent intent = new Intent(Personnage.this, ProfilActivity.class);

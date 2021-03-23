@@ -50,16 +50,22 @@ class ViewPagerAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.item, container, false);
 
         //referencing the image view from the item.xml file
-        ImageView imageViewTorso = (ImageView) itemView.findViewById(R.id.imageViewMain);
+        ImageView imageViewHat = (ImageView) itemView.findViewById(R.id.imageViewChapeau);
 
         //referencing the image view from the item.xml file
-        ImageView imageViewHat = (ImageView) itemView.findViewById(R.id.imageViewSecondary);
+        ImageView imageViewTorso = (ImageView) itemView.findViewById(R.id.imageViewHaut);
+
+        //referencing the image view from the item.xml file
+        ImageView imageViewPants = (ImageView) itemView.findViewById(R.id.imageViewBas);
 
         //setting the image in the imageView
         imageViewTorso.setImageResource(images.get(position));
 
         //setting the image in the imageView
         imageViewHat.setImageResource(images.get(position));
+
+        //setting the image in the imageView
+        imageViewPants.setImageResource(images.get(position));
 
         //Adding the View
         Objects.requireNonNull(container).addView(itemView);

@@ -11,34 +11,46 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="418dp"
-        android:layout_height="738dp"
-        android:src="@drawable/char_nude_brut"
+        android:layout_width="245dp"
+        android:layout_height="519dp"
+        android:src="@drawable/male_color2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerMain"
-        android:layout_width="153dp"
-        android:layout_height="172dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.758" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerSecondary"
-        android:layout_width="184dp"
-        android:layout_height="172dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.50" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerChapeau"
+        android:layout_width="97dp"
+        android:layout_height="97dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerHaut"
+        android:layout_width="245dp"
+        android:layout_height="520dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerBas"
+        android:layout_width="245dp"
+        android:layout_height="520dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.0" />
 
     <FrameLayout
