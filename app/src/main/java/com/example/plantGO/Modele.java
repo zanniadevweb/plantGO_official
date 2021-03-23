@@ -32,6 +32,7 @@ public class Modele {
 
     // Attributs propres au Personnage
     public static String couleurPeau = "2";
+    public static String genre = "1";
 
 
     // Firebase
