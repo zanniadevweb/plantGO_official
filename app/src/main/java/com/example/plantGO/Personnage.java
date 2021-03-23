@@ -44,6 +44,7 @@ public class Personnage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personnage);
+        Modele.couleurPeau = "2";
 
         if (Modele.unSetDeBase) {
             HataddElement(R.drawable.hat1);
@@ -102,16 +103,46 @@ public class Personnage extends AppCompatActivity {
     public void changerCouleurPeau1 (View view) {
         ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
         imageViewPersonnage.setImageResource(R.drawable.male_color1);
+        Modele.couleurPeau = "1";
+
     }
 
     public void changerCouleurPeau2 (View view) {
         ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
         imageViewPersonnage.setImageResource(R.drawable.male_color2);
+        Modele.couleurPeau = "2";
     }
 
     public void changerCouleurPeau3 (View view) {
         ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
         imageViewPersonnage.setImageResource(R.drawable.male_color3);
+        Modele.couleurPeau = "3";
+    }
+
+    public void changerCouleurSexe1 (View view) {
+        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
+        if (Modele.couleurPeau.equals("1")) {
+            imageViewPersonnage.setImageResource(R.drawable.male_color1);
+        }
+        if (Modele.couleurPeau.equals("2")) {
+            imageViewPersonnage.setImageResource(R.drawable.male_color2);
+        }
+        if (Modele.couleurPeau.equals("3")) {
+            imageViewPersonnage.setImageResource(R.drawable.male_color3);
+        }
+    }
+
+    public void changerCouleurSexe2 (View view) {
+        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
+        if (Modele.couleurPeau.equals("1")) {
+            imageViewPersonnage.setImageResource(R.drawable.female_color1);
+        }
+        if (Modele.couleurPeau.equals("2")) {
+            imageViewPersonnage.setImageResource(R.drawable.female_color2);
+        }
+        if (Modele.couleurPeau.equals("3")) {
+            imageViewPersonnage.setImageResource(R.drawable.female_color3);
+        }
     }
 
 

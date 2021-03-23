@@ -30,6 +30,10 @@ public class Modele {
     public static boolean firstLoadingApplication = true;
 
 
+    // Attributs propres au Personnage
+    public static String couleurPeau = "2";
+
+
     // Firebase
     public static Uri imageURI;
 
