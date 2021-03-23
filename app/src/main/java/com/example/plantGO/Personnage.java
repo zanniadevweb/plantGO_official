@@ -6,20 +6,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
 public class Personnage extends AppCompatActivity {
-
-    //creating object of ViewPager
-    ViewPager mViewPagerHat;
-
-    //creating object of ViewPager
-    ViewPager mViewPagerTorso;
-
-    //creating object of ViewPager
-    ViewPager mViewPagerPants;
 
     //images array list
     public static ArrayList<Integer> imagesHat = new ArrayList<Integer>(); //{R.drawable.hat1, R.drawable.hat2};
@@ -29,15 +19,6 @@ public class Personnage extends AppCompatActivity {
 
     //images array list
     public static ArrayList<Integer> imagesPants = new ArrayList<Integer>(); //{R.drawable.hat1, R.drawable.hat2};
-
-    //Creating Object of ViewPagerAdapter
-    ViewPagerAdapter mViewPagerAdapterHat;
-
-    //Creating Object of ViewPagerAdapter
-    ViewPagerAdapter mViewPagerAdapterTorso;
-
-    //Creating Object of ViewPagerAdapter
-    ViewPagerAdapter mViewPagerAdapterPants;
 
 
     @Override
@@ -51,41 +32,17 @@ public class Personnage extends AppCompatActivity {
             HataddElement(R.drawable.hat1);
             TorsoaddElement(R.drawable.haut_forestier_male);
             PantsaddElement(R.drawable.bas_forestier_male);
+            TorsoaddElement(R.drawable.haut_forestier_female);
+            PantsaddElement(R.drawable.bas_forestier_female);
             Modele.unSetDeBase = false;
         }
 
         if (Modele.firstInventoryLook && Modele.jeuCoffreTresorGagne) {
-            Personnage.HataddElement(R.drawable.hat2);
-            Personnage.TorsoaddElement(R.drawable.torso2);
+            HataddElement(R.drawable.hat1_violet);
+            TorsoaddElement(R.drawable.haut_violet_male);
+            PantsaddElement(R.drawable.bas_violet_male);
             Modele.firstInventoryLook = false;
         }
-
-        //Initializing the ViewPager Object
-        mViewPagerHat = (ViewPager)findViewById(R.id.viewPagerChapeau);
-
-        //Initializing the ViewPager Object
-        mViewPagerTorso = (ViewPager)findViewById(R.id.viewPagerHaut);
-
-        //Initializing the ViewPager Object
-        mViewPagerPants = (ViewPager)findViewById(R.id.viewPagerBas);
-
-        //Initializing the ViewPagerAdapter
-        mViewPagerAdapterHat = new ViewPagerAdapter(Personnage.this, imagesHat);
-
-        //Initializing the ViewPagerAdapter
-        mViewPagerAdapterTorso = new ViewPagerAdapter(Personnage.this, imagesTorso);
-
-        //Initializing the ViewPagerAdapter
-        mViewPagerAdapterPants = new ViewPagerAdapter(Personnage.this, imagesPants);
-
-        //Adding the Adapter to the ViewPager
-        mViewPagerHat.setAdapter(mViewPagerAdapterHat);
-
-        //Adding the Adapter to the ViewPager
-        mViewPagerTorso.setAdapter(mViewPagerAdapterTorso);
-
-        //Adding the Adapter to the ViewPager
-        mViewPagerPants.setAdapter(mViewPagerAdapterPants);
 
     }
 
@@ -136,6 +93,12 @@ public class Personnage extends AppCompatActivity {
 
     public void changerSexe1 (View view) {
         ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
+        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
+        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
+
+        imageViewHaut.setImageResource(R.drawable.haut_forestier_male);
+        imageViewBas.setImageResource(R.drawable.bas_forestier_male);
+
         if (Modele.couleurPeau.equals("1")) {
             imageViewPersonnage.setImageResource(R.drawable.male_color1);
         }
@@ -150,6 +113,12 @@ public class Personnage extends AppCompatActivity {
 
     public void changerSexe2 (View view) {
         ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
+        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
+        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
+
+        imageViewHaut.setImageResource(R.drawable.haut_forestier_female);
+        imageViewBas.setImageResource(R.drawable.bas_forestier_female);
+
         if (Modele.couleurPeau.equals("1")) {
             imageViewPersonnage.setImageResource(R.drawable.female_color1);
         }
@@ -160,6 +129,56 @@ public class Personnage extends AppCompatActivity {
             imageViewPersonnage.setImageResource(R.drawable.female_color3);
         }
         Modele.genre = "2";
+    }
+
+    public void changerHatMinus (View view) {
+        ImageView imageViewHaut = findViewById(R.id.imageViewChapeauP);
+        imageViewHaut.setImageResource(R.drawable.hat1);
+    }
+
+    public void changerHatPlus (View view) {
+        ImageView imageViewHaut = findViewById(R.id.imageViewChapeauP);
+        imageViewHaut.setImageResource(R.drawable.hat1_violet);
+    }
+
+    public void changerTorsoMinus (View view) {
+        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
+        if (Modele.genre.equals("1")) {
+            imageViewHaut.setImageResource(R.drawable.haut_forestier_male);
+        }
+        if (Modele.genre.equals("2")) {
+            imageViewHaut.setImageResource(R.drawable.haut_forestier_female);
+        }
+    }
+
+    public void changerTorsoPlus (View view) {
+        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
+        if (Modele.genre.equals("1")) {
+            imageViewHaut.setImageResource(R.drawable.haut_violet_male);
+        }
+        if (Modele.genre.equals("2")) {
+            imageViewHaut.setImageResource(R.drawable.haut_violet_female);
+        }
+    }
+
+    public void changerPantsMinus (View view) {
+        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
+        if (Modele.genre.equals("1")) {
+            imageViewBas.setImageResource(R.drawable.bas_forestier_male);
+        }
+        if (Modele.genre.equals("2")) {
+            imageViewBas.setImageResource(R.drawable.bas_forestier_female);
+        }
+    }
+
+    public void changerPantsPlus (View view) {
+        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
+        if (Modele.genre.equals("1")) {
+            imageViewBas.setImageResource(R.drawable.bas_violet_male);
+        }
+        if (Modele.genre.equals("2")) {
+            imageViewBas.setImageResource(R.drawable.bas_violet_female);
+        }
     }
 
 
