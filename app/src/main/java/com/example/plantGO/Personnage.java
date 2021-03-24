@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
+
+import com.example.plantGO.databinding.ActivityPersonnageBinding;
 
 public class Personnage extends AppCompatActivity {
 
@@ -20,11 +22,18 @@ public class Personnage extends AppCompatActivity {
     //images array list
     public static ArrayList<Integer> imagesPants = new ArrayList<Integer>(); //{R.drawable.hat1, R.drawable.hat2};
 
+    // Attribut permet d'utiliser le ViewBinding (c'est un databinding dynamique, au lieu du classique mais statique setContentView(R.layout.toto). Permet d'enlever tous les findviewbyid !
+    private @NonNull
+    ActivityPersonnageBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personnage);
+        // Inflate the layout as per google doc instructions
+        binding = ActivityPersonnageBinding.inflate(getLayoutInflater());
+        // add the inflated view to the Included view.
+        setContentView(binding.getRoot());
         Modele.couleurPeau = "2";
         Modele.genre = "1";
 
@@ -59,125 +68,108 @@ public class Personnage extends AppCompatActivity {
     }
 
     public void changerCouleurPeau1 (View view) {
-        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
         if (Modele.genre.equals("1")) {
-            imageViewPersonnage.setImageResource(R.drawable.male_color1);
+            binding.imageViewPersonnage.setImageResource(R.drawable.male_color1);
         }
         if (Modele.genre.equals("2")) {
-            imageViewPersonnage.setImageResource(R.drawable.female_color1);
+            binding.imageViewPersonnage.setImageResource(R.drawable.female_color1);
         }
         Modele.couleurPeau = "1";
     }
 
     public void changerCouleurPeau2 (View view) {
-        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
         if (Modele.genre.equals("1")) {
-            imageViewPersonnage.setImageResource(R.drawable.male_color2);
+            binding.imageViewPersonnage.setImageResource(R.drawable.male_color2);
         }
         if (Modele.genre.equals("2")) {
-            imageViewPersonnage.setImageResource(R.drawable.female_color2);
+            binding.imageViewPersonnage.setImageResource(R.drawable.female_color2);
         }
         Modele.couleurPeau = "2";
     }
 
     public void changerCouleurPeau3 (View view) {
-        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
         if (Modele.genre.equals("1")) {
-            imageViewPersonnage.setImageResource(R.drawable.male_color3);
+            binding.imageViewPersonnage.setImageResource(R.drawable.male_color3);
         }
         if (Modele.genre.equals("2")) {
-            imageViewPersonnage.setImageResource(R.drawable.female_color3);
+            binding.imageViewPersonnage.setImageResource(R.drawable.female_color3);
         }
         Modele.couleurPeau = "3";
     }
 
     public void changerSexe1 (View view) {
-        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
-        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
-        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
-
-        imageViewHaut.setImageResource(R.drawable.haut_forestier_male);
-        imageViewBas.setImageResource(R.drawable.bas_forestier_male);
+        binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_male);
+        binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_male);
 
         if (Modele.couleurPeau.equals("1")) {
-            imageViewPersonnage.setImageResource(R.drawable.male_color1);
+            binding.imageViewPersonnage.setImageResource(R.drawable.male_color1);
         }
         if (Modele.couleurPeau.equals("2")) {
-            imageViewPersonnage.setImageResource(R.drawable.male_color2);
+            binding.imageViewPersonnage.setImageResource(R.drawable.male_color2);
         }
         if (Modele.couleurPeau.equals("3")) {
-            imageViewPersonnage.setImageResource(R.drawable.male_color3);
+            binding.imageViewPersonnage.setImageResource(R.drawable.male_color3);
         }
         Modele.genre = "1";
     }
 
     public void changerSexe2 (View view) {
-        ImageView imageViewPersonnage = findViewById(R.id.imageViewPersonnage);
-        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
-        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
-
-        imageViewHaut.setImageResource(R.drawable.haut_forestier_female);
-        imageViewBas.setImageResource(R.drawable.bas_forestier_female);
+        binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_female);
+        binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_female);
 
         if (Modele.couleurPeau.equals("1")) {
-            imageViewPersonnage.setImageResource(R.drawable.female_color1);
+            binding.imageViewPersonnage.setImageResource(R.drawable.female_color1);
         }
         if (Modele.couleurPeau.equals("2")) {
-            imageViewPersonnage.setImageResource(R.drawable.female_color2);
+            binding.imageViewPersonnage.setImageResource(R.drawable.female_color2);
         }
         if (Modele.couleurPeau.equals("3")) {
-            imageViewPersonnage.setImageResource(R.drawable.female_color3);
+            binding.imageViewPersonnage.setImageResource(R.drawable.female_color3);
         }
         Modele.genre = "2";
     }
 
     public void changerHatMinus (View view) {
-        ImageView imageViewHaut = findViewById(R.id.imageViewChapeauP);
-        imageViewHaut.setImageResource(R.drawable.hat1);
+        binding.imageViewChapeauP.setImageResource(R.drawable.hat1);
     }
 
     public void changerHatPlus (View view) {
-        ImageView imageViewHaut = findViewById(R.id.imageViewChapeauP);
-        imageViewHaut.setImageResource(R.drawable.hat1_violet);
+        binding.imageViewChapeauP.setImageResource(R.drawable.hat1_violet);
     }
 
     public void changerTorsoMinus (View view) {
-        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
         if (Modele.genre.equals("1")) {
-            imageViewHaut.setImageResource(R.drawable.haut_forestier_male);
+            binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_male);
         }
         if (Modele.genre.equals("2")) {
-            imageViewHaut.setImageResource(R.drawable.haut_forestier_female);
+            binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_female);
         }
     }
 
     public void changerTorsoPlus (View view) {
-        ImageView imageViewHaut = findViewById(R.id.imageViewHautP);
         if (Modele.genre.equals("1")) {
-            imageViewHaut.setImageResource(R.drawable.haut_violet_male);
+            binding.imageViewHautP.setImageResource(R.drawable.haut_violet_male);
         }
         if (Modele.genre.equals("2")) {
-            imageViewHaut.setImageResource(R.drawable.haut_violet_female);
+            binding.imageViewHautP.setImageResource(R.drawable.haut_violet_female);
         }
     }
 
     public void changerPantsMinus (View view) {
-        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
         if (Modele.genre.equals("1")) {
-            imageViewBas.setImageResource(R.drawable.bas_forestier_male);
+            binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_male);
         }
         if (Modele.genre.equals("2")) {
-            imageViewBas.setImageResource(R.drawable.bas_forestier_female);
+            binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_female);
         }
     }
 
     public void changerPantsPlus (View view) {
-        ImageView imageViewBas = findViewById(R.id.imageViewBasP);
         if (Modele.genre.equals("1")) {
-            imageViewBas.setImageResource(R.drawable.bas_violet_male);
+            binding.imageViewBasP.setImageResource(R.drawable.bas_violet_male);
         }
         if (Modele.genre.equals("2")) {
-            imageViewBas.setImageResource(R.drawable.bas_violet_female);
+            binding.imageViewBasP.setImageResource(R.drawable.bas_violet_female);
         }
     }
 
