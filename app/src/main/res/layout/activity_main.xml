@@ -6,6 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:onClick="displayAppPhoto"
+        app:fabCustomSize="80dp"
+        app:backgroundTint="@color/jaunePlantGO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintVertical_bias="0.057"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/jaunePlantGO"
+        app:fabCustomSize="80dp"
+        android:onClick="displayProfile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.057"
+        app:srcCompat="@drawable/genderneutraluser" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -32,19 +64,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975" />
 
-    <ImageButton
-        android:id="@+id/btn_photo"
-        android:layout_width="77dp"
-        android:layout_height="75dp"
-        android:onClick="displayAppPhoto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
-
     <Button
         android:id="@+id/gameVertical"
         android:layout_width="90dp"
@@ -63,9 +82,10 @@
         android:id="@+id/planteAChercher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Plantes à chercher"
+        android:text="Plantes à chercher :"
         android:textColor="#000000"
         android:textSize="20dp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toTopOf="@+id/planteQuete1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.114"
@@ -79,6 +99,7 @@
         android:layout_height="wrap_content"
         android:textColor="#4C4C4C"
         android:textSize="20dp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.097"
@@ -93,6 +114,7 @@
         android:text="Last update time :"
         android:textSize="@dimen/default_text_size"
         android:visibility="gone"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
@@ -107,6 +129,7 @@
         android:text="Latitude :"
         android:textSize="@dimen/default_text_size"
         android:visibility="gone"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.028"
@@ -121,6 +144,7 @@
         android:text="Longitude :"
         android:textSize="@dimen/default_text_size"
         android:visibility="gone"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
@@ -136,6 +160,7 @@
         android:textColor="#FF0000"
         android:textColorHint="#000000"
         android:textSize="@dimen/default_text_size"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
@@ -143,43 +168,54 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.098" />
 
-    <ImageView
-        android:id="@+id/fondMessage"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:src="@drawable/fondmessage"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_viewQueteTerminee"
+        android:layout_width="371dp"
+        android:layout_height="121dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/bleuPlantGO"
+        app:cardCornerRadius="6dp"
+        app:contentPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.500" />
+        app:layout_constraintVertical_bias="0.885">
 
-    <TextView
-        android:id="@+id/textViewQueteEnCours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.450" />
+        <TextView
+            android:id="@+id/textViewQueteEnCours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal|center"
+            android:fontFamily="@font/texte"
+            android:text="La quête est terminée"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.450" />
 
-    <Button
-        android:id="@+id/b_terminerQuete"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:elevation="2dp"
-        android:onClick="validerPopUpTerminerQuete"
-        android:text="Ok"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.550" />
+        <Button
+            android:id="@+id/b_terminerQuete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:elevation="2dp"
+            android:fontFamily="@font/boutons"
+            android:onClick="validerPopUpTerminerQuete"
+            android:text="Ok"
+            app:backgroundTint="@color/vertPlantGO"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.550" />
+
+    </androidx.cardview.widget.CardView>
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/jetDe"
@@ -198,6 +234,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
@@ -210,25 +247,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.700" />
-
-    <ImageView
-        android:id="@+id/btn_profil"
-        android:layout_width="70dp"
-        android:layout_height="67dp"
-        android:onClick="displayProfile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
-        app:srcCompat="@drawable/genderneutraluser" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

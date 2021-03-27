@@ -13,7 +13,6 @@ public class Modele {
     // Attributs propres à libGDX
     public static String resultatpartie = "Partie non déterminée";
     public static Integer compteurDechetCollecte = 0;
-    public static Integer compteurTonneau = 0;
     public static Integer randomMiniJeu = 0;
     public static Boolean estLanceJeuVertical = false;
     public static Integer tempsPartie = 0;
@@ -31,6 +30,11 @@ public class Modele {
     public static boolean firstLoadingApplication = true;
 
 
+    // Attributs propres au Personnage
+    public static String couleurPeau = "2";
+    public static String genre = "1";
+
+
     // Firebase
     public static Uri imageURI;
 
@@ -41,15 +45,11 @@ public class Modele {
     public static boolean popUpActif = false;
     public static boolean popUpDetruit = false;
     public static Quete queteCourante = Quete.getInstance();
-    public static LatLng marqueurCoffre;
     public static Plante planteCourante;
-
-
-
-
     public static boolean queteTerminee = false; // Si true : Active le lancer de dé et lance un jeu au hasard parmi les deux par défaut si résultat > 3
 
     // Google Maps
+    public static LatLng marqueurCoffre;
     public static LatLng marqueurQuete;
     public static LatLng maPosition;
     public static double latitudeTempsT;

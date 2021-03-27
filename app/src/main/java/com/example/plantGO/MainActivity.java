@@ -15,11 +15,13 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
 import java.util.Map;
@@ -29,6 +31,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.example.plantGO.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 //* Import propre à la lecture / écriture de fichiers *//
@@ -276,24 +279,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
     public void afficherPopUpQueteTerminee() {
             if (!Modele.popUpDetruit) {
-                binding.textViewQueteEnCours.setVisibility(View.VISIBLE);
-                binding.fondMessage.setVisibility(View.VISIBLE);
-
-                Button bt8 = findViewById(R.id.b_terminerQuete);
-                bt8.setVisibility(View.VISIBLE);
-
-                binding.textViewQueteEnCours.setText("La quête est terminée");
+                CardView crdview1 = findViewById(R.id.card_viewQueteTerminee);
+                crdview1.setVisibility(View.VISIBLE);
             }
     }
 
     public void masquerPopUpQueteTerminee() {
         if ((!Modele.queteTerminee && !Modele.popUpActif) || (Modele.popUpDetruit)) {
-            binding.textViewQueteEnCours.setVisibility(View.INVISIBLE);
-            binding.fondMessage.setVisibility(View.INVISIBLE);
-            binding.fondMessage.setAlpha((float) 0.0);
-
-            Button bt8 = findViewById(R.id.b_terminerQuete);
-            bt8.setVisibility(View.INVISIBLE);
+            CardView crdview1 = findViewById(R.id.card_viewQueteTerminee);
+            crdview1.setVisibility(View.INVISIBLE);;
 
             binding.textViewQueteEnCours.setText("");
         }
@@ -373,8 +367,11 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                //binding.btn_profil.setVisibility(View.INVISIBLE);
-                //binding.btn_photo.setVisibility(View.INVISIBLE);
+
+                FloatingActionButton btn_profil = findViewById(R.id.btn_profil);
+                btn_profil.setVisibility(View.INVISIBLE);
+                FloatingActionButton btn_photo = findViewById(R.id.btn_photo);
+                btn_photo.setVisibility(View.INVISIBLE);
                 binding.gameHorizontal.setVisibility(View.INVISIBLE);
                 binding.gameVertical.setVisibility(View.INVISIBLE);
                 binding.planteAChercher.setVisibility(View.INVISIBLE);
@@ -404,8 +401,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
-                //binding.btn_profil.setVisibility(View.INVISIBLE);
-                //binding.btn_photo.setVisibility(View.INVISIBLE);
+                ImageView btn_profil = findViewById(R.id.btn_profil);
+                btn_profil.setVisibility(View.INVISIBLE);
+                ImageView btn_photo = findViewById(R.id.btn_photo);
+                btn_photo.setVisibility(View.INVISIBLE);
                 binding.gameHorizontal.setVisibility(View.INVISIBLE);
                 binding.gameVertical.setVisibility(View.INVISIBLE);
                 binding.planteAChercher.setVisibility(View.INVISIBLE);
@@ -422,9 +421,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             public void onFinish() {
                 View mapFragment = findViewById(R.id.map);
                 mapFragment.setVisibility(View.VISIBLE);
-
-                //binding.btn_profil.setVisibility(View.VISIBLE);
-                //binding.btn_photo.setVisibility(View.VISIBLE);
+                FloatingActionButton btn_profil = findViewById(R.id.btn_profil);
+                btn_profil.setVisibility(View.VISIBLE);
+                FloatingActionButton btn_photo = findViewById(R.id.btn_photo);
+                btn_photo.setVisibility(View.VISIBLE);
                 binding.gameHorizontal.setVisibility(View.VISIBLE);
                 binding.gameVertical.setVisibility(View.VISIBLE);
                 binding.planteAChercher.setVisibility(View.VISIBLE);

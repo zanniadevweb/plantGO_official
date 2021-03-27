@@ -1,57 +1,554 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Personnage">
 
-    <!-- viewpager to show images -->
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="418dp"
-        android:layout_height="738dp"
-        android:src="@drawable/char_nude_brut"
+    <LinearLayout
+        android:id="@+id/linearLayoutAll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerMain"
-        android:layout_width="153dp"
-        android:layout_height="172dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.758" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerSecondary"
-        android:layout_width="184dp"
-        android:layout_height="172dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.023">
 
-    <Button
-        android:id="@+id/buttonProfile"
+    <LinearLayout
+        android:id="@+id/linearLayoutTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="displayProfile"
-        android:text="Retour"
+        android:orientation="horizontal"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.023">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="displayProfile"
+                app:backgroundTint="@color/jaunePlantGO"
+                app:fabCustomSize="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/genderneutraluser" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_margin="5sp"
+                android:elevation="7dp"
+                android:fontFamily="@font/boutons"
+                android:text="Profil"
+                android:textColor="#000000" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutCharacter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal|center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMinusClothe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023">
+
+            <FrameLayout
+                android:layout_width="73dp"
+                android:layout_height="71dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.242"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.975">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonChangerHatMinus"
+                    android:layout_gravity="bottom|end"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changerHatMinus"
+                    app:fabCustomSize="70dp"
+                    app:backgroundTint="@color/vertPlantGO"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
+                    app:layout_constraintVertical_bias="0.057"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/arrow_select_left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="5sp"
+                    android:elevation="7dp"
+                    android:fontFamily="@font/boutons"
+                    android:text="Chapeau"
+                    android:textColor="#000000" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="73dp"
+                android:layout_height="71dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.242"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.975">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonChangerTorsoMinus"
+                    android:layout_gravity="bottom|end"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changerTorsoMinus"
+                    app:fabCustomSize="70dp"
+                    app:backgroundTint="@color/vertPlantGO"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
+                    app:layout_constraintVertical_bias="0.057"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/arrow_select_left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="5sp"
+                    android:elevation="7dp"
+                    android:fontFamily="@font/boutons"
+                    android:text="Haut"
+                    android:textColor="#000000" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="73dp"
+                android:layout_height="71dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.242"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.975">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonChangerPantsMinus"
+                    android:layout_gravity="bottom|end"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changerPantsMinus"
+                    app:fabCustomSize="70dp"
+                    app:backgroundTint="@color/vertPlantGO"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
+                    app:layout_constraintVertical_bias="0.057"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/arrow_select_left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="5sp"
+                    android:elevation="7dp"
+                    android:fontFamily="@font/boutons"
+                    android:text="Bas"
+                    android:textColor="#000000" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutCharacter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal|center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023">
+
+            <ImageView
+                android:id="@+id/imageViewPersonnage"
+                android:layout_width="245dp"
+                android:layout_height="520dp"
+                android:src="@drawable/male_color2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.50" />
+
+            <ImageView
+                android:id="@+id/imageViewChapeauP"
+                android:layout_width="245dp"
+                android:layout_height="520dp"
+                android:src="@drawable/hat1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.50" />
+
+            <ImageView
+                android:id="@+id/imageViewHautP"
+                android:layout_width="245dp"
+                android:layout_height="520dp"
+                android:src="@drawable/haut_forestier_male"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.50" />
+
+            <ImageView
+                android:id="@+id/imageViewBasP"
+                android:layout_width="245dp"
+                android:layout_height="520dp"
+                android:src="@drawable/bas_forestier_male"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.50" />
+
+    </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutPlusClothe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023">
+
+            <FrameLayout
+                android:layout_width="73dp"
+                android:layout_height="71dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.242"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.975">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonChangerHatPlus"
+                    android:layout_gravity="bottom|end"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changerHatPlus"
+                    app:fabCustomSize="70dp"
+                    app:backgroundTint="@color/vertPlantGO"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
+                    app:layout_constraintVertical_bias="0.057"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/arrow_select_right" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="5sp"
+                    android:elevation="7dp"
+                    android:fontFamily="@font/boutons"
+                    android:text="Chapeau"
+                    android:textColor="#000000" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="73dp"
+                android:layout_height="71dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.242"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.975">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonChangerTorsoPlus"
+                    android:layout_gravity="bottom|end"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changerTorsoPlus"
+                    app:fabCustomSize="70dp"
+                    app:backgroundTint="@color/vertPlantGO"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
+                    app:layout_constraintVertical_bias="0.057"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/arrow_select_right" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="5sp"
+                    android:elevation="7dp"
+                    android:fontFamily="@font/boutons"
+                    android:text="Haut"
+                    android:textColor="#000000" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="73dp"
+                android:layout_height="71dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.242"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.975">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonChangerPantsPlus"
+                    android:layout_gravity="bottom|end"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changerPantsPlus"
+                    app:fabCustomSize="70dp"
+                    app:backgroundTint="@color/vertPlantGO"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
+                    app:layout_constraintVertical_bias="0.057"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/arrow_select_right" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="5sp"
+                    android:elevation="7dp"
+                    android:fontFamily="@font/boutons"
+                    android:text="Bas"
+                    android:textColor="#000000" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutCustomChar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal|bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023">
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerCouleurPeau1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerCouleurPeau1"
+                app:backgroundTint="@color/couleurPeau1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerCouleurPeau2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerCouleurPeau2"
+                app:backgroundTint="@color/couleurPeau2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerCouleurPeau3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerCouleurPeau3"
+                app:backgroundTint="@color/couleurPeau3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerSexe1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerSexe1"
+                android:background="@drawable/male_symbol"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="73dp"
+            android:layout_height="71dp"
+            android:background="@drawable/cadre_noir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975">
+            <Button
+                android:id="@+id/buttonChangerSexe2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/boutons"
+                android:onClick="changerSexe2"
+                android:background="@drawable/female_symbol"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.953"
+                android:adjustViewBounds="true"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>

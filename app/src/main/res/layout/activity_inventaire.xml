@@ -6,20 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".Inventaire">
 
-    <!-- viewpager to show images -->
-
-    <Button
-        android:id="@+id/buttonProfile"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="displayProfile"
-        android:text="Retour"
+        android:layout_gravity="top|start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.023">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="displayProfile"
+            app:backgroundTint="@color/jaunePlantGO"
+            app:fabCustomSize="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/genderneutraluser" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="5sp"
+            android:elevation="7dp"
+            android:fontFamily="@font/boutons"
+            android:text="Profil"
+            android:textColor="#000000" />
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/imageViewTorso"
@@ -50,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Torse 1"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.219"
@@ -62,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chapeau 1"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.729"
@@ -76,6 +99,7 @@
         android:checked="true"
         android:clickable="false"
         android:text="Disponible"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
@@ -90,6 +114,7 @@
         android:checked="true"
         android:clickable="false"
         android:text="Disponible"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.776"
@@ -104,6 +129,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Torse 2"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.219"
@@ -116,6 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chapeau 2"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.773"
@@ -153,6 +180,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:text="Verrouillé"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.154"
@@ -166,6 +194,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:text="Verrouillé"
+        android:fontFamily="@font/texte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"
