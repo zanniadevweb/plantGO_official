@@ -17,7 +17,7 @@ public class GameHorizontal extends Game {
     // Box2D Collision Bits
     public static final short NOTHING_BIT = 0;
     public static final short GROUND_BIT = 1;
-    public static final short MARIO_BIT = 2;
+    public static final short CHARACTER_BIT = 2;
     public static final short ENNEMY_BIT = 64;
     public static final short ENNEMY_HEAD_BIT = 128;
     public static final short BLOQUEURENNEMITERRESTRE_BIT = 256;
@@ -56,7 +56,5 @@ public class GameHorizontal extends Game {
     {
         super.render();
     }
-
-    // Life cycle methods of ApplicationListener
 
 }

@@ -17,25 +17,21 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.example.plantGO.libGDX.LibGDXLaunchers.GameHorizontal;
 import com.example.plantGO.libGDX.Screens.GameHorizontal.PlayScreenHorizontal;
-//import com.example.test_libgdxintoandroid.Sprites.Other.FireBall;
 
 
-/**
- * Created by brentaureli on 8/27/15.
- */
 public class MyCharacterHorizontal extends Sprite {
     public enum State { FALLING, JUMPING, RUNNING, DEAD };
     public State currentState;
     public State previousState;
     public World world;
     public Body b2body;
-    private TextureRegion marioStand;
-    private TextureRegion marioDead;
-    private Animation<TextureRegion> marioRun;
-    private Animation<TextureRegion> marioJump;
+    private TextureRegion characterStand;
+    private TextureRegion characterDead;
+    private Animation<TextureRegion> characterRun;
+    private Animation<TextureRegion> characterJump;
     private float stateTimer;
     private boolean runningRight;
-    private boolean marioIsDead;
+    private boolean characterIsDead;
 
     public MyCharacterHorizontal(PlayScreenHorizontal screen) {
         super(screen.getAtlas().findRegion("little_mario"));
@@ -48,7 +44,7 @@ public class MyCharacterHorizontal extends Sprite {
         for (int frame = 1; frame < 4; frame++) {
             frames.add(new TextureRegion(getTexture(), frame * 16, 11, 16, 16));
         }
-        marioRun = new Animation(0.1f, frames);
+        characterRun = new Animation(0.1f, frames);
 
         // clear frames for next animation
         frames.clear();
@@ -57,49 +53,49 @@ public class MyCharacterHorizontal extends Sprite {
         for (int frame = 1; frame < 6; frame++) {
             frames.add(new TextureRegion(getTexture(), frame * 16, 11, 16, 16));
         }
-        marioJump = new Animation(0.1f, frames);
+        characterJump = new Animation(0.1f, frames);
 
-        marioStand = new TextureRegion(getTexture(), 1, 11, 16, 16);
+        characterStand = new TextureRegion(getTexture(), 1, 11, 16, 16);
 
-        //create dead mario texture region
-        marioDead = new TextureRegion(getTexture(), 96, 0, 16, 16); //-- NEW
+        //create dead character texture region
+        characterDead = new TextureRegion(getTexture(), 96, 0, 16, 16); //-- NEW
 
         defineGdx();
         setBounds(0, 0, 16 / GameHorizontal.PPM, 16 / GameHorizontal.PPM);
-        setRegion(marioStand);
+        setRegion(characterStand);
     }
 
     public void update (float dt) {
         setPosition (b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
-        // Mort de Mario si tombe dans l'eau (certaine hauteur)
+        // Mort du personnage si tombe dans l'eau (certaine hauteur)
         if(b2body.getPosition().y < 0.10) { // Dès que tonneau tombe de la dernière plateforme
             die();
         }
     }
 
     public TextureRegion getFrame(float dt) {
-        //get marios current state. ie. jumping, running...
+        //get character current state. ie. jumping, running...
         currentState = getState();
         TextureRegion region;
 
         //depending on the state, get corresponding animation keyFrame.
         switch(currentState) {
             case DEAD:
-                region = marioDead;
+                region = characterDead;
                 break;
             case JUMPING:
-                region = marioJump.getKeyFrame(stateTimer);
+                region = characterJump.getKeyFrame(stateTimer);
                 break;
             case RUNNING:
-                region = marioRun.getKeyFrame(stateTimer, true);
+                region = characterRun.getKeyFrame(stateTimer, true);
                 break;
             case FALLING:
             default:
-                region = marioStand;
+                region = characterStand;
                 break;
         }
-        //if mario is running right and the texture isnt facing right... flip it.
+        //if the character is running right and the texture isnt facing right... flip it.
         if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
             region.flip(true, false);
             runningRight = true;
@@ -115,7 +111,7 @@ public class MyCharacterHorizontal extends Sprite {
 
 
     public State getState() {
-        if (marioIsDead) {
+        if (characterIsDead) {
             return State.DEAD;
         }
         else if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)) {
@@ -138,7 +134,7 @@ public class MyCharacterHorizontal extends Sprite {
         if (!isDead()) {
             GameHorizontal.manager.get("audio/music/music.ogg", Music.class).stop();
             GameHorizontal.manager.get("audio/sounds/lose.wav", Sound.class).play();
-            marioIsDead = true;
+            characterIsDead = true;
             Filter filter = new Filter();
             filter.maskBits = GameHorizontal.NOTHING_BIT;
 
@@ -151,7 +147,7 @@ public class MyCharacterHorizontal extends Sprite {
     }
 
     public boolean isDead(){
-        return marioIsDead;
+        return characterIsDead;
     }
 
     public float getStateTimer(){
@@ -168,13 +164,13 @@ public class MyCharacterHorizontal extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / GameHorizontal.PPM);
 
-        fdef.filter.categoryBits = GameHorizontal.MARIO_BIT;
+        fdef.filter.categoryBits = GameHorizontal.CHARACTER_BIT;
         fdef.filter.maskBits = GameHorizontal.GROUND_BIT |
                 GameHorizontal.ENNEMY_BIT |
                 GameHorizontal.ENNEMY_HEAD_BIT;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this); // ALTERNATIVE SI ON NE FAIT PAS GRANDIR MARIO
+        b2body.createFixture(fdef).setUserData(this);
 
         // Définit le sommet de la tête du personnage afin de détecter la collision avec d'autres objets (brique, pièce, ennemi)
         EdgeShape head = new EdgeShape();

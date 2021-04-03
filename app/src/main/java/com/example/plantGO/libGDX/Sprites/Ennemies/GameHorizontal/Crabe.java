@@ -20,10 +20,8 @@ public class Crabe extends EnnemiHorizontal
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
-    private TextureRegion goombaStand;
     private boolean setToDestroy;
     private boolean destroyed;
-    //float angle;
 
     public Crabe(PlayScreenHorizontal screen, float x, float y) {
         super(screen, x, y);
@@ -33,7 +31,6 @@ public class Crabe extends EnnemiHorizontal
         }
         walkAnimation = new Animation(0.4f, frames);
         stateTime = 0;
-
         setBounds(getX(), getY(), 16 / GameHorizontal.PPM, 16 / GameHorizontal.PPM);
         setToDestroy = false;
         destroyed = false;
@@ -69,7 +66,7 @@ public class Crabe extends EnnemiHorizontal
         fdef.filter.maskBits = GameHorizontal.GROUND_BIT |
                 GameHorizontal.BLOQUEURENNEMITERRESTRE_BIT |
                 GameHorizontal.ENNEMY_BIT |
-                GameHorizontal.MARIO_BIT;
+                GameHorizontal.CHARACTER_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

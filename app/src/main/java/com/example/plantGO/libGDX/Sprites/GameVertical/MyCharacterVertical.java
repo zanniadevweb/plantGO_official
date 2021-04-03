@@ -17,25 +17,20 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.example.plantGO.libGDX.LibGDXLaunchers.GameVertical;
 import com.example.plantGO.libGDX.Screens.GameVertical.PlayScreenVertical;
-//import com.example.test_libgdxintoandroid.Sprites.Other.FireBall;
 
-
-/**
- * Created by brentaureli on 8/27/15.
- */
 public class MyCharacterVertical extends Sprite {
     public enum State { FALLING, JUMPING, STANDING, RUNNING, DEAD };
     public State currentState;
     public State previousState;
     public World world;
     public Body b2body;
-    private TextureRegion marioStand;
-    private TextureRegion marioDead;
-    private Animation<TextureRegion> marioRun;
-    private Animation<TextureRegion> marioJump;
+    private TextureRegion characterStand;
+    private TextureRegion characterDead;
+    private Animation<TextureRegion> characterRun;
+    private Animation<TextureRegion> characterJump;
     private float stateTimer;
     private boolean runningRight;
-    private boolean marioIsDead;
+    private boolean characterIsDead;
 
     public MyCharacterVertical(PlayScreenVertical screen) {
         super(screen.getAtlas().findRegion("little_mario"));
@@ -50,7 +45,7 @@ public class MyCharacterVertical extends Sprite {
         for (int frame = 1; frame < 4; frame++) {
             frames.add(new TextureRegion(getTexture(), frame * 16, 11, 16, 16));
         }
-        marioRun = new Animation(0.1f, frames);
+        characterRun = new Animation(0.1f, frames);
 
         // clear frames for next animation
         frames.clear();
@@ -59,16 +54,16 @@ public class MyCharacterVertical extends Sprite {
         for (int frame = 1; frame < 6; frame++) {
             frames.add(new TextureRegion(getTexture(), frame * 16, 11, 16, 16));
         }
-        marioJump = new Animation(0.1f, frames);
+        characterJump = new Animation(0.1f, frames);
 
-        marioStand = new TextureRegion(getTexture(), 1, 11, 16, 16);
+        characterStand = new TextureRegion(getTexture(), 1, 11, 16, 16);
 
-        //create dead mario texture region
-        marioDead = new TextureRegion(getTexture(), 96, 0, 16, 16); //-- NEW
+        //create dead character texture region
+        characterDead = new TextureRegion(getTexture(), 96, 0, 16, 16); //-- NEW
 
         defineGdx();
         setBounds(0, 0, 16 / GameVertical.PPM, 16 / GameVertical.PPM);
-        setRegion(marioStand);
+        setRegion(characterStand);
     }
 
     public void update (float dt) {
@@ -77,33 +72,33 @@ public class MyCharacterVertical extends Sprite {
     }
 
     public TextureRegion getFrame(float dt) {
-        //get marios current state. ie. jumping, running, standing...
+        //get character current state. ie. jumping, running, standing...
         currentState = getState();
         TextureRegion region;
 
         //depending on the state, get corresponding animation keyFrame.
         switch(currentState) {
             case DEAD:
-                region = marioDead;
+                region = characterDead;
                 break;
             case JUMPING:
-                region = marioJump.getKeyFrame(stateTimer);
+                region = characterJump.getKeyFrame(stateTimer);
                 break;
             case RUNNING:
-                region = marioRun.getKeyFrame(stateTimer, true);
+                region = characterRun.getKeyFrame(stateTimer, true);
                 break;
             case FALLING:
             case STANDING:
             default:
-                region = marioStand;
+                region = characterStand;
                 break;
         }
-        //if mario is running left and the texture isnt facing left... flip it.
+        //if character is running left and the texture isnt facing left... flip it.
         if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
             region.flip(true, false);
             runningRight = false;
         }
-        //if mario is running right and the texture isnt facing right... flip it.
+        //if character is running right and the texture isnt facing right... flip it.
         else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
             region.flip(true, false);
             runningRight = true;
@@ -119,7 +114,7 @@ public class MyCharacterVertical extends Sprite {
 
 
     public State getState() {
-        if (marioIsDead) {
+        if (characterIsDead) {
             return State.DEAD;
         }
         else if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)) {
@@ -146,7 +141,7 @@ public class MyCharacterVertical extends Sprite {
 
             GameVertical.manager.get("audio/music/music.ogg", Music.class).stop();
             GameVertical.manager.get("audio/sounds/lose.wav", Sound.class).play();
-            marioIsDead = true;
+            characterIsDead = true;
             Filter filter = new Filter();
             filter.maskBits = GameVertical.NOTHING_BIT;
 
@@ -159,7 +154,7 @@ public class MyCharacterVertical extends Sprite {
     }
 
     public boolean isDead(){
-        return marioIsDead;
+        return characterIsDead;
     }
 
     public float getStateTimer(){
@@ -176,14 +171,14 @@ public class MyCharacterVertical extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / GameVertical.PPM);
 
-        fdef.filter.categoryBits = GameVertical.MARIO_BIT;
+        fdef.filter.categoryBits = GameVertical.CHARACTER_BIT;
         fdef.filter.maskBits = GameVertical.GROUND_BIT |
                 GameVertical.ENNEMY_BIT |
                 GameVertical.ENNEMY_HEAD_BIT |
                 GameVertical.ITEM_BIT;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this); // ALTERNATIVE SI ON NE FAIT PAS GRANDIR MARIO
+        b2body.createFixture(fdef).setUserData(this);
 
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2 / GameVertical.PPM, 6 / GameVertical.PPM), new Vector2(2 / GameVertical.PPM, 6 / GameVertical.PPM));

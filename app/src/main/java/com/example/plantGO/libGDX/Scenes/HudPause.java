@@ -18,19 +18,8 @@ public class HudPause implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-    //Mario score/time Tracking Variables
-    private Integer worldTimer;
-    //private boolean timeUp; // true when the world timer reaches 0
-    private float timeCount;
-    private static Integer score;
-
     //Scene2D widgets
-    private Label countdownLabel;
-    private static Label scoreLabel;
-    private Label timeLabel;
-    private Label levelLabel;
     private Label worldLabel;
-    private Label marioLabel;
 
     public HudPause(SpriteBatch sb){
 

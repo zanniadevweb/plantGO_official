@@ -22,7 +22,6 @@ public class HudHorizontal implements Disposable{
 
     //Mario score/time Tracking Variables
     private Integer worldTimer;
-    //private boolean timeUp; // true when the world timer reaches 0
     private float timeCount;
 
     //Scene2D widgets
@@ -34,7 +33,6 @@ public class HudHorizontal implements Disposable{
         //define our tracking variables
         worldTimer = 300;
         timeCount = 0;
-
 
         //setup the HUD viewport using a new camera seperate from our gamecam
         //define our stage using that viewport and our games spritebatch

@@ -68,7 +68,7 @@ public class PlayScreenVertical implements Screen{
 
         this.game = game;
 
-        //create cam used to follow mario through cam world
+        //create cam used to follow the character through cam world
         gamecam = new OrthographicCamera();
 
         //create a FitViewport to maintain virtual aspect ratio despite screen size
@@ -93,13 +93,11 @@ public class PlayScreenVertical implements Screen{
         world = new World(new Vector2(0, -10), true);
         //allows for debug lines of our box2d world.
         b2dr = new Box2DDebugRenderer();
-        /*---------------------------- REND LIGNE bodies INVISIBLES--------------------*/
         b2dr.setDrawBodies(false); // REND LIGNE bodies INVISIBLES
-        /*---------------------------- REND LIGNE bodies INVISIBLES--------------------*/
 
         creator = new B2WorldCreatorVertical(this);
 
-        //create mario in our game world
+        //create the character in our game world
         player = new MyCharacterVertical(this);
 
         world.setContactListener(new WorldContactListenerVertical());
@@ -120,16 +118,8 @@ public class PlayScreenVertical implements Screen{
 
     public void handleInput(float dt) {
 
-        // Valeurs de test
-        //Gdx.app.log("Dechets", "Nombre dechets restants: " + Modele.compteurDechetCollecte);
-        //Gdx.app.log("Temps", "temps restant: " + Modele.tempsPartie);
-        //Gdx.app.log("Camera y", "Cam position is: " + gamecam.position.y);
-        //Gdx.app.log("Camera x", "Cam position is: " + gamecam.position.x);
-
         /*************************************** PERMET DE METTRE EN PAUSE  ******************************************/
             if ((Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) || gameController.isPausePressed()) && !enPause && player.currentState != MyCharacterVertical.State.DEAD) {
-            /*Modele.resultatpartie = "Partie perdue";
-            Gdx.app.exit();*/
                 music.stop();
                 enPause = true;
             }

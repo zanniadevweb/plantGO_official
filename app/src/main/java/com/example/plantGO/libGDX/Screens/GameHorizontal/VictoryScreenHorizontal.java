@@ -32,8 +32,8 @@ public class VictoryScreenHorizontal implements Screen {
         table.center();
         table.setFillParent(true);
 
-        Label gameOverLabel = new Label("YOU WIN", font);
-        Label playAgainLabel = new Label("Click to return to plantGO application", font);
+        Label gameOverLabel = new Label("VICTOIRE", font);
+        Label playAgainLabel = new Label("Touche l'écran pour quitter le jeu", font);
 
         table.add(gameOverLabel).expandX();
         table.row();

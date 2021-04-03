@@ -22,7 +22,6 @@ public class Dechet extends EnnemiVertical
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
-    private TextureRegion goombaStand;
     private boolean setToDestroy;
     private boolean destroyed;
 
@@ -34,7 +33,6 @@ public class Dechet extends EnnemiVertical
         }
         walkAnimation = new Animation(0.2f, frames);
         stateTime = 0;
-
         setBounds(getX(), getY(), 16 / GameVertical.PPM, 16 / GameVertical.PPM);
         setToDestroy = false;
         destroyed = false;
@@ -70,7 +68,7 @@ public class Dechet extends EnnemiVertical
 
         fdef.filter.categoryBits = GameVertical.ITEM_BIT;
         fdef.filter.maskBits = GameVertical.GROUND_BIT |
-                GameVertical.MARIO_BIT;
+                GameVertical.CHARACTER_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

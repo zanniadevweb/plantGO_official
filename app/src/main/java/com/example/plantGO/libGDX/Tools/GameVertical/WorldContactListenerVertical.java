@@ -28,7 +28,7 @@ public class WorldContactListenerVertical implements ContactListener {
         }
 
         switch (cDef){
-            case GameVertical.ENNEMY_HEAD_BIT | GameVertical.MARIO_BIT:
+            case GameVertical.ENNEMY_HEAD_BIT | GameVertical.CHARACTER_BIT:
                 if(fixA.getFilterData().categoryBits == GameVertical.ENNEMY_HEAD_BIT)
                     ((EnnemiVertical)fixA.getUserData()).hitOnHead((MyCharacterVertical) fixB.getUserData());
                 else
@@ -40,8 +40,8 @@ public class WorldContactListenerVertical implements ContactListener {
                 else
                     ((EnnemiVertical)fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            case GameVertical.MARIO_BIT | GameVertical.ENNEMY_BIT:
-                if(fixA.getFilterData().categoryBits == GameVertical.MARIO_BIT)
+            case GameVertical.CHARACTER_BIT | GameVertical.ENNEMY_BIT:
+                if(fixA.getFilterData().categoryBits == GameVertical.CHARACTER_BIT)
                     ((MyCharacterVertical) fixA.getUserData()).hit();
                 else
                     ((MyCharacterVertical) fixB.getUserData()).hit();

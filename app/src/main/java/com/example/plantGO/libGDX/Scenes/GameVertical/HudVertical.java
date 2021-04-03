@@ -22,7 +22,6 @@ public class HudVertical implements Disposable{
 
     //Mario score/time Tracking Variables
     private Integer worldTimer;
-    //private boolean timeUp; // true when the world timer reaches 0
     private float timeCount;
     private static Integer score;
 
@@ -32,7 +31,7 @@ public class HudVertical implements Disposable{
     private Label timeLabel;
     private Label worldLabel1;
     private Label worldLabel2;
-    private Label marioLabel;
+    private Label characterLabel;
 
     public HudVertical(SpriteBatch sb){
         //define our tracking variables
@@ -58,10 +57,10 @@ public class HudVertical implements Disposable{
         timeLabel = new Label("TEMPS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel1 = new Label("Ecrase tous", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel2 = new Label("les dechets", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        marioLabel = new Label("DECHETS RESTANTS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        characterLabel = new Label("DECHETS RESTANTS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
-        table.add(marioLabel).expandX().padTop(10);
+        table.add(characterLabel).expandX().padTop(10);
         table.add(worldLabel1).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
         //add a second row to our table
@@ -100,6 +99,4 @@ public class HudVertical implements Disposable{
     {
         stage.dispose();
     }
-
-    /*public boolean isTimeUp() { return timeUp; }*/
 }

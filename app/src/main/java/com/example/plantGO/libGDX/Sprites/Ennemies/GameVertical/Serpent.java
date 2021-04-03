@@ -20,7 +20,6 @@ public class Serpent extends EnnemiVertical
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
-    private TextureRegion goombaStand;
     private boolean setToDestroy;
     private boolean destroyed;
 
@@ -34,7 +33,6 @@ public class Serpent extends EnnemiVertical
         }
         walkAnimation = new Animation(0.4f, frames);
         stateTime = 0;
-
         setBounds(getX(), getY(), 16 / GameVertical.PPM, 16 / GameVertical.PPM);
         setToDestroy = false;
         destroyed = false;
@@ -70,7 +68,7 @@ public class Serpent extends EnnemiVertical
         fdef.filter.maskBits = GameVertical.GROUND_BIT |
                 GameVertical.BLOQUEURENNEMITERRESTRE_BIT |
                 GameVertical.ENNEMY_BIT |
-                GameVertical.MARIO_BIT;
+                GameVertical.CHARACTER_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

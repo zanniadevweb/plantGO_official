@@ -19,10 +19,7 @@ public class PlanteCarnivore extends EnnemiHorizontal
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
-    private TextureRegion goombaStand;
-    private boolean setToDestroy;
     private boolean destroyed;
-    //float angle;
 
     public PlanteCarnivore(PlayScreenHorizontal screen, float x, float y) {
         super(screen, x, y);
@@ -33,9 +30,7 @@ public class PlanteCarnivore extends EnnemiHorizontal
         }
         walkAnimation = new Animation(0.2f, frames);
         stateTime = 0;
-
         setBounds(getX(), getY(), 16 / GameHorizontal.PPM, 16 / GameHorizontal.PPM);
-        setToDestroy = false;
         destroyed = false;
     }
 
@@ -59,7 +54,7 @@ public class PlanteCarnivore extends EnnemiHorizontal
         fdef.filter.categoryBits = GameHorizontal.ENNEMY_BIT;
         fdef.filter.maskBits = GameHorizontal.GROUND_BIT |
                 GameHorizontal.ENNEMY_BIT |
-                GameHorizontal.MARIO_BIT;
+                GameHorizontal.CHARACTER_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
