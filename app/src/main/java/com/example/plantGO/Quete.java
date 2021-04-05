@@ -75,22 +75,25 @@ public class Quete { // classe basée sur un pattern de Singleton
         String listePlantesString = "";
         Plante plante;
         if (INSTANCE != null )
-            for (Map.Entry comboPlante_estTrouvee : listePlantes.entrySet()) {
-                plante = (Plante)comboPlante_estTrouvee.getKey();
+            for (Map.Entry comboPlante : listePlantes.entrySet()) {
+                plante = (Plante)comboPlante.getKey();
                 listePlantesString += plante.getNomCommun() + "\n";
             }
         return listePlantesString;
     }
 
     // quand une plante est trouvée
-    public void aTrouve(Plante planteTrouvee){
-        listePlantes.put(planteTrouvee, true);
+    public void aTrouve(String planteTrouvee){
+        for (Map.Entry comboPlante : listePlantes.entrySet()) {
+            if ( ((Plante)comboPlante.getKey()).getNomCommun() == planteTrouvee )
+                listePlantes.put((Plante)comboPlante.getKey(), true);
+        }
     }
 
     // vérifier si la quete est terminée
     public Boolean estTerminée(){
-        for (Map.Entry comboPlante_estTrouvee : listePlantes.entrySet()) {
-            if (!(Boolean) comboPlante_estTrouvee.getValue())
+        for (Map.Entry comboPlante : listePlantes.entrySet()) {
+            if (!(Boolean) comboPlante.getValue())
                return false;
         }
         return true;
