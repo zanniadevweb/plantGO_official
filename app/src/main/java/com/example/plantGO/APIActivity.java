@@ -85,8 +85,7 @@ public class APIActivity extends AppCompatActivity {
 
     // appeler l'API de reconnaisance de plante avec l'URL de l'image
     protected void recognizeImageThroughAPI(String imageLink) throws UnsupportedEncodingException {
-        //imageLink = formater(imageLink);
-        imageLink = "https://stickeramoi.com/17252-large_default/sticker-feuille-d-arbre-chene-vert-jaune.jpg";
+        imageLink = formater(imageLink);
         RequestQueue queue = Volley.newRequestQueue(APIActivity.this);
 
         String url ="https://my-api.plantnet.org/v2/identify/all?images=" +

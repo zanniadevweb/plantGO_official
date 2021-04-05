@@ -16,7 +16,7 @@ public class Plante {
     public String getNomScientifique()         { return nomScientifique; }
     public void setNomScientifique(String nom) { nomScientifique = nom;  }
 
-    public boolean estDansLaQuete() {
+        public boolean estDansLaQuete() {
         for ( Map.Entry plante : Modele.queteCourante.listePlantes.entrySet() )
             if (plante.getKey().equals(nomScientifique))
                 return true;
