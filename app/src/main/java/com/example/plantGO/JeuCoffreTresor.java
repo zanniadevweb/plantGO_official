@@ -124,7 +124,7 @@ public class JeuCoffreTresor extends AppCompatActivity {
 
     public void quitterJeu(View view) {
         Modele.jeuCoffreTresorGagne = true;
-        Intent intent = new Intent(JeuCoffreTresor.this, Inventaire.class);
+        Intent intent = new Intent(JeuCoffreTresor.this, InventaireActivity.class);
         JeuCoffreTresor.this.startActivity(intent);
     }
 }

@@ -83,7 +83,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.plantGO.Inventaire"
+            android:name="com.example.plantGO.InventaireActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />

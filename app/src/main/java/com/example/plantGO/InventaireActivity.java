@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.plantGO.databinding.ActivityInventaireBinding;
 
-public class Inventaire extends AppCompatActivity {
+public class InventaireActivity extends AppCompatActivity {
 
     // Attribut permet d'utiliser le ViewBinding (c'est un databinding dynamique, au lieu du classique mais statique setContentView(R.layout.toto). Permet d'enlever tous les findviewbyid !
     private @NonNull
@@ -28,8 +28,8 @@ public class Inventaire extends AppCompatActivity {
     }
 
     public void displayProfile (View view) {
-        Intent intent = new Intent(Inventaire.this, ProfilActivity.class);
-        Inventaire.this.startActivity(intent);
+        Intent intent = new Intent(InventaireActivity.this, ProfilActivity.class);
+        InventaireActivity.this.startActivity(intent);
     }
 
     public void isAvailableOrNotHat2 () {
