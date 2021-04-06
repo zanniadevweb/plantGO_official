@@ -2,53 +2,38 @@ package com.example.plantGO;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.plantGO.databinding.ActivityInventaireBinding;
+
+import java.util.ArrayList;
 
 public class InventaireActivity extends AppCompatActivity {
 
-    // Attribut permet d'utiliser le ViewBinding (c'est un databinding dynamique, au lieu du classique mais statique setContentView(R.layout.toto). Permet d'enlever tous les findviewbyid !
-    private @NonNull
-    ActivityInventaireBinding binding;
-
-        @Override
-        protected void onCreate (Bundle savedInstanceState){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            // Inflate the layout as per google doc instructions
-            binding = ActivityInventaireBinding.inflate(getLayoutInflater());
-            // add the inflated view to the Included view.
-            setContentView(binding.getRoot());
-            //supprimer l'animation au changement d'activité
-            overridePendingTransition(0,0);
-            isAvailableOrNotHat2();
-            isAvailableOrNotTorso2();
-    }
+        setContentView(R.layout.activity_inventaire);
 
-    public void displayProfile (View view) {
+        ArrayList<Integer> al_listeCosmetiques =  new ArrayList<Integer>();
+        for (int photo : Modele.listeCosmetiques){ al_listeCosmetiques.add(photo); }
+
+        ListView ls_cosmetique = findViewById(R.id.ls_listeCosmetique);
+
+        InventaireAdapter adapter = new InventaireAdapter(getApplicationContext(), R.layout.activity_cosmetiqueinventaire, al_listeCosmetiques);
+        ls_cosmetique.setAdapter(adapter);
+
+    }
+    public void displayProfile(View view) {
         Intent intent = new Intent(InventaireActivity.this, ProfilActivity.class);
         InventaireActivity.this.startActivity(intent);
     }
 
-    public void isAvailableOrNotHat2 () {
-        if (Modele.jeuCoffreTresorGagne) {
-            binding.switchHat2.setClickable(false);
-            binding.switchHat2.setChecked(true);
-            binding.imageViewHat2.setImageResource(R.drawable.hat2);
-            binding.switchHat2.setText("Disponible");
-        }
+    public void displayCartePlante(View view) {
+        Intent intent = new Intent(InventaireActivity.this, CartePlanteActivity.class);
+        InventaireActivity.this.startActivity(intent);
     }
-
-    public void isAvailableOrNotTorso2 () {
-        if (Modele.jeuCoffreTresorGagne) {
-            binding.switchTorso2.setClickable(false);
-            binding.switchTorso2.setChecked(true);
-            binding.imageViewTorso2.setImageResource(R.drawable.torso2);
-            binding.switchTorso2.setText("Disponible");
-        }
-    }
-
-
 }

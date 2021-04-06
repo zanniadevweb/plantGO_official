@@ -31,25 +31,7 @@ public class HerbierAdapter extends ArrayAdapter<String> {
         TextView viewNomPlante = (TextView) convertView.findViewById(R.id.tv_nomPlante);
         viewNomPlante.setText(plante.get(position));
 
-
         return convertView;
     }
 
-    // transforme la durée en minutes en durée heure+minutes au format h:mm, hh:mm, mm ou m
-    private String formater(int duree) {
-        int heures = 0,minutes = duree; String dureeFormatee="";
-        if (minutes > 59) {
-            while (minutes > 59) {minutes -= 60; heures++;}  // on compte 1h (-60min) à chaque tour de boucle, si le nombre de minute est < à 1h on s'arrête
-
-            String minutesF = String.valueOf(minutes); if (minutes < 10) minutesF = '0' + minutesF; // afin d'avoir un format h:mm ou hh:mm dans tous les cas
-            String heuresF = String.valueOf(heures);
-            dureeFormatee = heuresF + 'h' + minutesF;
-
-        }else{ // dans le cas où le film dure - d'une heure
-            String minutesF = String.valueOf(minutes); if (minutes < 10) minutesF = '0' + minutesF;
-            dureeFormatee = minutesF+"min";
-        }
-
-        return dureeFormatee;
-    }
 }

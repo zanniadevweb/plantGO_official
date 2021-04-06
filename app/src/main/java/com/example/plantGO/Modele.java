@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 
@@ -62,5 +63,6 @@ public class Modele {
     public static double randomLng;
 
     // Herbier
-    public static Object nomPlanteCliquee;
+    public static String nomPlanteCliquee;
+    public static int[] listeCosmetiques = {R.drawable.torso1, R.drawable.torso2, R.drawable.bas_forestier_female, R.drawable.bas_forestier_male, R.drawable.bas_violet_female, R.drawable.bas_violet_male};
 }

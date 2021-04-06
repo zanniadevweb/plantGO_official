@@ -81,14 +81,14 @@
                 app:srcCompat="@drawable/plante_random" />
 
             <TextView
-                android:id="@+id/textViewNomCommun"
+                android:id="@+id/tv_nomCommun"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/texte"
                 android:paddingStart="15dp"
                 android:paddingTop="15dp"
                 android:paddingEnd="15dp"
-                android:text="Nom commun : Arbus Rustica"
+                android:text="Nom commun : "
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,14 +98,14 @@
                 app:layout_constraintVertical_bias="0.450" />
 
             <TextView
-                android:id="@+id/textViewDescriptionBasique"
+                android:id="@+id/tv_descriptionBasique"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/texte"
                 android:paddingStart="15dp"
                 android:paddingTop="15dp"
                 android:paddingEnd="15dp"
-                android:text="Description basique : Ceci est une description basique"
+                android:text="Description basique : "
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,7 @@
                 android:weightSum="100">
 
                 <TextView
-                    android:id="@+id/textViewDescriptionAvancee"
+                    android:id="@+id/tv_descriptionAvancee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="95"
@@ -130,7 +130,7 @@
                     android:paddingStart="15dp"
                     android:paddingTop="15dp"
                     android:paddingEnd="0dp"
-                    android:text="Description avancéee : Dépensez de l'expérience en appuyant sur '+' pour débloquer cette description"
+                    android:text="Description avancéee : "
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
