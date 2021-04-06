@@ -513,8 +513,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         }
     }
 
-
-
     public void sauvegarderFichier () {
         // On crée un fichier qui correspond à l'emplacement extérieur
         File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getPackageName());

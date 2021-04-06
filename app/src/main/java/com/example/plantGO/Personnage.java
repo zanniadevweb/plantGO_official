@@ -12,6 +12,50 @@ import java.util.ArrayList;
 import com.example.plantGO.databinding.ActivityPersonnageBinding;
 
 public class Personnage extends AppCompatActivity {
+    int experience;
+    int sexe;
+    int couleaurPeau;
+    int idQueteEnCours;
+
+    public Personnage(int experience, int sexe, int couleaurPeau, int idQueteEnCours) {
+        this.experience = experience;
+        this.sexe = sexe;
+        this.couleaurPeau = couleaurPeau;
+        this.idQueteEnCours = idQueteEnCours;
+    }
+
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(int sexe) {
+        this.sexe = sexe;
+    }
+
+    public int getCouleaurPeau() {
+        return couleaurPeau;
+    }
+
+    public void setCouleaurPeau(int couleaurPeau) {
+        this.couleaurPeau = couleaurPeau;
+    }
+
+    public int getIdQueteEnCours() {
+        return idQueteEnCours;
+    }
+
+    public void setIdQueteEnCours(int idQueteEnCours) {
+        this.idQueteEnCours = idQueteEnCours;
+    }
 
     //images array list
     public static ArrayList<Integer> imagesHat = new ArrayList<Integer>(); //{R.drawable.hat1, R.drawable.hat2};

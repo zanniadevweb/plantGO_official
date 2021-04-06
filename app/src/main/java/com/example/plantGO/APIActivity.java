@@ -93,6 +93,8 @@ public class APIActivity extends AppCompatActivity {
                     "&organs=leaf&include-related-images=false&lang=fr" +
                     "&api-key=2a10dhqKV1csqtYS4gUnTxZ";
 
+        Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", url);
+
         JsonObjectRequest request = new JsonObjectRequest (Request.Method.GET,
                 url,
                 null,
@@ -101,7 +103,7 @@ public class APIActivity extends AppCompatActivity {
                 this::onResponse,
 
                 /* En cas d'erreur */
-                error -> { binding.resultatRequeteAPI.setText("Erreur envoie à l'API "); }
+                error -> { binding.resultatRequeteAPI.setText("Plante non reconnue ou impossibilité d'envoi à l'API. Retentez de prendre une photo."); }
         );
 
 
@@ -114,13 +116,62 @@ public class APIActivity extends AppCompatActivity {
             JSONObject resultatsDeLaRecherche = (JSONObject) response.getJSONArray("results").get(0); // L'api renvoie tous les résultats probables de la reconnaissance de plan
             JSONObject resultatLePlusProbable = resultatsDeLaRecherche.getJSONObject("species"); // nom scientifique, nom commun, famille
             String nomScientifique = resultatLePlusProbable.getString("scientificNameWithoutAuthor");
+            String nomCommun = (String) resultatLePlusProbable.getJSONArray("commonNames").get(0);
 
-            Modele.planteCourante.setNomScientifique(nomScientifique);
+            Modele.planteCourante = new Plante(nomCommun,nomScientifique);
+            Log.v("plante",Modele.planteCourante.getNomCommun()+" & "+Modele.planteCourante.getNomScientifique());
+            if (!Modele.planteCourante.estDansLaQuete())
+                binding.resultatRequeteAPI.setText("Pas dans la quête hebdomadaire ! :" + nomScientifique);
+            else
+                binding.resultatRequeteAPI.setText(nomScientifique);
 
-            if (Modele.planteCourante.estDansLaQuete())
-                    nomScientifique = "Pas dans la quête hebdomadaire !";
+            // récupérer description
+            getDescriptionThroughAPI(nomScientifique);
+        }
+        catch (JSONException e)
+            { e.printStackTrace(); }
+    }
 
-            binding.resultatRequeteAPI.setText(nomScientifique);
+    private void getDescriptionThroughAPI(String nomScientifique) {
+        RequestQueue queue = Volley.newRequestQueue(APIActivity.this);
+
+        String url ="https://trefle.io/api/v1/plants/search?token=cI3tP70z6kyRlggY_QPA3bFkDfzjz_K3ME8ggdHhm-4&q=" + nomScientifique.replaceAll("\\s","-");
+
+        Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", url);
+
+        JsonObjectRequest request = new JsonObjectRequest (Request.Method.GET,
+                url,
+                null,
+
+                /* En cas de réponse de l'API */
+                this::onResponse2,
+
+                /* En cas d'erreur */
+                error -> { binding.resultatRequeteAPI.setText("Plante inconnue du moteur de description."); }
+        );
+
+
+        // Add the request to the RequestQueue.
+        queue.add(request);
+    }
+
+    private void onResponse2(JSONObject response) {
+        // créer carte plante avec description
+        try {
+            JSONObject commonName = (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
+            JSONObject niveau1 =    (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
+            JSONObject niveau2 =    (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
+            JSONObject niveau3 =    (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
+            Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", response.toString());
+            // créer carte
+                // assigner nomScientifique + nom commum
+                // assigner niveau 1
+                // assigner niveau 2
+                // assigner niveau 3
+                // assigner image ??
+
+            // plante trouvée
+            Modele.queteCourante.aTrouve(commonName.toString());
         }
         catch (JSONException e)
             { e.printStackTrace(); }

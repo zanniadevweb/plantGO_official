@@ -99,7 +99,6 @@ public class AppPhotoActivity extends AppCompatActivity {
         }
     }
 
-
     // When you have the request results
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,8 +125,6 @@ public class AppPhotoActivity extends AppCompatActivity {
         }
         sendToApi();
     }
-
-
 
 
     // Envoyer l'image à l'api : récupérer le résultat
