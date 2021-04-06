@@ -120,17 +120,13 @@ public class Quete { // classe basée sur un pattern de Singleton
 
     @Override
     public String toString() {
-        return "Quete{" +
-                "idQuete=" + idQuete +
-                ", latPosition=" + latPosition +
-                ", lngPosition=" + lngPosition +
-                ", rayon=" + rayon +
-                ", estFini=" + estFini +
-                ", latCoffre=" + latCoffre +
-                ", lngCoffre=" + lngCoffre +
-                ", listePlantes=" + listePlantes +
-                ", estTerminee=" + estTerminee +
-                '}';
+        String listePlantesSTR="";
+
+        for (Map.Entry comboPlante : listePlantes.entrySet()) {
+            listePlantesSTR += ((Plante)comboPlante.getKey()).getNomCommun()+"\n";
+        }
+
+        return listePlantesSTR;
     }
 
     HashMap<Plante, Boolean> listePlantes = new HashMap<Plante, Boolean>();

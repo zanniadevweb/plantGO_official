@@ -24,8 +24,7 @@ public class ProfilActivity extends AppCompatActivity {
         //supprimer l'animation au changement d'activité
         overridePendingTransition(0,0);
 
-        binding.progressBar.setProgress(Modele.experienceTotaleActuelle);
-        binding.textViewExperienceTotale.setText( Modele.experienceTotaleActuelle + " / " + getResources().getString(R.string.experience_maximum) + " xp");
+        binding.textViewExperienceTotale.setText(Modele.experienceTotaleActuelle.toString());
 
     }
 

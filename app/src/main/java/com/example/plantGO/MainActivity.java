@@ -815,9 +815,12 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
                 if (distance[0] < 210) { // Si distance est inférieure à 210 mètres
                     String nom_plante1 = getString(R.string.nom_plante1);
-                    binding.marqueurQueteText.setText("Vous êtes dans la zone de quête (+ ou - 210 mètres) du centre. C'est ici que vous trouverez un(e) " + nom_plante1);
+                    binding.marqueurQueteText.setText("(Dans zone de quête)");
+                    binding.marqueurQueteText.setTextColor(Color.GREEN);
+
                 } else {
                     binding.marqueurQueteText.setText("(Hors zone de quête)");
+                    binding.marqueurQueteText.setTextColor(Color.RED);
                 }
             }
 
