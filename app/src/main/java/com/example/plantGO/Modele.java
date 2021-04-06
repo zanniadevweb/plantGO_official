@@ -59,4 +59,6 @@ public class Modele {
     public static double randomLat;
     public static double randomLng;
 
+    // Herbier
+    public static Object nomPlanteCliquee;
 }

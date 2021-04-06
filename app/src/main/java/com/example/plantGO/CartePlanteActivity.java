@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-public class cartePlanteActivity extends AppCompatActivity {
+public class CartePlanteActivity extends AppCompatActivity {
     Plante planteAssociee;
     String description;
     int niveauDescription;
@@ -27,8 +27,8 @@ public class cartePlanteActivity extends AppCompatActivity {
     }
 
     public void displayHerbier(View view) {
-        Intent intent = new Intent(cartePlanteActivity.this, HerbierActivity.class);
-        cartePlanteActivity.this.startActivity(intent);
+        Intent intent = new Intent(CartePlanteActivity.this, HerbierActivity.class);
+        CartePlanteActivity.this.startActivity(intent);
     }
 
     public void augmenterNiveauDescription(View view) {

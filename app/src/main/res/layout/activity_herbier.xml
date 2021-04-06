@@ -12,76 +12,61 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal">
 
-            <FrameLayout
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonProfile2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|start"
+                android:onClick="displayProfile"
+                app:backgroundTint="@color/jaunePlantGO"
+                app:fabCustomSize="80dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.083"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.023">
+                app:srcCompat="@drawable/genderneutraluser" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/buttonProfile2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="displayProfile"
-                    app:backgroundTint="@color/jaunePlantGO"
-                    app:fabCustomSize="80dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/genderneutraluser" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_margin="5sp"
+                android:elevation="7dp"
+                android:fontFamily="@font/boutons"
+                android:text="Profil"
+                android:textColor="#000000" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_margin="5sp"
-                    android:elevation="7dp"
-                    android:fontFamily="@font/boutons"
-                    android:text="Profil"
-                    android:textColor="#000000" />
-
-            </FrameLayout>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:gravity="right"
             android:fontFamily="sans-serif-medium"
+            android:gravity="right"
             android:text="Herbier"
             android:textSize="36sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <androidx.gridlayout.widget.GridLayout
+    <ListView
+        android:id="@+id/ls_listePlantes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:columnCount="2">
-
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="210dp"
-            android:layout_height="196dp"
-            android:contentDescription="plante random pour les tests"
-            android:onClick="displayCartePlante"
-            app:srcCompat="@drawable/plante_random" />
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="210dp"
-            android:layout_height="192dp"
-            tools:srcCompat="@tools:sample/avatars" />
-
-    </androidx.gridlayout.widget.GridLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

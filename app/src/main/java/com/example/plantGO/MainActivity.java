@@ -14,7 +14,6 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
-import java.util.Map;
 import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
@@ -843,7 +841,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             // Il faudrait que cette instruction ne s'exécute qu'une seule fois (sinon surcharge la mémoire pour rien : car un point chargé/créé le reste pour toujours) ==> Le false / true ne marche pas
             boolean marqueurQueteDejaAjoute = false;
             if (Modele.queteAcceptee && !marqueurQueteDejaAjoute) {
-                mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
+                mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plante_quete))));
                 marqueurQueteDejaAjoute = true; // dit "redondant" ???
                 Modele.circle.setVisible(true);
             }
