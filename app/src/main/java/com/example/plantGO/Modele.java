@@ -20,7 +20,8 @@ public class Modele {
     public static Integer experienceTotaleActuelle = 0;
     public static boolean pasEncoreAjoutExperience = true;
     public static boolean partieDejaLance = false;
-
+        // pour lancer un minijeu
+    public static boolean planteReconnue = false;
 
     // Attributs propres au jeu du coffre au trésor et à l'inventaire (backpack)
     public static boolean firstInventoryLook = true;
@@ -41,7 +42,6 @@ public class Modele {
 
     // Quêtes
     public static boolean queteAcceptee = false;
-    public static boolean lancerDeDejaFait = false;
     public static boolean popUpActif = false;
     public static boolean popUpDetruit = false;
     public static Quete queteCourante = Quete.getInstance();
@@ -58,4 +58,5 @@ public class Modele {
     public static Circle circle;
     public static double randomLat;
     public static double randomLng;
+
 }

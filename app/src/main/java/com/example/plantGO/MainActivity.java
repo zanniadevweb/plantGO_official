@@ -271,8 +271,8 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
 
     public void lancerMiniJeuOuNon() {
-        if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée") && !Modele.lancerDeDejaFait) {
-            Modele.lancerDeDejaFait = true;
+        if (Modele.planteReconnue) {
+            Modele.planteReconnue = false;
             lancerUnDe();
         }
     }

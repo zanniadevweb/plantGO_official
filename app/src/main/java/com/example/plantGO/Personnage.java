@@ -24,7 +24,6 @@ public class Personnage extends AppCompatActivity {
         this.idQueteEnCours = idQueteEnCours;
     }
 
-
     public int getExperience() {
         return experience;
     }
