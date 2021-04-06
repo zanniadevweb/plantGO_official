@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import com.example.plantGO.databinding.ActivityPersonnageBinding;
 
 public class Personnage extends AppCompatActivity {
+
     int experience;
     int sexe;
     int couleaurPeau;

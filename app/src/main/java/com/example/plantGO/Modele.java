@@ -54,6 +54,8 @@ public class Modele {
     public static LatLng maPosition;
     public static double latitudeTempsT;
     public static double longitudeTempsT;
+    public static double latitudeMarqueurQuete;
+    public static double longitudeMarqueurQuete;
     public static Marker MyMarker;
     public static Circle circle;
     public static double randomLat;

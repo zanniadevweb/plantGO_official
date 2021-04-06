@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,19 +17,26 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.Location;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+
 import com.example.plantGO.databinding.ActivityMainBinding;
+import com.google.android.gms.maps.model.CustomCap;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.PatternItem;
+import com.google.android.gms.maps.model.Polygon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -43,6 +49,15 @@ import android.app.Activity;
 import android.os.Environment;
 
 //* Import propre à Google Maps *//
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -54,13 +69,6 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -96,6 +104,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private final static String KEY_REQUESTING_LOCATION_UPDATES = "requesting-location-updates";
     private final static String KEY_LOCATION = "location";
     private final static String KEY_LAST_UPDATED_TIME_STRING = "last-updated-time-string";
+    private static final int COLOR_BLACK_ARGB = 0;
 
     /**
      * Provides access to the Fused Location Provider API.
@@ -573,7 +582,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         mMap = googleMap;
 
         // Add a marker in Anglet and move the camera
-        Modele.marqueurQuete = new LatLng(43.47834075276044, -1.5079883577079218);
+        Modele.latitudeMarqueurQuete = 43.47834075276044;
+        Modele.longitudeMarqueurQuete = -1.5079883577079218;
+        Modele.marqueurQuete = new LatLng(Modele.latitudeMarqueurQuete, Modele.longitudeMarqueurQuete);
         //Marker marqueurQuete = mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.marqueurQuete));
         Modele.circle = mMap.addCircle(new CircleOptions()
@@ -588,8 +599,20 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         // Définit un niveau de zoom centré sur le Pays basque et le marqueur de la première quête -> Documentation Zoom : https://developers.google.com/maps/documentation/android-sdk/views
         mMap.setMinZoomPreference(10.0f);
 
+        // Add polylines to the map.
+        // Polylines are useful to show a route or some other connection between points
+        Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
+                .clickable(true)
+                .add(
+                        new LatLng(Modele.latitudeMarqueurQuete, Modele.longitudeMarqueurQuete),
+                        new LatLng(43.46, -1.4))); // Modele.latitudeTempsT + Modele.longitudeTempsT ==> Marche pas encore
 
+        // Store a data object with the polyline, used here to indicate an arbitrary type.
+        polyline1.setTag("A");
+        // Style the polyline.
+        //stylePolyline(polyline1);
     }
+
     /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
 
 
