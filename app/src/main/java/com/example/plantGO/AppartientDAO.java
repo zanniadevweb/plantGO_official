@@ -7,15 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-
 public class AppartientDAO extends SQLiteOpenHelper {
     public AppartientDAO(@Nullable Context context) {
         super(context, Param.base, null, Param.version);
     }
-    /*int idQuete;
-    int idPlante;
-    boolean estTrouve;*/
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table Appartient ("

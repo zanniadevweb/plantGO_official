@@ -204,9 +204,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         ne s'exécute que si TOUTES les plantes de la quête en cours ont été identifiées */
 
         // actualise ou crée un quête
-        Modele.queteCourante = Quete.getInstance();
+        //Modele.queteCourante = Quete.getInstance();
 
-        binding.planteQuete1.setText(Modele.queteCourante.toString());
+        binding.planteQuete1.setText("Erable \n Tilleul");
 
 
         if (Modele.planteCourante != null)

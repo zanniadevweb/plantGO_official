@@ -14,10 +14,6 @@ public class CosmetiqueDAO extends SQLiteOpenHelper {
     public CosmetiqueDAO(@Nullable Context context) {
         super(context, Param.base, null, Param.version);
     }
-    /*int idCosmetique;
-    String nom;
-    String type;
-    String nomImage;*/
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table Cosmetique ("

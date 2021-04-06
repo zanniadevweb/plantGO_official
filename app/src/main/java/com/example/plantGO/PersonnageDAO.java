@@ -55,7 +55,7 @@ public class PersonnageDAO extends SQLiteOpenHelper {
             idQueteEnCours = curseur.getInt(3);
 
 
-            unPersonnage = new Personnage(experience, sexe, couleaurPeau, idQueteEnCours);
+            //unPersonnage = new Personnage(experience, sexe, couleaurPeau, idQueteEnCours);
         }
         return unPersonnage;
     }
