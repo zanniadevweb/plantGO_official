@@ -3,13 +3,13 @@ package com.example.plantGO;
 import java.util.Map;
 
 public class Plante {
-    int idPlante;
+    int idPlante = -1;
     String nomCommun = null;
     String nomScientifique = null;
-    String famille;
-    String inventeur;
-    int niveauDescription;
-    boolean estDebloque;
+    String famille = null;
+    String inventeur = null;
+    int niveauDescription = -1;
+    boolean estDebloque = false;
 
 
     public Plante(String nomCommun, String nomScientifique, String famille, String inventeur, int niveauDescription, boolean estDebloque) {
@@ -107,7 +107,7 @@ public class Plante {
 
 
 
-        public boolean estDansLaQuete() {
+    public boolean estDansLaQuete() {
         for ( Map.Entry plante : Modele.queteCourante.listePlantes.entrySet() )
             if (plante.getKey().equals(nomScientifique))
                 return true;

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -85,7 +87,9 @@ public class APIActivity extends AppCompatActivity {
 
     // appeler l'API de reconnaisance de plante avec l'URL de l'image
     protected void recognizeImageThroughAPI(String imageLink) throws UnsupportedEncodingException {
-        imageLink = formater(imageLink);
+
+        imageLink = "https://images-na.ssl-images-amazon.com/images/I/61VL5X9qINL._SL1316_.jpg";
+        //imageLink = formater(imageLink);
         RequestQueue queue = Volley.newRequestQueue(APIActivity.this);
 
         String url ="https://my-api.plantnet.org/v2/identify/all?images=" +
@@ -113,13 +117,18 @@ public class APIActivity extends AppCompatActivity {
 
     private void onResponse(JSONObject response) {
         try {
-            JSONObject resultatsDeLaRecherche = (JSONObject) response.getJSONArray("results").get(0); // L'api renvoie tous les résultats probables de la reconnaissance de plan
-            JSONObject resultatLePlusProbable = resultatsDeLaRecherche.getJSONObject("species"); // nom scientifique, nom commun, famille
-            String nomScientifique = resultatLePlusProbable.getString("scientificNameWithoutAuthor");
-            String nomCommun = (String) resultatLePlusProbable.getJSONArray("commonNames").get(0);
+            JSONObject resultatLePlusProbable = (JSONObject) response.getJSONArray("results").get(0); // L'api renvoie tous les résultats probables de la reconnaissance de plan
+            JSONObject espece = resultatLePlusProbable.getJSONObject("species"); // nom scientifique, nom commun, famille
+            String nomScientifique = espece.getString("scientificNameWithoutAuthor");
 
-            Modele.planteCourante = new Plante(nomCommun,nomScientifique);
-            Log.v("plante",Modele.planteCourante.getNomCommun()+" & "+Modele.planteCourante.getNomScientifique());
+            Log.v("xxxxxxxxxxx",espece.getJSONArray("commonNames").get(0).toString());
+
+            String nomCommun = espece.getJSONArray("commonNames").get(0).toString();
+
+            Modele.planteCourante = new Plante(nomScientifique,nomCommun);
+            Log.v("xxxxxxxxxxx",Modele.planteCourante.toString());
+
+            Log.v("xxxxxxxxxxx",Modele.planteCourante.getNomCommun()+" & "+Modele.planteCourante.getNomScientifique());
             if (!Modele.planteCourante.estDansLaQuete())
                 binding.resultatRequeteAPI.setText("Pas dans la quête hebdomadaire ! :" + nomScientifique);
             else
@@ -156,22 +165,35 @@ public class APIActivity extends AppCompatActivity {
     }
 
     private void onResponse2(JSONObject response) {
+
         // créer carte plante avec description
         try {
-            JSONObject commonName = (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
-            JSONObject niveau1 =    (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
-            JSONObject niveau2 =    (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
-            JSONObject niveau3 =    (JSONObject) (JSONObject) response.getJSONArray("data").get(0);
-            Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", response.toString());
+
+            JSONObject planteLaPlusProbable = (JSONObject) response.getJSONArray("data").get(0);
+            String nomCommun = planteLaPlusProbable.getString("common_name");
+            String anneeDecouverte = planteLaPlusProbable.getString("year");
+            String inventeur = planteLaPlusProbable.getString("author");
+            String famille = planteLaPlusProbable.getString("family_common_name");
+            String idFamille = planteLaPlusProbable.getString("genus_id");
+            String photoGenerique = planteLaPlusProbable.getString("image_url");
+            String biblio = planteLaPlusProbable.getString("bibliography");
+
+            String description1 = "nom courant : "+nomCommun+" | famille : "+famille+"\n"+"\n";
+            String description2 = "Inventeur : "+inventeur+" | annee de decouverte : "+anneeDecouverte+" | id de la famille de plantes : "+idFamille+" | bibliographie : "+biblio+"\n"+"\n";
+
+            String descriptionComplete = description1+description2+photoGenerique;
+
+            TextView tv_description = findViewById(R.id.tv_description);
+            tv_description.setText(descriptionComplete);
+
             // créer carte
                 // assigner nomScientifique + nom commum
                 // assigner niveau 1
                 // assigner niveau 2
-                // assigner niveau 3
                 // assigner image ??
 
             // plante trouvée
-            Modele.queteCourante.aTrouve(commonName.toString());
+            Modele.queteCourante.aTrouve(nomCommun.toString());
         }
         catch (JSONException e)
             { e.printStackTrace(); }
