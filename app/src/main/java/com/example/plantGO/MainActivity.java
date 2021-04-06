@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -17,16 +16,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.Location;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
+
 import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 
 import com.example.plantGO.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,6 +43,13 @@ import android.app.Activity;
 import android.os.Environment;
 
 //* Import propre à Google Maps *//
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -52,13 +61,6 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -94,6 +96,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     private final static String KEY_REQUESTING_LOCATION_UPDATES = "requesting-location-updates";
     private final static String KEY_LOCATION = "location";
     private final static String KEY_LAST_UPDATED_TIME_STRING = "last-updated-time-string";
+    private static final int COLOR_BLACK_ARGB = 0;
 
     /**
      * Provides access to the Fused Location Provider API.
@@ -266,6 +269,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         createLocationRequest();
         buildLocationSettingsRequest();
     }
+
 
 
     public void lancerMiniJeuOuNon() {
@@ -458,7 +462,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Modele.randomLat = Math.random()* 0.00378 + (Modele.marqueurQuete.latitude-0.00189); //créer une longitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
         Modele.randomLng = Math.random()* 0.0052 +(Modele.marqueurQuete.longitude-0.0026); //créer une latitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
         Modele.marqueurCoffre = new LatLng(Modele.randomLat,Modele.randomLng);
-        //mMap.addMarker(new MarkerOptions().position(Modele.marqueurCoffre ).title("Coffre").icon(BitmapDescriptorFactory.fromResource((R.drawable.tresor)))); ---- lIGNE QUI CRASHE
+        mMap.addMarker(new MarkerOptions().position(Modele.marqueurCoffre ).title("Coffre").icon(BitmapDescriptorFactory.fromResource((R.drawable.tresor))));
 
     }
 
@@ -570,7 +574,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         mMap = googleMap;
 
         // Add a marker in Anglet and move the camera
-        Modele.marqueurQuete = new LatLng(43.47834075276044, -1.5079883577079218);
+        Modele.latitudeMarqueurQuete = 43.47834075276044;
+        Modele.longitudeMarqueurQuete = -1.5079883577079218;
+        Modele.marqueurQuete = new LatLng(Modele.latitudeMarqueurQuete, Modele.longitudeMarqueurQuete);
         //Marker marqueurQuete = mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.marqueurQuete));
         Modele.circle = mMap.addCircle(new CircleOptions()
@@ -587,6 +593,14 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
 
 
     }
+
+   public void itineraireQuete (View view) {
+    // Appelle application Google Maps  : Centrer vue sur point et y mettre un marqueur qui permet un iténéraire vers ce point
+    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+            Uri.parse("geo:" + Modele.latitudeMarqueurQuete + "," + Modele.longitudeMarqueurQuete + "?q=" + Modele.latitudeMarqueurQuete + "," + Modele.longitudeMarqueurQuete + "(" + "Marqueur Quete" + ")"));
+    MainActivity.this.startActivity(intent);
+   }
+
     /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
 
 
@@ -841,7 +855,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
             // Il faudrait que cette instruction ne s'exécute qu'une seule fois (sinon surcharge la mémoire pour rien : car un point chargé/créé le reste pour toujours) ==> Le false / true ne marche pas
             boolean marqueurQueteDejaAjoute = false;
             if (Modele.queteAcceptee && !marqueurQueteDejaAjoute) {
-                mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plante_quete))));
+                mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
                 marqueurQueteDejaAjoute = true; // dit "redondant" ???
                 Modele.circle.setVisible(true);
             }

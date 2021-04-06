@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:layout_marginRight="6dip"
         android:layout_weight="0.35"
-        android:background="@drawable/plante_quete"
+        android:background="@drawable/plante_random"
         android:contentDescription=""
         android:visibility="visible" />
 
