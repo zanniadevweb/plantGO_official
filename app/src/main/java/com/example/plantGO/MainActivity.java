@@ -22,8 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
-
-
 import java.util.Random;
 import java.text.DateFormat;
 import java.util.Date;

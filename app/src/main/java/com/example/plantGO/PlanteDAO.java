@@ -1,4 +1,4 @@
-package com.example.plantGO;
+/*package com.example.plantGO;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,13 +13,6 @@ public class PlanteDAO extends SQLiteOpenHelper {
     public PlanteDAO(@Nullable Context context) {
         super(context, Param.base, null, Param.version);
     }
-    /*int idPlante;
-    String nomCommun = null;
-    String nomScientifique = null;
-    String famille;
-    String inventeur;
-    int niveauDescription;
-    boolean estDebloque;*/
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table Plante ("
@@ -70,4 +63,4 @@ public class PlanteDAO extends SQLiteOpenHelper {
         }
         return unePlante;
     }
-}
+}*/

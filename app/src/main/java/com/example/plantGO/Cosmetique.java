@@ -1,4 +1,4 @@
-package com.example.plantGO;
+/*package com.example.plantGO;
 
 public class Cosmetique {
     int idCosmetique;
@@ -60,4 +60,4 @@ public class Cosmetique {
                 ", nomImage='" + nomImage + '\'' +
                 '}';
     }
-}
+}*/

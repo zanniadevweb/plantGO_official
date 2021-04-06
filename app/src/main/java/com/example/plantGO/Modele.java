@@ -42,12 +42,17 @@ public class Modele {
 
 
     // Quêtes
+    //ArrayList<Quete> quetes;
     public static boolean queteAcceptee = false;
     public static boolean popUpActif = false;
     public static boolean popUpDetruit = false;
     public static Quete queteCourante = Quete.getInstance();
     public static Plante planteCourante;
     public static boolean queteTerminee = false; // Si true : Active le lancer de dé et lance un jeu au hasard parmi les deux par défaut si résultat > 3
+
+    //ArrayList<Plante> plantes;
+    //ArrayList<Appartient> appartenance;
+    //ArrayList<Cosmetique> cosmetiques;
 
     // Google Maps
     public static LatLng marqueurCoffre;

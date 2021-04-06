@@ -1,4 +1,4 @@
-package com.example.plantGO;
+/*package com.example.plantGO;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -56,4 +56,4 @@ public class CosmetiqueDAO extends SQLiteOpenHelper {
         }
         return unCosmetique;
     }
-}
+}*/

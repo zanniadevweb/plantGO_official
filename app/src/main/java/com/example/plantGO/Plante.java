@@ -3,10 +3,10 @@ package com.example.plantGO;
 import java.util.Map;
 
 public class Plante {
-    int idPlante = -1;
+    //int idPlante = -1;
     String nomCommun = null;
     String nomScientifique = null;
-    String famille = null;
+    /*String famille = null;
     String inventeur = null;
     int niveauDescription = -1;
     boolean estDebloque = false;
@@ -37,7 +37,7 @@ public class Plante {
 
     public void setIdPlante(int idPlante) {
         this.idPlante = idPlante;
-    }
+    }*/
 
     public String getNomCommun() {
         return nomCommun;
@@ -55,7 +55,7 @@ public class Plante {
         this.nomScientifique = nomScientifique;
     }
 
-    public String getFamille() {
+    /*public String getFamille() {
         return famille;
     }
 
@@ -98,7 +98,7 @@ public class Plante {
                 ", niveauDescription=" + niveauDescription +
                 ", estDebloque=" + estDebloque +
                 '}';
-    }
+    }*/
 
     public Plante(String nomCommun, String  nomScientifique){
         setNomCommun(nomCommun);

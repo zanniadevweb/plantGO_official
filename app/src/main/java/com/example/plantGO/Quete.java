@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class Quete { // classe basée sur un pattern de Singleton
     // attr
-    int idQuete;
+    /*int idQuete;
     double latPosition;
     double lngPosition;
     int rayon;
@@ -116,7 +116,7 @@ public class Quete { // classe basée sur un pattern de Singleton
 
     public void setEstTerminee(Boolean estTerminee) {
         this.estTerminee = estTerminee;
-    }
+    }*/
 
     @Override
     public String toString() {

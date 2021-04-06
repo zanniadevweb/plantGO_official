@@ -1,4 +1,4 @@
-package com.example.plantGO;
+/*package com.example.plantGO;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,13 +13,6 @@ public class QueteDAO extends SQLiteOpenHelper {
     public QueteDAO(@Nullable Context context) {
         super(context, Param.base, null, Param.version);
     }
-    /*int idQuete;
-    double latPosition;
-    double lngPosition;
-    int rayon;
-    boolean estFini;
-    double latCoffre;
-    double lngCoffre;*/
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table Quete ("
@@ -70,4 +63,4 @@ public class QueteDAO extends SQLiteOpenHelper {
         }
         return uneQuete;
     }
-}
+}*/
