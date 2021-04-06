@@ -6,82 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".CartePlanteActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutTop"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_gravity="top|start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        android:layout_marginLeft="20sp">
+        app:layout_constraintVertical_bias="0.023">
 
-        <FrameLayout
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|start"
+            android:onClick="displayHerbier"
+            app:backgroundTint="@color/jaunePlantGO"
+            app:fabCustomSize="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.083"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023">
+            app:srcCompat="@drawable/plant" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="displayHerbier"
-                app:backgroundTint="@color/jaunePlantGO"
-                app:fabCustomSize="80dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/plant" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_margin="5sp"
-                android:elevation="7dp"
-                android:fontFamily="@font/boutons"
-                android:text="Herbier"
-                android:textColor="#000000" />
-
-        </FrameLayout>
-
-        <Button
-            android:id="@+id/button6"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="5sp"
+            android:elevation="7dp"
             android:fontFamily="@font/boutons"
-            android:onClick="augmenterNiveauDescription"
-            android:text="Débloquer description"
-            app:backgroundTint="@color/vertPlantGO"/>
+            android:text="Herbier"
+            android:textColor="#000000" />
 
-    </LinearLayout>
+    </FrameLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_viewCartePlante1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="25sp"
         app:cardBackgroundColor="@color/bleuPlantGO"
         app:cardCornerRadius="6dp"
         app:contentPadding="16dp"
-        android:layout_marginLeft="25sp"
-        android:layout_marginRight="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.885">
+        app:layout_constraintVertical_bias="0.724">
 
         <LinearLayout
             android:id="@+id/linearLayoutCardView"
@@ -93,22 +69,25 @@
                 android:id="@+id/imageViewPlante1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
                 android:background="@drawable/cadre_noir"
+                android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.247"
-                android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/plante_random"
-                android:padding="2dp"
-                android:adjustViewBounds="true"/>
+                app:srcCompat="@drawable/plante_random" />
 
             <TextView
                 android:id="@+id/textViewNomCommun"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/texte"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
                 android:text="Nom commun : Arbus Rustica"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -116,16 +95,16 @@
                 app:layout_constraintHorizontal_bias="0.500"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.450"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:paddingTop="15dp"/>
+                app:layout_constraintVertical_bias="0.450" />
 
             <TextView
                 android:id="@+id/textViewDescriptionBasique"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/texte"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
                 android:text="Description basique : Ceci est une description basique"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -133,57 +112,53 @@
                 app:layout_constraintHorizontal_bias="0.500"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.450"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:paddingTop="15dp"/>
+                app:layout_constraintVertical_bias="0.450" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutDescriptionAvancee"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="100">
-
-            <TextView
-                android:id="@+id/textViewDescriptionAvancee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/texte"
-                android:text="Description avancéee : Dépensez de l'expérience en appuyant sur '+' pour débloquer cette description"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.500"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.450"
-                android:layout_weight="95"
-                android:paddingStart="15dp"
-                android:paddingEnd="0dp"
-                android:paddingTop="15dp"/>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/buttonDescriptionAvancee"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linearLayoutDescriptionAvancee"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:onClick="augmenterNiveauDescription"
-                app:fabCustomSize="50dp"
-                android:layout_weight="5"
-                android:layout_gravity="center_vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.083"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.023"
-                app:srcCompat="@drawable/plus" />
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textViewDescriptionAvancee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="95"
+                    android:fontFamily="@font/texte"
+                    android:paddingStart="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="0dp"
+                    android:text="Description avancéee : Dépensez de l'expérience en appuyant sur '+' pour débloquer cette description"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.500"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.450" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/boutons"
+        android:onClick="augmenterNiveauDescription"
+        android:text="Débloquer description"
+        app:backgroundTint="@color/vertPlantGO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_viewCartePlante1"
+        app:layout_constraintVertical_bias="0.609" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

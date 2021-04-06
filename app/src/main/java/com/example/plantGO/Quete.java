@@ -130,7 +130,6 @@ public class Quete { // classe basée sur un pattern de Singleton
                 ", lngCoffre=" + lngCoffre +
                 ", listePlantes=" + listePlantes +
                 ", estTerminee=" + estTerminee +
-                ", dateDemarrage=" + dateDemarrage +
                 '}';
     }
 

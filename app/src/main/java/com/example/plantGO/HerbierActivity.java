@@ -20,6 +20,8 @@ public class HerbierActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_herbier);
 
+        listeNomPlantes = new ArrayList<String>();
+
         // changer par un récup de la bd
         listeNomPlantes.add("Tito");
         listeNomPlantes.add("222");
