@@ -180,7 +180,7 @@ public class APIActivity extends AppCompatActivity {
 
     private String formater(String url) throws UnsupportedEncodingException {
 
-        String encoded = URLEncoder.encode(url, StandardCharsets.UTF_8.toString()); Log.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", encoded);
+        String encoded = URLEncoder.encode(url, StandardCharsets.UTF_8.toString());
         return encoded;
     }
 
