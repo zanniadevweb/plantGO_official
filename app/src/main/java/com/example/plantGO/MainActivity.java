@@ -270,6 +270,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
     }
 
 
+
     public void lancerMiniJeuOuNon() {
         if (Modele.queteTerminee && Modele.resultatpartie.equals("Partie non déterminée") && !Modele.lancerDeDejaFait) {
             Modele.lancerDeDejaFait = true;
@@ -460,7 +461,7 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Modele.randomLat = Math.random()* 0.00378 + (Modele.marqueurQuete.latitude-0.00189); //créer une longitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
         Modele.randomLng = Math.random()* 0.0052 +(Modele.marqueurQuete.longitude-0.0026); //créer une latitude aléatoire<420m (diametre zone quete) qu'on ajoute une extrémité minimal de cette zone
         Modele.marqueurCoffre = new LatLng(Modele.randomLat,Modele.randomLng);
-        //mMap.addMarker(new MarkerOptions().position(Modele.marqueurCoffre ).title("Coffre").icon(BitmapDescriptorFactory.fromResource((R.drawable.tresor)))); ---- lIGNE QUI CRASHE
+        mMap.addMarker(new MarkerOptions().position(Modele.marqueurCoffre ).title("Coffre").icon(BitmapDescriptorFactory.fromResource((R.drawable.tresor))));
 
     }
 
