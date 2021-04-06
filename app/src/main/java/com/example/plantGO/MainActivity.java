@@ -197,13 +197,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         lancerProtocolesLocalisation();
         /** --------------------------------------------------- Méthodes pour localisation -------------------------------------------------- **/
 
-
-        /* ATTENTION, il faudra faire en sorte que le code résultant de ces conditions
-        ne s'exécute que si TOUTES les plantes de la quête en cours ont été identifiées */
-
-        // actualise ou crée un quête
-        //Modele.queteCourante = Quete.getInstance();
-
         binding.planteQuete1.setText("Erable \n Tilleul");
 
 
@@ -844,21 +837,11 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
                     binding.marqueurQueteText.setText("Vous êtes loin du coffre");
                 }
             }
-            //mMap.clear();
-            //mMap.moveCamera(CameraUpdateFactory.newLatLng(Modele.moi)); // Suit en permanance (chaque fois que la localisation est actualisée) ma position
 
-            Log.d("loc", "latitude " + latitude);
-            Log.d("loc", "longitude " + longitude);
-            if (Modele.queteAcceptee) {
-                Log.d("loc", "distance " + distance[0]);
-            }
-            Log.d("time", "time " + updatetime);
-
-            // Il faudrait que cette instruction ne s'exécute qu'une seule fois (sinon surcharge la mémoire pour rien : car un point chargé/créé le reste pour toujours) ==> Le false / true ne marche pas
             boolean marqueurQueteDejaAjoute = false;
             if (Modele.queteAcceptee && !marqueurQueteDejaAjoute) {
                 mMap.addMarker(new MarkerOptions().position(Modele.marqueurQuete).title("Quête").icon(BitmapDescriptorFactory.fromResource((R.drawable.plantequete))));
-                marqueurQueteDejaAjoute = true; // dit "redondant" ???
+                marqueurQueteDejaAjoute = true;
                 Modele.circle.setVisible(true);
             }
 

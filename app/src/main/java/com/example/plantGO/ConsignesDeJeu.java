@@ -3,10 +3,8 @@ package com.example.plantGO;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.example.plantGO.databinding.ActivityConsignesjeuBinding;
 

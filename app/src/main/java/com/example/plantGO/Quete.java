@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Quete { // classe basée sur un pattern de Singleton
+
+    //-------------------------------------- Base de données ----------------------------------
     // attr
     /*int idQuete;
     double latPosition;

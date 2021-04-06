@@ -3,9 +3,11 @@ package com.example.plantGO;
 import java.util.Map;
 
 public class Plante {
-    //int idPlante = -1;
+    //int idPlante = -1; -- Base de données
     String nomCommun = null;
     String nomScientifique = null;
+
+    //-------------------------------------- Base de données ----------------------------------
     /*String famille = null;
     String inventeur = null;
     int niveauDescription = -1;

@@ -42,7 +42,7 @@ public class Modele {
 
 
     // Quêtes
-    //ArrayList<Quete> quetes;
+    //ArrayList<Quete> quetes; -- Base de données
     public static boolean queteAcceptee = false;
     public static boolean popUpActif = false;
     public static boolean popUpDetruit = false;
@@ -50,9 +50,9 @@ public class Modele {
     public static Plante planteCourante;
     public static boolean queteTerminee = false; // Si true : Active le lancer de dé et lance un jeu au hasard parmi les deux par défaut si résultat > 3
 
-    //ArrayList<Plante> plantes;
-    //ArrayList<Appartient> appartenance;
-    //ArrayList<Cosmetique> cosmetiques;
+    //ArrayList<Plante> plantes; -- Base de données
+    //ArrayList<Appartient> appartenance; -- Base de données
+    //ArrayList<Cosmetique> cosmetiques; -- Base de données
 
     // Google Maps
     public static LatLng marqueurCoffre;
