@@ -39,10 +39,10 @@ public class CartePlanteActivity extends AppCompatActivity {
     }
 
     public void augmenterNiveauDescription(View view) {
-        int exp = Modele.experienceTotaleActuelle;
 
-        if (exp > 200 ) // Récupérer attribut : niveauDeDébloquage, au lieu de la valeur en dure
-             { /* cartePlante.augmenterNiveauDec() */ }
+
+        if (Modele.experienceTotaleActuelle > 200 )
+             { /* cartePlante.augmenterNiveauDec() */; Modele.experienceTotaleActuelle-=200; }
 
         else {  Context context = getApplicationContext();
                 CharSequence text = "Tu manques de niveau ... Retente une prochaine fois !";

@@ -239,6 +239,9 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         if (!Modele.firstLoadingApplication) {
             sauvegarderFichier();
         }
+
+        lancerMiniJeuOuNon();
+
     }
 
     // afficher profil
@@ -303,7 +306,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Modele.popUpActif = true;
         Modele.popUpDetruit = true;
         masquerPopUpQueteTerminee();
-        lancerMiniJeuOuNon();
     }
 
     public void launchGameHorizontal(View view) {
@@ -337,7 +339,6 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         MainActivity.this.startActivity(intent);
     }
 
-
     public void accepterQuete() {
         Modele.queteAcceptee = true;
     }
@@ -357,10 +358,10 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         Integer randomJouerOuNon = new Random().nextInt(6) + 1; // [0, 1] + 1 => [1, 6] : Minimum 1 (si [0] + 1) et maximum 6 (si [1] + 1)
         binding.resultatJetDe.setText(String.valueOf(randomJouerOuNon));
 
-        if (randomJouerOuNon > 3) {
+        if (randomJouerOuNon == 3) {
             timerAvantJeu();
         }
-        if (randomJouerOuNon <= 3) {
+        if (randomJouerOuNon != 3) {
             timerSiPasJeu();
         }
     }
