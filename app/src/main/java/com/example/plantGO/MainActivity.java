@@ -599,19 +599,15 @@ public class MainActivity<LocationRequest> extends AppCompatActivity implements 
         // Définit un niveau de zoom centré sur le Pays basque et le marqueur de la première quête -> Documentation Zoom : https://developers.google.com/maps/documentation/android-sdk/views
         mMap.setMinZoomPreference(10.0f);
 
-        // Add polylines to the map.
-        // Polylines are useful to show a route or some other connection between points
-        Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
-                .clickable(true)
-                .add(
-                        new LatLng(Modele.latitudeMarqueurQuete, Modele.longitudeMarqueurQuete),
-                        new LatLng(43.46, -1.4))); // Modele.latitudeTempsT + Modele.longitudeTempsT ==> Marche pas encore
 
-        // Store a data object with the polyline, used here to indicate an arbitrary type.
-        polyline1.setTag("A");
-        // Style the polyline.
-        //stylePolyline(polyline1);
     }
+
+   public void itineraireQuete (View view) {
+    // Appelle application Google Maps  : Centrer vue sur point et y mettre un marqueur qui permet un iténéraire vers ce point
+    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+            Uri.parse("geo:" + Modele.latitudeMarqueurQuete + "," + Modele.longitudeMarqueurQuete + "?q=" + Modele.latitudeMarqueurQuete + "," + Modele.longitudeMarqueurQuete + "(" + "Marqueur Quete" + ")"));
+    MainActivity.this.startActivity(intent);
+   }
 
     /** --------------------------------------------------- Méthodes pour Google Maps -------------------------------------------------- **/
 
