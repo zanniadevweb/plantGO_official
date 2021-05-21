@@ -83,8 +83,7 @@ public class APIActivity extends AppCompatActivity {
     // appeler l'API de reconnaisance de plante avec l'URL de l'image
     protected void recognizeImageThroughAPI(String imageLink) throws UnsupportedEncodingException {
 
-        imageLink = "https://images-na.ssl-images-amazon.com/images/I/61VL5X9qINL._SL1316_.jpg";
-        //imageLink = formater(imageLink);
+        imageLink = formater(imageLink);
         RequestQueue queue = Volley.newRequestQueue(APIActivity.this);
 
         String url ="https://my-api.plantnet.org/v2/identify/all?images=" +

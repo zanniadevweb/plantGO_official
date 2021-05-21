@@ -22,9 +22,9 @@ public class HerbierActivity extends AppCompatActivity {
         listeNomPlantes = new ArrayList<String>();
 
         // changer par un récup de la bd
-        listeNomPlantes.add("Tito");
-        listeNomPlantes.add("222");
-        listeNomPlantes.add("dvw");
+        listeNomPlantes.add("Saule pleureur");
+        listeNomPlantes.add("Pin des Landes");
+        listeNomPlantes.add("Fougère");
 
         ListView ls_plantes = findViewById(R.id.ls_listePlantes);
 

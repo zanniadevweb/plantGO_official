@@ -69,5 +69,5 @@ public class Modele {
 
     // Herbier
     public static String nomPlanteCliquee;
-    public static int[] listeCosmetiques = {R.drawable.torso1, R.drawable.torso2, R.drawable.bas_forestier_female, R.drawable.bas_forestier_male, R.drawable.bas_violet_female, R.drawable.bas_violet_male};
+    public static int[] listeCosmetiques = {R.drawable.hat1, R.drawable.hat1_violet, R.drawable.haut_forestier_female, R.drawable.haut_forestier_male, R.drawable.haut_violet_female, R.drawable.haut_violet_male, R.drawable.bas_forestier_female, R.drawable.bas_forestier_male, R.drawable.bas_violet_female, R.drawable.bas_violet_male};
 }

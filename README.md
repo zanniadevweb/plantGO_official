@@ -1,79 +1,87 @@
 plantGO
 ================
 
-Ce projet est une application mobile Android qui a pour but de promouvoir la préservation de la flore du Pays basque avec un gameplay ludique (mini-jeux) et sa découverte par la prise de photographies.
+plantGO is a playful mobile application tailored for the Android Operating System.
+It has been developed on the Android Studio Integrated Development Environnement (IDE) using Java programming language. 
+It aims at bringing encyclopedic knowledge through plant card collection where descriptive sheets can be consulted in the same way as a “virtual herbarium”. The video-game aspect was made using libGDX framework.
 
+As a student project, it is unfinished, thus not meant to be fully functionnal in its current state.
 
-Introduction
+Links
 ============
 
-...
+**Trello Link [FR]: ** 
+https://trello.com/b/Kp12eugz/projet-tutor%C3%A9-s4-plantgo
+
+**Demo Video: **
+https://www.youtube.com/watch?v=JSq6NyNP-es
 
 
-**Lien Trello** : 
-(https://trello.com/b/Kp12eugz/projet-tutor%C3%A9-s4-plantgo).
-
-To run this sample, **location must be enabled**.
-
-
-Prérequis
+Prerequisites
 --------------
 
-- Android API Level >v9
-- ?
-- ?
+- Android API Level > v9 ('Pie')
+- Accessible Mobile Data or Wi-Fi
+- Location must be enabled: precision of 5-10 meters at least
+- Frontal Camera
 
-Pour commencer
+To start
 ---------------
 
 This sample uses the Gradle build system. To build this project, use the
 "gradlew build" command or use "Import Project" in Android Studio.
 
-Support
+
+Artists Credits - Images & Sounds
 -------
 
-Si vous avez trouvé un bug, veuillez nous adresser vos remarques à l'adresse e-mail suivante:
-?
+**[Music]**
+
+Website ‘Computoser’. URL: http://computoser.com/
+⇒ Random generated music using an algorithm: Track #4142 : ‘See Away’ & Track #5360 ‘Nothing Leaves The Forests'
 
 
-Crédits artistiques - Banques d'images et de sons
--------
+**[Sound effects]**
 
-**[Musiques]**
+   • Website ‘jsfxr’. URL: https://sfxr.me/
+⇒ Random generated sounds using an algorithm (crushing ennemies / waste)
 
-Site internet ‘Computoser’. URL : http://computoser.com/
-⇒ Musiques générés aléatoirement via un algorithme : Track #4142 : ‘See Away’ et Track #5360 ‘Nothing Leaves The Forests'
-
-
-**[Sons]**
-
-   • Site internet ‘jsfxr’. URL : https://sfxr.me/
-⇒ Sons généré aléatoirement via un algorithme (écrasement ennemis / déchets)
-
-   • Site internet ‘mixkit‘. URL : https://mixkit.co/free-sound-effects
-=> Sons téléchargés : ‘Game Level Completed’ et ‘Player losing or failing’
+   • Website ‘mixkit‘. URL: https://mixkit.co/free-sound-effects
+=> Downloaded sounds: ‘Game Level Completed’ et ‘Player losing or failing’
 
 
 **[Level-Design]**
 
-   • Site internet ‘itch.io’. URL : https://itch.io/game-assets/free
-⇒ Auteurs crédités : rizaldarmawansyah (décor de montagnes), ansimuz (briques de terrain dites ‘tiles’) et LateNightCoffee (nuages).
+   • Website ‘itch.io’. URL: https://itch.io/game-assets/free
+⇒ Credited Authors: rizaldarmawansyah (mountains), ansimuz (tiles of the maps) et LateNightCoffee (clouds).
     
-   • Site internet ‘OpenGameArt’. URL : https://opengameart.org/
-⇒ Auteur crédité : 魔大农 (palmier). 
+   • Website ‘OpenGameArt’. URL : https://opengameart.org/
+⇒ Credited Author : 魔大农 (palmier). 
 
 
 **[Sprites]**
 
-   • Site internet ‘OpenGameArt’. URL : https://opengameart.org/
-⇒ Auteurs crédités : Jordan Irwin alias AntumDeluge (cobra) et sunburn (plante carnivore).
+   • Website ‘OpenGameArt’. URL: https://opengameart.org/
+⇒ Credited Authors: Jordan Irwin alias AntumDeluge (cobra) et sunburn (plante carnivore).
   
-   • Site internet ‘itch.io’. URL : https://itch.io/game-assets/free
-⇒ Auteurs crédités : Everlit (crabe) et Clint Bellanger (déchets).
+   • Website ‘itch.io’. URL: https://itch.io/game-assets/free
+⇒ Credited Authors: Everlit (crabe) et Clint Bellanger (déchets).
 
 
 **[Gifs]**
 
-   • Site internet ‘LottieFiles’. URL : https://lottiefiles.com/
-⇒ Auteurs crédités : del veritas (ouverture coffre au trésor), Max Steebergen (Pelle qui déterre) et Fauzi Setyaji (sablier d’attente).
+   • Website ‘LottieFiles’. URL: https://lottiefiles.com/
+⇒ Credited Authors: del veritas (ouverture coffre au trésor), Max Steebergen (Pelle qui déterre) & Fauzi Setyaji (hourglass).
+
+
+**[Avatar]**
+
+   • Website ‘DeviantArt’. URL: https://www.deviantart.com
+⇒ Credited Author: Sleeping-Demons.
+
+
+**[Icônes]**
+
+   • Website ‘icons8’. URL: https://icons8.com/
+
 
