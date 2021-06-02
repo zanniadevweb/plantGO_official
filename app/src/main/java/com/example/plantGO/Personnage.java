@@ -3,10 +3,9 @@ package com.example.plantGO;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
 import com.example.plantGO.databinding.ActivityPersonnageBinding;
@@ -67,65 +66,53 @@ public class Personnage extends AppCompatActivity {
         imagesPants.add(element);
     }
 
+    public <Resource> void changerCouleurPeauSelonGenre(String genreM, String genreF, Resource resM, Resource resF) {
+        if (Modele.genre.equals(genreM)) {
+            binding.imageViewPersonnage.setImageResource((Integer) resM);
+        }
+        if (Modele.genre.equals(genreF)) {
+            binding.imageViewPersonnage.setImageResource((Integer) resF);
+        }
+    }
+
     public void changerCouleurPeau1 (View view) {
-        if (Modele.genre.equals("1")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.male_color1);
-        }
-        if (Modele.genre.equals("2")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.female_color1);
-        }
+        changerCouleurPeauSelonGenre("1", "2", R.drawable.male_color1, R.drawable.female_color1);
         Modele.couleurPeau = "1";
     }
 
     public void changerCouleurPeau2 (View view) {
-        if (Modele.genre.equals("1")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.male_color2);
-        }
-        if (Modele.genre.equals("2")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.female_color2);
-        }
+        changerCouleurPeauSelonGenre("1", "2", R.drawable.male_color2, R.drawable.female_color2);
         Modele.couleurPeau = "2";
     }
 
     public void changerCouleurPeau3 (View view) {
-        if (Modele.genre.equals("1")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.male_color3);
-        }
-        if (Modele.genre.equals("2")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.female_color3);
-        }
+        changerCouleurPeauSelonGenre("1", "2", R.drawable.male_color3, R.drawable.female_color3);
         Modele.couleurPeau = "3";
+    }
+
+    public <Resource> void changerGenreSelonVetements(String couleurPeau1, String couleurPeau2, String couleurPeau3, Resource resM1, Resource resM2, Resource resM3) {
+        if (Modele.couleurPeau.equals(couleurPeau1)) {
+            binding.imageViewPersonnage.setImageResource((Integer) resM1);
+        }
+        if (Modele.couleurPeau.equals(couleurPeau2)) {
+            binding.imageViewPersonnage.setImageResource((Integer) resM2);
+        }
+        if (Modele.couleurPeau.equals(couleurPeau3)) {
+            binding.imageViewPersonnage.setImageResource((Integer) resM3);
+        }
     }
 
     public void changerSexe1 (View view) {
         binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_male);
         binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_male);
-
-        if (Modele.couleurPeau.equals("1")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.male_color1);
-        }
-        if (Modele.couleurPeau.equals("2")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.male_color2);
-        }
-        if (Modele.couleurPeau.equals("3")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.male_color3);
-        }
+        changerGenreSelonVetements("1", "2", "3", R.drawable.male_color1, R.drawable.male_color2, R.drawable.male_color3);
         Modele.genre = "1";
     }
 
     public void changerSexe2 (View view) {
         binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_female);
         binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_female);
-
-        if (Modele.couleurPeau.equals("1")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.female_color1);
-        }
-        if (Modele.couleurPeau.equals("2")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.female_color2);
-        }
-        if (Modele.couleurPeau.equals("3")) {
-            binding.imageViewPersonnage.setImageResource(R.drawable.female_color3);
-        }
+        changerGenreSelonVetements("1", "2", "3", R.drawable.female_color1, R.drawable.female_color2, R.drawable.female_color3);
         Modele.genre = "2";
     }
 
@@ -137,40 +124,38 @@ public class Personnage extends AppCompatActivity {
         binding.imageViewChapeauP.setImageResource(R.drawable.hat1_violet);
     }
 
-    public void changerTorsoMinus (View view) {
-        if (Modele.genre.equals("1")) {
-            binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_male);
+    public <Resource> void changerTorsoSelonGenre(String genreM, String genreF, Resource resM, Resource resF) {
+        if (Modele.genre.equals(genreM)) {
+            binding.imageViewHautP.setImageResource((Integer) resM);
         }
-        if (Modele.genre.equals("2")) {
-            binding.imageViewHautP.setImageResource(R.drawable.haut_forestier_female);
+        if (Modele.genre.equals(genreF)) {
+            binding.imageViewHautP.setImageResource((Integer) resF);
         }
     }
 
+    public void changerTorsoMinus (View view) {
+        changerTorsoSelonGenre("1", "2", R.drawable.haut_forestier_male, R.drawable.haut_forestier_female);
+    }
+
     public void changerTorsoPlus (View view) {
-        if (Modele.genre.equals("1")) {
-            binding.imageViewHautP.setImageResource(R.drawable.haut_violet_male);
+        changerTorsoSelonGenre("1", "2", R.drawable.haut_violet_male, R.drawable.haut_violet_female);
+    }
+
+    public <Resource> void changerPantsSelonGenre(String genreM, String genreF, Resource resM, Resource resF) {
+        if (Modele.genre.equals(genreM)) {
+            binding.imageViewBasP.setImageResource((Integer) resM);
         }
-        if (Modele.genre.equals("2")) {
-            binding.imageViewHautP.setImageResource(R.drawable.haut_violet_female);
+        if (Modele.genre.equals(genreF)) {
+            binding.imageViewBasP.setImageResource((Integer) resF);
         }
     }
 
     public void changerPantsMinus (View view) {
-        if (Modele.genre.equals("1")) {
-            binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_male);
-        }
-        if (Modele.genre.equals("2")) {
-            binding.imageViewBasP.setImageResource(R.drawable.bas_forestier_female);
-        }
+        changerPantsSelonGenre("1", "2", R.drawable.bas_forestier_male, R.drawable.bas_forestier_female);
     }
 
     public void changerPantsPlus (View view) {
-        if (Modele.genre.equals("1")) {
-            binding.imageViewBasP.setImageResource(R.drawable.bas_violet_male);
-        }
-        if (Modele.genre.equals("2")) {
-            binding.imageViewBasP.setImageResource(R.drawable.bas_violet_female);
-        }
+        changerPantsSelonGenre("1", "2", R.drawable.bas_violet_male, R.drawable.bas_violet_female);
     }
 
 
